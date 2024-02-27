@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="modal fade" id="remove_order_items{{item.id}}" tabindex="-1" aria-labelledby="remove_order_items{{item.id}}" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+           
+            {% if count_cart_item == 1 %}
+            <div class="modal-header">
+                <h5 class="modal-title">Cancel Order</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+            </div>
+            <div class="modal-body">     
+                <div>
+                    <p style="font-size: 18px;">Clicking on <b>'YES'</b> button the Order will cancelled. Click <b>'NO'</b> to continue Booking.</p>
+                </div>       
+                <div class="btn-footer btn-flex">
+                    <button type="button" class="btn btn7 yes-btn" data-bs-dismiss="modal" aria-label="Close"
+                        name="button">No</button>
+                    <button type="button" onclick="removeOrderItem({{ item.id }})" class="btn btn7 yes-btn" name="button">Yes</button>
+                </div>
+            </div>
+            {% else %}
+            <div class="modal-header">
+                <h5 class="modal-title">Remove from the cart</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+            </div>
+                        
+            <div class="modal-body">     
+                <div>
+
+                    <p style="font-size: 18px;">To remove Order Item from your list click on <b>'YES'</b> button. If not  click on <b>'NO'</b>.</p>
+                </div>       
+                <div class="btn-footer btn-flex">
+                    <button type="button" class="btn btn7 yes-btn" data-bs-dismiss="modal" aria-label="Close"
+                        name="button">No</button>
+                    <button type="button" onclick="removeOrderItem({{ item.id }})" class="btn btn7 yes-btn" name="button">Yes</button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

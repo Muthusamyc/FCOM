@@ -1,0 +1,43 @@
+<div class="modal fade" id="update-status">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Date</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{% url 'update_order_status_by_deisnger' %}" id="">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        {% csrf_token %}
+                        <input type="hidden" name="orderId" value="{{ order.id }}" />
+                        <input type="hidden" name="cartId" value="{{ order.cart.id }}" />
+                        <input type="hidden" name="itemId" id="itemId" value="" />
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" name="statusType" id="statusType" required >
+                                <option value="" >Select</option>
+                                <option value="{{booking_stage.ORDER_CONSULTED}}" >Visited / Consulation Done</option>
+                                <option value="{{booking_stage.ORDER_PICKEDUP}}" >Picked Up</option>
+                                <option value="{{booking_stage.ORDER_IN_PROGRESS}}" >In Progess</option>
+                                <option value="{{booking_stage.ORDER_DELIVERED}}">Delivered</option>                               
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

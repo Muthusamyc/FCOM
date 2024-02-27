@@ -1,0 +1,441 @@
+{% extends 'public_template.html' %}
+{% load static %}
+{% load ordertags %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/my-account.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '' %}css/custom-stitching.css">
+<script src="{% static 'orders/order_status_update.js' %}"></script>
+<section id="book-now">
+  <div class="container-fluid container-width">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1 class="mainh1">My Bookings</h1>
+        <p class="text-white para2">Your Booking</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="customTabs p2">
+  <div class="container-fluid container-width">
+    <div class="row">
+      <div class="col-md-3 sideTabs filters">
+        <button onclick="window.location.href='{% url "our_services" %}'" class="btn btn7 book-btn full-width" type="button" data-controls="men">Book Now</button>
+        <!-- <h4>Filters</h4> -->
+        {% if is_page_redirected %}
+         <script>
+            localStorage.removeItem("cart");
+         </script>
+        {% endif %}
+        <form id="form1" action="{% url 'my_booking' %}" method="post">
+          {% csrf_token %}
+        <!-- <ul class="nav" data-tab="category" id="categoryTab" role="tablist"> -->
+          <!-- <li class="nav-item" role="presentation">
+            <label for="">Member</label>
+            <select name="addressType" class="form-control" value="">
+              <option value="">Select</option>
+              <option value="">Designer Visit</option>
+            </select>
+          </li> -->
+          <!-- <li class="nav-item" role="presentation">
+            <label for="">Booking Type</label>
+            <select name="addressType" class="form-control" value="">
+              <option value="">Select</option>
+              {% for booking_type in booking_types %}
+              <option value="{{ booking_type.id }}">{{ booking_type.name }}</option>
+              {% endfor %}
+            </select>
+          </li> -->
+          <!-- <li class="nav-item" role="presentation">
+            <label for="">Service Type</label>
+            <select name="addressType" class="form-control" value="">
+              <option value="">Select</option>
+              {% for service_type in service_types %}
+              <option value="{{ service_type.id }}">{{ service_type.name }}</option>
+              {% endfor %}
+            </select>
+          </li> -->
+        
+          <!-- <li class="nav-item" role="presentation">
+            <label for="">Status</label>
+            <select name="addressType" class="form-control" value="">
+              <option value="">Select</option>
+              {% for id, key in all_status.items %}
+               <option value="{{ id }}" {% if id == selected_status %} selected="selected" {% endif %}>
+                {{ key }}</option>
+              {% endfor %}
+            </select>
+          </li> -->
+        <!-- </ul> -->
+        <input type="hidden" name="filterstatus"  id="filterstatus" value="">
+        <ul class="nav" data-tab="category" id="categoryTab1" role="tablist">
+          {% if selected_status is None or selected_status == 0 %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control active"  id="0" type="button"  >All Bookings</button>
+          </li>
+          {% else %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control"  id="0" type="button"  >All Bookings</button>
+          </li>
+          {% endif %}
+          {% if selected_status == 1%}
+        
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control active"  id="1" type="button"  >Order Booked</button>
+          </li>
+          {% else %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control"  id="1" type="button"  >Order Booked</button>
+          </li>
+          {% endif %}
+          {% if selected_status == 10 %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control active" id="10" type="button" >Order Cancelled</button>
+          </li>
+          {% else %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control " id="10" type="button" >Order Cancelled</button>
+          </li>
+          {% endif %}
+          {% if selected_status == 3 %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control active" id="3" type="button" >Order Approved</button>
+          </li>
+          {% else %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control" id="3" type="button" >Order Approved</button>
+          </li>
+          {% endif %}
+          {% if selected_status == 7 %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control active" id="7" type="button" >In Progress</button>
+          </li>
+          {% else %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control" id="7" type="button" >In Progress</button>
+          </li>
+          {% endif %}
+          {% if selected_status == 9 %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control active" id="9" type="button" >Delivered</button>
+          </li>
+          {% else %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link filter-btn form-control" id="9" type="button" >Delivered</button>
+          </li>
+          {% endif %}
+        </ul>
+        </form> 
+        <div class="callback-action">
+          <h3 class="h11">Any Questions?</h3>
+          <a href="#">Call us at<br />
+            <b>+91 9108902222</b><br />
+            or </a>
+          <button type="button"  class="btn btn2" name="button">Request Callback</button>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="tab-content booking-details">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row setup-content m-0 show" id="step-1">
+              {% for order in orders %}
+              <div class="customTabContent">
+                <h2 class="itemssearch-heading">
+                  <div class="row full-width">
+                    <div class="col-md-3">
+                      <label for="">ID</label>
+                      <div class="itemstop-title" id="id">{{ order.id }}</div>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Booking Type</label>
+                      <div class="itemstop-title" id="consultation">{{ order.booking_type.name }}</div>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Date</label>
+                      <div class="itemstop-title" id="date">{{ order.created_on }}</div>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Service Type</label>
+                      <div class="itemstop-title" id="serviceType">{{ order.service_type.name }}</div>
+                    </div>
+                  </div>
+                </h2>
+                <div class="row-data active" data-tag="girls,restyling,regular,withLining">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="booking-view">
+                        <div class="selected-image">
+                          {% for item in order.orderitems_set.all %}
+                          <img src="{{item.product_item.item.image.url}}" alt="{{item.product_item.item.name}}" >
+                            
+                                            
+                          {% endfor %}
+                        </div>
+                        
+                        
+                        {% if order.status == booking_stage.ORDER_BOOKED or order.status == booking_stage.ORDER_ASSINGED or order.status == booking_stage.ORDER_CONSULTED or order.status == booking_stage.ORDER_PICKEDUP or order.status == booking_stage.WAIT_FOR_APPROVAL %}
+                         <button type="button" class="btn btn25" data-bs-toggle="modal" data-bs-target="#cancelBookingModal" name="button">Cancel Booking</button>
+                        {% include 'my_booking_status/cancel_order.html' %}
+                        {% endif %}
+
+                        {% if order.status == booking_stage.ORDER_DELIVERED and not order.customerreview_set.last %}
+                        <button type="button" data-id="{{order.id}}" class="btn btn25 ReviewBtn" name="button" id="ReviewBtn">Review</button>
+                      {% endif %}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="items-grid-footer">
+                  <div class="row full-width">
+                    <div class="col-md-2">
+                      <label for="">Status</label>
+                      <div class="itemstop-title highlighted-text" id="id">{{ order.status|get_order_status }}</div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="">Designer Assigned</label>
+                      <div class="itemstop-title">
+                        {% if order.designer_assigned %}{{ order.designer_assigned }} {% else %} <div class="field-loader"><span></span><span></span><span></span></div> {% endif %}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="">Consultation Date</label>
+                      <div class="itemstop-title">
+                        {% if order.consultation_date %}{{ order.consultation_date }} {% else %}<div class="field-loader"><span></span><span></span><span></span></div> {% endif %}
+                      </div>
+                    </div>
+                    {% if order.transactiondetails.transactionamount_set.last.payment_type != "balance" %}
+                    <div class="col-md-2">
+                      <label for="">Estimated Total</label>
+                      <div class="itemstop-title">₹ <span id="estimated-total">{{ order.transactiondetails.sub_total }}</span>
+                        {% if order.transactiondetails.transactionamount_set.last.payment_type == "estimated" %} - <span class="highlighted-text">{% if order.status == booking_stage.ORDER_FAILED %} Failed {% else%} Paid {% endif %}</span> {% endif %}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="">Advance Amount</label>
+                      <div class="itemstop-title">₹ <span id="advancedAmount">350</span>
+                        {% if order.transactiondetails.transactionamount_set.last.payment_type == "advance" %} - <span class="highlighted-text">Paid</span> {% endif %}
+                      </div>
+                    </div> 
+                    {% else %}
+                    <div class="col-md-2">
+                      <label for="">Total Amount</label>
+                      <div class="itemstop-title">₹ <span id="estimated-total">{{ order.transactiondetails.net_amount }}</span> - <span class="highlighted-text">Paid</span>
+                      </div>
+                    </div>
+                    {% endif %}
+                     <div class="col-md-2">
+                      <label for=""></label>
+                      <div class="col text-end">
+                        
+                        <a href='{% url "my_booking_items" order.id %}' class="link-btn form-line m-0" style="font-size: 18px;">View Details  </a>
+                        
+                    </div>
+                    </div>  
+                    <!-- <div class="col-md-2">
+                      <label for="">Download</label>
+                      <a href="/file" class="itemstop-title highlighted-text" id="download" download>Estimation
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <!-- <div class="sticky-cart-footer">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="sticky-cart-total">
+                      <div class="items-cart">
+                        <h4>Items in Cart</h4>
+                        <p id="total-item">0</p>
+                      </div>
+                      <div class="items-cart">
+                        <h4>Estimated Total</h4>
+                        <p>&#x20B9; <span id="estimated-total-item">0</span></p>
+                      </div>
+                      <div class="items-cart">
+                        <h4>Advance Payable</h4>
+                        <p id="estimated-total-item">&#x20B9; 500</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 text-right btn-flex">
+                    <button type="button" class="btn btn25" name="button">Cancel</button>
+                    <button type="button" class="btn btn7 nextBtn" id="continue_book" name="button">Continue</button>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+<div class="col-md-12">
+  <div class="container-fluid track-order" id="CusReview" style="height:100%;width:100%;display:none">
+    <div class="row">
+      <div class="col-md-4" ></div>
+      
+      <div class="col-md-4 card mt-4 pb-0 review-card " >
+        <button type="button" class="btn-close  btn-close" aria-label="Close" ><b id="Rclsbtn">&#10006</b></button>
+        <form action="/" method="post"> 
+         <div class="modal-body p0">
+        <h3 style="font-size:4vh;">Customer Review</h3>
+        <hr style="border: 1px solid black;margin-bottom: 10px;">
+  
+        <div style="width:100%;">
+        <P style="color:black;"><b>How to you rate FCOM customer services?</b></P>
+        <div class="star-rating" >
+          <input type="radio" id="5-stars" name="rating" value="5" required data-target="#customer_services"/>
+          <label for="5-stars" id="star" class="star">&#9733;</label>
+          <input type="radio" id="4-stars" name="rating" value="4" required data-target="#customer_services"/>
+          <label for="4-stars" id="star" class="star">&#9733;</label>
+          <input type="radio" id="3-stars" name="rating" value="3" required data-target="#customer_services"/>
+          <label for="3-stars" id="star" class="star">&#9733;</label>
+          <input type="radio" id="2-stars" name="rating" value="2" required data-target="#customer_services"/>
+          <label for="2-stars" id="star" class="star">&#9733;</label>
+          <input type="radio" id="1-star" name="rating" value="1" required data-target="#customer_services"/>
+          <label for="1-star" id="star" class="star">&#9733;</label>
+      </div></div>
+
+    
+      <hr style="width:100%;margin: 0;">
+      <div style="width:100%;">
+     <P style="color:black"><b>How do you rate FCOM Designer?</b></P>
+     <div class="star-rating">
+      <input type="radio" id="rating2-5" name="rating2" value="5" required data-target="#designer"/>
+      <label for="rating2-5" class="star">&#9733;</label>
+      <input type="radio" id="rating2-4" name="rating2" value="4" required data-target="#designer"/>
+      <label for="rating2-4" class="star">&#9733;</label>
+      <input type="radio" id="rating2-3" name="rating2" value="3" required data-target="#designer"/>
+      <label for="rating2-3" class="star">&#9733;</label>
+      <input type="radio" id="rating2-2" name="rating2" value="2" required data-target="#designer"/>
+      <label for="rating2-2" class="star">&#9733;</label>
+      <input type="radio" id="rating2-1" name="rating2" value="1" required data-target="#designer"/>
+      <label for="rating2-1" class="star">&#9733;</label>
+    </div>
+    </div> 
+
+    
+    
+    <hr style="width:100%;margin: 0;">
+    <div style="width:100%;">
+   <P style="color:black"><b>How do you rate FCOM delivery services?</b></P>
+   <div class="star-rating">
+    <input type="radio" id="rating3-5" name="rating3" value="5" required data-target="#delivery_services"/>
+    <label for="rating3-5" class="star">&#9733;</label>
+    <input type="radio" id="rating3-4" name="rating3" value="4" required data-target="#delivery_services"/>
+    <label for="rating3-4" class="star">&#9733;</label>
+    <input type="radio" id="rating3-3" name="rating3" value="3" required data-target="#delivery_services"/>
+    <label for="rating3-3" class="star">&#9733;</label>
+    <input type="radio" id="rating3-2" name="rating3" value="2" required data-target="#delivery_services"/>
+    <label for="rating3-2" class="star">&#9733;</label>
+    <input type="radio" id="rating3-1" name="rating3" value="1" required data-target="#delivery_services"/>
+    <label for="rating3-1" class="star">&#9733;</label>
+  </div>
+  </div> 
+
+
+    <hr style="width:100%;">
+         
+          <div class="form-group">
+           <label for="message-text" class="col-form-label">Message:</label>
+          <textarea class="form-control" id="customer_review"></textarea>
+          <input type="hidden"  id="order_id" value="">
+          <input type="hidden" id="customer_services" name="customer_services" value="">
+          <input type="hidden" id="designer" name="designer" value="">
+          <input type="hidden" id="delivery_services" name="delivery_services" value="">
+          </div>
+         
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal" id="reviewcancel">Cancel</button>
+           <button type="button" onclick="reviewSections()" class="btn btn-secondary"  style="background-color: #F28077">Submit</button>
+        
+         </div>
+  
+        </div>
+        </form>
+      </div>
+   
+      <div class="col-md-4" ></div>
+    </div>
+  </div>
+ 
+ </div>
+
+<!-- <script type="text/javascript" src="/static/js/custom-stitching.js"></script> -->
+{% endblock %}
+
+{% block script %}
+<script>
+  $('form select').on('change', function(){
+    var selected_val = $(this).val();
+    if (selected_val){
+      $("#form1").submit();
+    }
+});
+
+
+</script>
+<script>
+$("#chat_icon").click(function(){
+  $("#chat_box").toggle('.show')
+  $(".chat-content").animate({ scrollTop: $('.chat-content').height() }, 1000);
+  $(".chat-content").scroll(0)
+})
+
+
+
+$(document).on("click", '.filter-btn', function () {
+  var selectedId = $(this).attr('id');
+  parentId = 'categoryTab1'
+  $("#categoryTab1 .filter-btn").removeClass('active');
+  $(this).addClass('active');
+  $('#filterstatus').val(selectedId);
+  $("#form1").submit();
+
+});
+
+</script>
+
+<script>
+  $(".ReviewBtn").on('click', function (e) {
+    var dataId = $(this).data('id')
+  $('#CusReview').toggle();
+  $('#order_id').val(dataId)
+
+  });
+  $("#Rclsbtn").on('click', function (e) {
+  $("#CusReview").hide();
+  });
+  $("#reviewcancel").on('click', function (e) {
+  $("#CusReview").hide();
+  });
+
+
+
+
+
+
+
+$('[type*="radio"]').change(function() {
+  var ratingValue = $(this).val();
+  var hiddenField = $(this).data('target');
+  $(hiddenField).val(ratingValue);
+});
+
+  </script>
+
+<script>
+  console.log(document.referrer);
+</script>
+
+
+
+{% endblock %}

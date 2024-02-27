@@ -1,0 +1,324 @@
+{% load measuretags %}
+<div class="accordion" >
+        
+    <div class="accordion__item" id="master-measurements" style="display:none;">
+       <div class="accordion__item__header text-center" >
+           Master Measurements
+       </div>
+   
+       <div class="accordion__item__content">
+        <div class="card">    
+                   
+            <div class="card-body">
+                <div class="row">
+                    
+                    
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="text-center"><b>Top (in Inch)</b></h6>
+                            </div>
+                            <div class="card-body">
+                             <form method="post" action="{% url 'master_measurements' order.id %}">
+                                 {% csrf_token %}
+                                 <input type="hidden" name="category" value="Top">
+                                   
+                                    <div class="row">
+                                        {% for group in groups %}
+                                        {% if group.category == 'Top' %}
+                                        <div class="col-md-6">
+                                            <div class="mb-3 row">
+                                                <label class="col-form-label col-sm-7">{{ group.name }}</label>
+                                                <div class="col-sm-5">  
+                                                    
+                                                    <input type="text" class="form-control" name="measurement_size" value="{% get_measurement_size group.id order.made_by.id 'Top' %}">
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                        
+                                       
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                <label>Special Instructions</label>
+                                <input type="text" class="form-control" name="notes" value="{% special_notes_master order.made_by.id 'Top' %}" >
+                            </div>
+                                    <div>
+                                        <button  type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+ 
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                       <div class="card">
+                           <div class="card-header">
+                               <h6 class="text-center"><b>Bottom (in Inch)</b></h6>
+                           </div>
+                           <div class="card-body">
+                            <form method="post" action="{% url 'master_measurements' order.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="category" value="Bottom">
+                                   <div class="row">
+                                       {% for group in groups %}
+                                       {% if group.category == 'Bottom' %}
+                                       <div class="col-md-6">
+                                           <div class="mb-3 row">
+                                               <label class="col-form-label col-sm-7">{{ group.name }}</label>
+                                               <div class="col-sm-5">  
+                                                   
+                                                   <input type="text" class="form-control" name="measurement_size" value="{% get_measurement_size group.id order.made_by.id 'Bottom' %}">
+                                               </div>
+                                           </div>
+                                           
+                                       </div>
+                                       {% endif %}
+                                   {% endfor %}
+                                       
+                                      
+                                       
+                                   </div>
+                                   <div class="form-group">
+                               <label>Special Instructions</label>
+                               <input type="text" class="form-control" name="notes" value="{% special_notes_master order.made_by.id 'Bottom' %}" >
+                           </div>
+                                   <div>
+                                       <button  type="submit" class="btn btn-success">Submit</button>
+                                   </div>
+
+                                   
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+        
+         
+
+       </div>
+     </div>
+
+     <div class="accordion__item" id="add-measurements" style="display:none;">
+        <div class="accordion__item__header text-center" >
+            Add Measurements
+        </div>
+    
+        <div class="accordion__item__content">
+            <div class="card">    
+                   
+                <div class="card-body">
+                    <div class="row">
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="text-center"><b>Top (in Inch)</b></h6>
+                                </div>
+                                <div class="card-body">
+                                 <form method="post" action="{% url 'add_measurements' %}">
+                                     {% csrf_token %}
+                                        <input type="hidden" name="item_id" class="measurement_item_id">
+                                        <input type="hidden" name="category" value="Top">
+                                        <div class="row">
+                                            {% for group in groups %}
+                                            {% if group.category == 'Top' %}
+                                            <div class="col-md-6">
+                                                <div class="mb-3 row">
+                                                    <label class="col-form-label col-sm-7">{{ group.name }}</label>
+                                                    <div class="col-sm-5">  
+                                                        
+                                                        <input type="text" class="form-control" name="measurement_size" value="{% get_measurement_size group.id order.made_by.id 'Top' %}">
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                            
+                                           
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                    <label>Special Instructions</label>
+                                    <input type="text" class="form-control" name="notes" value="{% special_notes_master order.made_by.id 'Top' %}" >
+                                </div>
+                                        <div>
+                                            <button  type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+ 
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="card">
+                               <div class="card-header">
+                                   <h6 class="text-center"><b>Bottom (in Inch)</b></h6>
+                               </div>
+                               <div class="card-body">
+                                <form method="post" action="{% url 'add_measurements' %}">
+                                    {% csrf_token %}
+                                       <input type="hidden" name="item_id" class="measurement_item_id">
+                                       <input type="hidden" name="category" value="Bottom">
+                                       <div class="row">
+                                           {% for group in groups %}
+                                           {% if group.category == 'Bottom' %}
+                                           <div class="col-md-6">
+                                               <div class="mb-3 row">
+                                                   <label class="col-form-label col-sm-7">{{ group.name }}</label>
+                                                   <div class="col-sm-5">  
+                                                       
+                                                       <input type="text" class="form-control" name="measurement_size" value="{% get_measurement_size group.id order.made_by.id 'Bottom' %}">
+                                                   </div>
+                                               </div>
+                                               
+                                           </div>
+                                           {% endif %}
+                                       {% endfor %}
+                                           
+                                          
+                                           
+                                       </div>
+                                       <div class="form-group">
+                                   <label>Special Instructions</label>
+                                   <input type="text" class="form-control" name="notes" value="{% special_notes_master order.made_by.id 'Bottom' %}" >
+                               </div>
+                                       <div>
+                                           <button  type="submit" class="btn btn-success">Submit</button>
+                                       </div>
+
+                                       
+                                   </form>
+                               </div>
+                           </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+          
+ 
+        </div>
+      </div>
+
+     {% for item in items %}
+     
+     {% check_item_measurement_is_exits item.id as measurements %}
+     {% if measurements %}
+
+     <div class="accordion__item" id="item-measurements">
+        <div class="accordion__item__header text-center" >
+            {{ item.product_item.item.name }} Measurements
+        </div>
+    
+        <div class="accordion__item__content">
+            <div class="card">    
+                   
+                <div class="card-body">
+                    <div class="row">
+                        
+                       <div class="col-md-6">
+                           <div class="card">
+                               <div class="card-header">
+                                   <h6 class="text-center"><b>Top (in Inch)</b></h6>
+                               </div>
+                               <div class="card-body">
+                                   <form method="post" action="{% url 'add_measurements' %}">
+                                       {% csrf_token %}
+                                       <input type="hidden" name="item_id" value="{{item.id}}"> 
+                                       <input type="hidden" name="category" value="Top">
+                                       <div class="row">
+                                           {% for group in groups %}
+                                           {% if group.category == 'Top' %}
+                                           <div class="col-md-6">
+                                               <div class="mb-3 row">
+                                                   <label class="col-form-label col-sm-7">{{ group.name }}</label>
+                                                   <div class="col-sm-5">
+                                                       
+                                                       <input type="text" class="form-control" name="measurement_size" value="{% get_measurement_size_item group.id item.id 'Top' %}">
+                                                   </div>
+                                               </div>
+                                               
+                                           </div>
+                                           {% endif %}
+                                       {% endfor %}
+                                           
+                                          
+                                           
+                                       </div>
+                                       <div class="form-group">
+                                   <label>Special Instructions</label>
+                                   <input type="text" class="form-control" name="notes" value="{% special_notes item.id 'Top' %}" >
+                               </div>
+                               {% if order.status == booking_stage.ORDER_PICKEDUP or  order.status == booking_stage.WAIT_FOR_APPROVAL %}
+                                       <div>
+                                           <button  type="submit" class="btn btn-success">Submit</button>
+                                       </div>
+                                {% endif %}       
+                                       
+                                   </form>
+                               </div>
+                           </div>
+                       </div>
+                        <div class="col-md-6">
+                           <div class="card">
+                               <div class="card-header">
+                                   <h6 class="text-center"><b>Bottom1 (in Inch)</b></h6>
+                               </div>
+                               <div class="card-body">
+                                   <form method="post" action="{% url 'add_measurements' %}">
+                                       {% csrf_token %}
+                                       <input type="hidden" name="item_id" value="{{item.id}}"> 
+                                       <input type="hidden" name="category" value="Bottom">
+                                       <div class="row">
+                                           {% for group in groups %}
+                                           {% if group.category == 'Bottom' %}
+                                           <div class="col-md-6">
+                                               <div class="mb-3 row">
+                                                   <label class="col-form-label col-sm-7">{{ group.name }}</label>
+                                                   <div class="col-sm-5">  
+                                                       
+                                                       <input type="text" class="form-control" name="measurement_size" value="{% get_measurement_size_item group.id item.id 'Bottom' %}">
+                                                   </div>
+                                               </div>
+                                               
+                                           </div>
+                                           {% endif %}
+                                       {% endfor %}
+                                           
+                                          
+                                           
+                                       </div>
+                                       <div class="form-group">
+                                   <label>Special Instructions</label>
+                                   <input type="text" class="form-control" name="notes" value="{% special_notes item.id 'Bottom' %}" >
+                               </div>
+                               {% if order.status == booking_stage.ORDER_PICKEDUP or  order.status == booking_stage.WAIT_FOR_APPROVAL %}
+                               <div>
+                                    <button  type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                {% endif %}  
+
+                                       
+                                   </form>
+                               </div>
+                           </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+          
+ 
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+   </div> <!-- id accordion end -->

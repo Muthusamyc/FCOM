@@ -1,0 +1,60 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$("#tbody").on("click", ".btn-edit", function(){
+    let id = $(this).attr("data-sid")
+    var sort_order = $('#' + id).val();
+    mydata = {id:id, sort_order:sort_order, csrfmiddlewaretoken: '{{ csrf_token }}' }
+    
+    $.ajax({
+            url: "{% url 'update_sort_order' %}",
+            method: "POST",
+            data: mydata,
+            success: function(data){
+            //   console.log(data)
+              if(data.status == 1){
+                $('#error' + id).text("Success");
+              }
+              if(data.status == 0){
+                $('#error' + id).text("Duplicate");
+              }
+            }
+          })
+
+});
+$("#tbody").on("click", "#trash", function(){
+    let id = $(this).attr("data-sid")
+    mydata = {id:id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+    $.ajax({
+            url: "{% url 'delete_stiching_items' %}",
+            method: "POST",
+            data: mydata,
+            success: function(data){
+              if(data.status == 1){
+                alert('Items deleted Successfully')
+                $('#table'+id).hide();
+
+              }
+            }
+          })
+
+
+});
+
+$("#tbody").on("click", "#edit", function(){
+  let id = $(this).attr("data-sid");
+  var category = $('#category option:selected').val();
+  var finishing = $('#finishing option:selected').val();
+  var service = $('#service option:selected').val();
+  var pattern = $('#pattern option:selected').val();
+
+  $('#item_id').val(id);
+  $('#category_val').val(category);
+  $('#finishing_val').val(finishing);
+  $('#service_val').val(service);
+  $('#pattern_val').val(pattern);
+  $("#form1").submit();
+
+
+  });
+
+</script>

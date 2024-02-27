@@ -1,0 +1,47 @@
+{% if  order.status == booking_stage.ORDER_PICKEDUP or order.status == booking_stage.WAIT_FOR_APPROVAL or order.status == booking_stage.APPROVAL_REJECTED%}
+<div class="card col-md-12">
+    <div class="card-header">
+      <div class="row">
+        <div class="">
+          <form  id="send_request" >
+            {% if  order.status == booking_stage.ORDER_PICKEDUP %}
+            <button type="submit" id="{{ order.id }}" class="btn btn-success">Send for Approval</button>
+            <!-- <button type="submit" class="btn btn-danger">Reset</button> -->
+            {% elif order.status == booking_stage.WAIT_FOR_APPROVAL or  order.status == booking_stage.APPROVAL_REJECTED %}
+            <button type="submit" id="{{ order.id }}" class="btn btn-success" >Resend Approval</button>
+            <button type="submit" class="btn btn-secondary" disabled>Waiting for Approval</button>
+           {% endif %}    
+        </form>
+        </div>
+        <!-- <div class="col-md-2">
+          <button class="btn btn-primary" onclick="window.location.replace('{% url "orders_listing_for_designer" order.status   %}')">
+            Back
+          </button>
+        </div> -->
+      </div>
+    </div>
+</div>
+{% endif %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$("#send_request").on("click", ".btn-success", function(e){
+    e.preventDefault();
+    let id=this.id;
+    mydata = {id:id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+    $.ajax({
+            url: "{% url 'send_approval_request' %}",
+            method: "POST",
+            data: mydata,
+            success: function(data){
+              if(data.status == 1){                
+                $('#'+id).prop('disabled',true).text('Waiting for Approval');
+                $('.btn-secondary').hide();
+                alert('Order Is Sent for approval!');
+                window.history.back();
+              }
+            }
+          })
+});
+
+</script>

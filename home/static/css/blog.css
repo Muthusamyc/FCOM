@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@100&display=swap');
+* {
+    padding: 0%;
+    margin: 0%;
+}
+
+body {
+    line-height: 1.8;
+    color: #898fa1;
+    font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: #11245a;
+    font-family: 'Didot';
+    font-style: normal;
+    font-size: 52px;
+    line-height: 72px;
+    /* or 138% */
+    letter-spacing: -0.015em;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+}
+
+a {
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.45 ease;
+}
+
+img {
+    width: 100%;
+}
+
+small {
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+#Benifits {
+    background: rgba(242, 128, 119, 0.05);
+}
+
+#Home6 {
+    top: auto;
+    width: 100%;
+    margin-top: 60px;
+    background: linear-gradient(72.78deg, rgba(255, 118, 98, 0.5) 39.74%, rgba(196, 196, 196, 0) 87.61%, rgba(255, 119, 99, 0.5) 100%), url(../img/blog.png);
+    background-size: cover;
+    align-items: center;
+    background-position: center;
+    display: flex;
+    height: 900px;
+}
+
+p {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    letter-spacing: -0.015em;
+}
+
+.para12 {
+    font-family: 'Futura';
+    font-size: 16px;
+    line-height: 150%;
+    /* or 24px */
+    /* black 60 */
+    color: rgba(0, 0, 0, 0.6);
+    /* Inside auto layout */
+}
+
+.para13 {
+    font-family: 'Futura';
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 21px */
+    /* black 60 */
+    display: flex;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.para144 {
+    float: inline-start;
+    font-family: 'Futura';
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 21px */
+    /* black 60 */
+    display: flex;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.blogh1 {
+    width: auto;
+    font-family: 'Didot';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 130%;
+    /* identical to box height, or 42px */
+    /* Black */
+    color: #000000;
+}
+
+.blogh2 {
+    width: auto;
+    font-family: 'Didot';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    /* identical to box height, or 34px */
+    /* Black */
+    color: #000000;
+}
+
+.category {
+    font-family: 'Futura';
+    font-size: 12px;
+    line-height: 150%;
+    /* identical to box height, or 18px */
+    /* Primary */
+    color: #F28077;
+}
+
+.category1 {
+    font-family: 'Futura';
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+    /* Primary */
+    color: #F28077;
+}
+
+.cat {
+    color: #F28077;
+}
+
+.image5 {
+    width: 48px;
+    height: 48px;
+    border-radius: 500px;
+}

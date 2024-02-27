@@ -1,0 +1,35 @@
+{% load ordertags %}
+<div class="card col-md-12">
+    <div class="card-header">
+        <h3>Payment History</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Order Id</th>
+                            <th>Transaction Date</th>
+                            <th>Type</th>
+                       
+                            <th>Txn Id</th>   
+                            <th>Txn Amount</th>                              
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for paytm_trans in paytm_transactions %}
+                            <tr>
+                                <td>{{ paytm_trans.order_id }}</td>
+                                <td>{{ paytm_trans.txn_date }}</td>                                
+                                <td>{{ paytm_trans.payment_type }}</td>                                
+                                <td>{{ paytm_trans.txn_id }}</td>
+                                <td>{{ paytm_trans.txn_amount }}</td>                          
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+{% extends "admin/base_template.html" %}
+{% block content %}
+
+
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title" id="report-title">Customer Detail Report - CDR</h3>
+                        <div class="card-tools">
+                            
+                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <i class="fas fa-filter"></i>Filter
+                              </button>
+                          </div>
+                    </div>
+                   
+                  
+                    <div class="card-body">
+                        <div class="row">
+                         
+                            <div class="col-md-6">
+                             
+                            </div>   
+                           
+                        </div>
+                       
+                        <table class="table table-bordered  table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Phone No</th>
+                                    <th>Address</th>
+
+                                
+
+                                    
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{user.first_name}}</td>
+                                    <td>{{user.last_name}}</td>
+                                    <td>{{user.mobile_no}}</td>
+                                    <td>{{user.userdetail_set.last.address}}</td>
+                                    
+                                </tr> 
+                                  {% endfor %}                                                
+                            </tbody>
+                           
+                       
+                        </table>
+                    </div>
+                       
+                </div>
+                  
+                
+            </div>
+           
+
+        </div>
+    </div>
+
+    
+    
+
+
+
+
+</div>
+
+
+<div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Select Date</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="post" action="{% url 'customer_report' %}">
+        {% csrf_token %}
+        <div class="modal-body">
+            <div class="form-group">
+                <label>From Date</label>
+                
+                <input type="date" class="form-control" name="fromDate" value="" required="">
+            </div>
+            <div class="form-group">
+                <label>To Date</label>
+                
+                <input type="date" class="form-control" name="toDate" value="" required="">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary">Reset</button>
+          <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    
+
+
+{% endblock%}

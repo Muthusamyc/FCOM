@@ -1,0 +1,22 @@
+{% load static %}
+
+<div class="modal fade" id="delivery_confirmed" tabindex="-1" aria-labelledby="delivery_confirmed" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delivery confirmed</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+            </div>
+            <div class="modal-body">  
+                <div>
+                    <p style="font-size: 18px;">If you received your order press <b>'YES'</b> button or else press <b>'NO'</b>.</p>
+                </div>              
+                <div class="btn-footer btn-flex">
+                    <button type="button" class="btn btn7 yes-btn" data-bs-dismiss="modal" aria-label="Close"
+                        name="button">No</button>
+                    <button type="button" onclick="confirmOrderDelivered({{ order_detail.id }})" class="btn btn7 yes-btn" name="button">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+{% extends "admin/base_template.html" %}
+{% load ordertags %}
+{% load orderitemtags %}
+
+{% load static %}
+{% block content %}
+
+<div class="invoice p-3 mb-3" style="background: rgba(242, 128, 119, 0.05);">
+
+    {% include 'order_pages/customer_details.html' %}
+    {% include 'order_pages/order_items.html' %}
+    {% include 'order_pages/measurements.html' %}
+    {% include 'order_pages/payment_methods_and_status.html' %}
+    {% include 'order_pages/payment_history.html' %}
+    {% include 'order_pages/order_tracker.html' %}
+    {% include 'order_pages/send_approval_request.html' %}
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script>
+    let booked = $('#order_booked').text();
+    let assigned = $('#order_assigned').text();
+    let est_approved = $('#estimation_approved').text();
+    let inprogress = $('#inprogress').text();
+    if (!booked.trim()) {
+        $('#order_booked').text('Yet-to-update')
+    }
+    if (!assigned.trim()) {
+        $('#order_assigned').text('Yet-to-update')
+    }
+    if (!est_approved.trim()) {
+        $('#estimation_approved').text('Yet-to-update')
+    }
+    if (!inprogress.trim()) {
+        $('#inprogress').text('Yet-to-update')
+    }
+</script>
+
+
+{% include 'modals/update_item.html' %}
+{% include 'modals/assinge_designer.html' %}
+{% include 'modals/update_date_for_order.html' %}
+{% include 'modals/update_status.html' %}
+{% include 'modals/confirm_delivery.html' %}
+
+{% endblock content %}
+
+
+{% block script %}
+<script>
+
+$("#tbody").on("click", ".btn-primary", function () {
+        let item_id = $(this).attr("data-sid");
+        $('.measurement_item_id').val(item_id);
+        $('#add-measurements').show();
+       
+
+
+});
+$("#tbody").on("click", ".btn-warning", function () {
+        let item_id = $(this).attr("data-sid");
+        $('#itemId').val(item_id);
+
+});
+    
+    $("#master_screen_btn").click(function(){
+        $('#master-measurements').show()
+});
+
+
+
+  
+</script>
+<script>
+
+    // Tabs
+    function openCategory(evt, CategoryName) {
+      var x = document.getElementsByClassName("category");
+      for (i = 0; i < x.length; i++) {
+         x[i].style.display = "none";
+      }
+      var activebtn = document.getElementsByClassName("testbtn");
+      for (i = 0; i < x.length; i++) {
+          activebtn[i].className = activebtn[i].className.replace(" w3-theme-dark", "");
+      }
+      document.getElementById(CategoryName).style.display = "block";
+      evt.currentTarget.className += " w3-theme-dark";
+    }
+
+    var mybtn = document.getElementsByClassName("testbtn")[0];
+    mybtn.click();
+
+    </script>
+
+
+     <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script>
+
+    if ($(".accordion__item__header").length > 0) {
+      var active = "active";
+      $(".accordion__item__header").click(function () {
+        $(this).toggleClass(active);
+        $(this).next("div").slideToggle(200);
+      });
+    }
+
+    </script>
+
+
+{% endblock script %}

@@ -1,0 +1,15 @@
+   {# <h3 class="form-heading">Update your address on map</h3>#}
+                    {# <div class="row form-group">#}
+                        {# <div class="col-md-12">#}
+                            {# <label for="">Type your address</label>#}
+                            {# <div class="search-input">#}
+                                {# <input type="text" id="address" name="email" class="form-control" value="" #} {#
+                                    placeholder="#227, Ground Floor, 10th Main, Motappanapalya" />#}
+                                {# <button type="button" id="submit" data-source="signup" class="search-btn">
+                                    <i#} {# class='bx bx-search'></i>
+                                </button>#}
+                                {# </div>#}
+                            {# <p id="error-msg"></p>#}
+                            {# <iframe id="map-canvas" src="" allowfullscreen></iframe>#}
+                            {# </div>#}
+                        {# </div>#}

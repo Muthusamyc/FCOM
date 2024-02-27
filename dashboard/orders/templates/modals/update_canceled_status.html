@@ -1,0 +1,75 @@
+{% load orderitemtags %}
+{% canceled_after_picked_up order.id as picked_up %}
+
+<form method="post" action="{% url 'update_canceled_stages' order.id %}">
+    {% csrf_token %} 
+    {% if picked_up and order.status == booking_stage.ORDER_CANCELED %}
+
+    <tr>
+        <th style="width:50%">Ready for Dispatch:</th>
+        <td>                               
+           
+            <label class="btn btn-success">
+                <input id="dispatch" type="checkbox" name="dispatch"  autocomplete="off">
+                <span class="glyphicon glyphicon-ok"></span>
+            </label>
+            
+        </td>
+    </tr> 
+    {% elif order.status == booking_stage.ORDER_CANCELED_READY_FOR_DISPATCH %}
+    <tr>
+        <th style="width:50%">Send for Delivery:</th>
+        <td>
+            
+            <label class="btn btn-success">
+                <input type="checkbox" name="dispatched"  autocomplete="off" >
+                <span class="glyphicon glyphicon-ok"></span>
+            </label>
+          
+        </td>
+    </tr> 
+    {% elif order.status == booking_stage.ORDER_CANCELED_DISPATCHED %}
+    <tr>
+        <th style="width:50%">Delivery Status:</th>
+        <td>
+            
+            <label class="btn btn-success">
+                <input type="checkbox" name="delivered"  autocomplete="off" >
+                <span class="glyphicon glyphicon-ok"></span>
+            </label>
+          
+        </td>
+    </tr> 
+    {% elif order.status == booking_stage.ORDER_CANCELED_DELIVERED or order.status == booking_stage.ORDER_CANCELED %}
+  
+    <tr>
+        <th style="width:50%">Refund Amount:</th>
+        <td>
+            <div class="row">
+                <div class="col-md-6">                                
+                    <input class="form-control" type="number" name="refund_amount"  autocomplete="off" >
+                </div>             
+            </div>        
+        </td>
+    </tr>
+    {% elif order.status == booking_stage.REFUND_INITIATED %}
+    <tr>
+        <th style="width:50%">Fully Paid:</th>
+        <td>            
+            <label class="btn btn-success">
+                <input type="checkbox" name="fully_paid"  autocomplete="off">
+                <span class="glyphicon glyphicon-ok"></span>
+            </label>          
+        </td>
+    </tr> 
+    {% endif %}
+   
+    <tr>
+        <th></th>
+        <td>
+            
+            <button type="submit" name="order" class="btn btn-success">Update</button>
+        </td>
+    </tr> 
+ 
+    </form>     

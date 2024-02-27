@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@100&display=swap');
+body {
+    line-height: 1.8;
+    color: #898fa1;
+    font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: #11245a;
+    font-family: 'Didot';
+    font-style: normal;
+    font-size: 52px;
+    line-height: 72px;
+    /* or 138% */
+    letter-spacing: -0.015em;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+}
+
+a {
+    font-weight: 700;
+    transition: all 0.45 ease;
+}
+
+img {
+    width: 100%;
+}
+
+small {
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.para21 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    /* or 133% */
+    text-align: center;
+    letter-spacing: -0.015em;
+    /* Black */
+    color: #000000;
+}
+
+#Home3 {
+    width: 100%;
+    margin-top: 60px;
+    background: linear-gradient(72.78deg, rgba(255, 118, 98, 0.5) 39.74%, rgba(196, 196, 196, 0) 87.61%, rgba(255, 119, 99, 0.5) 100%), url(../img/ourstory.png);
+    background-size: cover;
+    align-items: center;
+    background-position: center;
+    display: flex;
+    height: 900px;
+}
+
+.btn6 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    /* identical to box height, or 24px */
+    /* Black */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    color: #000000;
+    border: 2px solid black;
+    background: whitesmoke;
+    box-sizing: border-box;
+    border-radius: 4px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    margin: 24px 0px;
+}
+
+.link {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    /* Black */
+    color: #000000;
+}
+
+.h11 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 130%;
+    /* identical to box height, or 42px */
+    text-align: center;
+    align-items: center;
+    /* Primary */
+    color: #F28077;
+}
+
+.p8 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 27px */
+    text-align: center;
+    margin:16px 0 20px;
+    /* black 60 */
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.para {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    /* or 150% */
+    /* black 60 */
+    color: rgba(0, 0, 0, 0.6);
+    /* Inside auto layout */
+}
+.para2{
+  width:auto;
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 16px;
+  line-height: 20px;
+  letter-spacing: -0.015em;
+}
+.h2 {
+    font-family: 'Didot';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 72px;
+    /* identical to box height, or 112% */
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #000000;
+}
+
+.choose {
+    width: 200px;
+    padding: 81px;
+    height: 200px;
+    background: #FFFFFF;
+    box-shadow: 0px 40px 40px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    align-items: center;
+    text-align: center;
+}
+
+.h6 {
+    font-family: 'Didot';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 20px;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    letter-spacing: -0.015em;
+    color: #F28077;
+}
+ 
+
+.stars {
+    color: goldenrod;
+}
+
+.comment {
+    width: 100%;
+}
+
+p {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height, or 125% */
+    align-items: center;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+
+.colon {
+    position: absolute;
+    width: 75px;
+    color: #F28077;
+}
+
+@media only screen and (max-width: 992px) {
+    .colon {
+        width: 51px;
+        margin-top: -9px;
+        margin-left: -10px;
+    }
+}
+
+.hline {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* or 125% */
+    letter-spacing: -0.015em;
+    /* Black */
+    color: #000000;
+}
+
+.p9 {
+    font-family: 'Futura';
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    /* Black */
+    color: #000000;
+}
+
+.view {
+    font-family: 'Futura';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height, or 125% */
+    letter-spacing: -0.015em;
+    color: #000000;
+    margin-left: 94%;
+    margin-top: 44px;
+}
+
+
+
+/* Story Css */
+.mainh1{
+  width:auto;
+  display:block;
+}
+#Story {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:0;
+  background-image: url('../img/story-bg.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.hiring-action {
+  margin-top:113px;
+}
+
+.storyPara{
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color:#000 !important;
+}
+
+.storyPara .link {
+    width: 28px;
+    font-family: 'Futura';
+    font-size: 14px;
+    line-height: 20px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #000000;
+    word-spacing: 100px;
+}

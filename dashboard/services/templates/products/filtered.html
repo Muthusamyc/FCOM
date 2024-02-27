@@ -1,0 +1,233 @@
+{% extends "admin/base_template.html" %} 
+{% load itemstags %}
+{% block content %}
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+    </style>
+
+<div class="content">
+    <div class="container">
+        <form id="form1" action="{% url 'view_edit_order' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="item_id" name="item_id" value="">
+            <input type="hidden" id="category_val" name="category_val" value="">
+            <input type="hidden" id="finishing_val" name="finishing_val" value="">
+            <input type="hidden" id="service_val" name="service_val" value="">
+            <input type="hidden" id="pattern_val" name="pattern_val" value="">
+        </form> 
+        <form id="selected-sticthing-item" action="{% url 'view_selected_stiching_items' %}" method="post" >
+            <div class="card-body">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Category</label>
+                            <select class="form-control" name="category" id="category">
+                                <option value=""> Select Category</option>
+                                {% for service in services.category %}
+                                <option value="{{service.id}}" {% if filter_values.0|add:"0" == service.id %} selected="selected" {% endif %} > {{ service.name }}</option>                                            
+                                {% endfor %}
+                            </select>
+                        </div>
+                       
+                    
+
+                        <div class="form-group">
+                            <label for="">Finishing</label>
+                            <select class="form-control" name="finishing" id="finishing">
+                                <option value=""> Select Finishing</option>
+                                {% for service in services.finishing %}
+                                <option value="{{service.id}}" {% if filter_values.1|add:"0" == service.id %} selected="selected" {% endif %} > {{ service.name }}</option> 
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Service</label>
+                            <select class="form-control" name="service" id="service">
+                                <option value=""> Select Service</option>
+                                {% for service in services.service %}
+                                <option value="{{service.id}}" {% if filter_values.2|add:"0" == service.id %} selected="selected" {% endif %} > {{ service.name }}</option> 
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Pattern</label>
+                            <select class="form-control" name="pattern" id="pattern">
+                                <option value=""> Select Pattern</option>
+                                {% for service in services.pattern %}
+                                <option value="{{service.id}}" {% if filter_values.3|add:"0" == service.id %} selected="selected" {% endif %} > {{ service.name }}</option> 
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-search">
+                                Search
+                            </i>                                    
+                        </button>
+                        <p style="display: none;" id="searchedItemsError" class="fa fa-danger"> No items found!</p>
+                        <p style="display: none;" id="searchedItemsCount" class="fa fa-danger"> </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">Items</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered  table-hover" id="sortTable">
+                            <thead>
+                                <tr>
+                                    <th>SL No</th>
+                                    <th>Item Name</th>
+                                    <th>Estimated/Starting Price</th>
+                                    <th>Tags</th>
+                                    <th>Image</th>
+                                    <th>Related To</th>
+                                    <th>Sort No </th>
+                                    <th>Actions </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                {% for data in all_items %}
+                                <tr id="table{{data.item.id}}">
+                                    <th>{{data.item.id}}</th>
+                                    <th>{{data.item.name}}</th>
+                                    <th> ₹{{data.item.estimated_price}} /  ₹{{data.item.starting_price}}</th>                                    
+                                    <th>{{data.item.tags}}</th>
+                                    <th><img src="/media/{{data.item.image}}" style="width: 50px;" /></th>
+                                    <th>
+                                        <ul>
+                                            <li>{{ data.category.name }}</li>
+                                            <li>{{ data.service.name }}</li>
+                                            <li>{{ data.pattern.name }}</li>
+                                            <li>{{ data.finishing.name }}</li>
+                                        </ul>
+                                    </th> 
+                                    <th width="100">  
+                                        {% if data.sort_order == None %}                                                                               
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="number"  class="form-control" id= "{{data.item.id}}" name="sort_order" value=""/>
+                                            </div>
+                                        {% else %}
+                                        <div style="margin-bottom: 10px;">
+                                            <input type="number"  class="form-control" id= "{{data.item.id}}" name="sort_order" value="{{data.sort_order}}"/>
+                                        </div>
+                                        {% endif %}
+                                            <div>
+                                                <input type="button" value="Update" class="btn btn-primary btn-edit" data-sid="{{data.item.id}}">
+                                                
+                                            </div> 
+                                            <div id= "error{{data.item.id}}" style="color:red; font:14px">
+                                                
+                                            </div>                                   
+                                    </th>
+                                    
+                                    <!-- <th>{{data.created_on}}</th>
+                                    <th>{{data.updated_on}}</th>  -->
+                                    <th>
+                                        
+                                      
+
+
+                                        <i id='edit'  data-sid="{{data.id}}" class="fa fa-edit"></i>
+
+                                        <i id='trash'  data-sid="{{data.id}}" class="fa fa-trash"></i>
+                                    </th>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">                         
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+
+                                    {% if all_items.has_other_pages %}
+                                    <ul class="pagination justify-content-end">
+                                    {% if all_items.has_previous %}   
+                                    <li class="page-item"><a class="page-link" href="?page={{ all_items.previous_page_number }}">Previous</a></li>
+                                    {% else %}
+                                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                                    {% endif %}   
+                                    {% for i in all_items.paginator.page_range %}
+                                    {% if all_items.number == i %}
+                                    <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
+                                    {% else %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if all_items.has_next %}    
+                                    <li class="page-item"><a class="page-link" href="?page={{ all_items.next_page_number }}">Next</a></li>
+                                    {% else %} 
+                                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                    {% endif %}    
+                                    </ul>
+                                    {% endif %}                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="card-footer">
+    {% if all_items.has_other_pages %}
+        <ul class="pagination justify-content-end">
+        {% if all_items.has_previous %}   
+        <li class="page-item"><a class="page-link" href="?page={{ all_items.previous_page_number }}">Previous</a></li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        {% endif %}   
+        {% for i in all_items.paginator.page_range %}
+        {% if all_items.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if all_items.has_next %}    
+        <li class="page-item"><a class="page-link" href="?page={{ all_items.next_page_number }}">Next</a></li>
+        {% else %} 
+        <li class="page-item disabled"><span class="page-link">Next</span></li>
+        {% endif %}    
+        </ul>
+        {% endif %}
+    </div> -->
+    <script>
+    
+
+        $(function () {
+        $("#sortTable").DataTable({
+          "responsive": true, "lengthChange": true, "autoWidth": false,
+          "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+       
+      });
+        </script>
+{% include 'products/jqueryscript.html' %}
+
+{% endblock%}
+

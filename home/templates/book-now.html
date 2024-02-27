@@ -1,0 +1,417 @@
+{% extends 'public_template.html' %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/custom-stitching.css">
+
+<section id="book-now">
+    <div class="container-fluid container-width">
+      <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="mainh1">Book Now</h1>
+            <p class="text-white para2">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="customTabs">
+    <div class="container-fluid container-width">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="stepwizard book-now col-md-offset-3">
+                    <div class="stepwizard-row setup-panel">
+                      <div class="stepwizard-step">
+                        <a href="#step-1" type="button" class="btn btn-primary btn-circle"></a>
+                        <p>Select Items</p>
+                      </div>
+                      <div class="stepwizard-step">
+                        <a href="#step-2" type="button" class="btn btn-default btn-circle next" disabled="disabled"></a>
+                        <p>Summary</p>
+                      </div>
+                      <div class="stepwizard-step">
+                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled"></a>
+                        <p>Pay</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+      <div class="row">
+        <div class="col-md-3 sideTabs">
+          <h4>Category</h4>
+          <ul class="nav" data-tab="category" id="categoryTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link  btn-category filter-btn active" type="button"  data-controls="women">Women</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link btn-category filter-btn " type="button" data-controls="men">Men</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link btn-category filter-btn " type="button" data-controls="girls">Girls (Upto 10 Yrs)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link btn-category filter-btn " type="button" data-controls="homeDecor">Home Decor</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link btn-category filter-btn " type="button" data-controls="pets" aria-selected="false">Pets</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link btn-category filter-btn " type="button" data-controls="gifts" aria-selected="false">Gifts</button>
+            </li>
+          </ul>
+          <h4 class="mt-40">Service</h4>
+          <ul class="nav" data-tab="service" id="serviceTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active filter-btn service-btn" type="button"  data-controls="customStitching">Custom Stitching</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link filter-btn service-btn" type="button" data-controls="alterationRepair">Alterations & Repair</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link filter-btn service-btn" type="button" data-controls="restyling">Restyling & Upcycling</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link filter-btn service-btn" type="button" data-controls="dyeing">Dyeing & Darning</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link filter-btn service-btn" type="button" data-controls="embroidry">Embroidry</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link filter-btn service-btn" type="button" data-controls="designConsultation">Design Consultation</button>
+            </li>
+          </ul>
+          <h4 class="mt-40">Finish</h4>
+          <ul class="nav" data-tab="finish" id="finishTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link finish-btn filter-btn" type="button"  data-controls="regular">Regular</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link finish-btn filter-btn" type="button" data-controls="boutique">Boutique</button>
+            </li>
+          </ul>
+          <h4 class="mt-40">Pattern</h4>
+          <ul class="nav nav-tabs" data-tab="pattern" id="patternTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link filter-btn pattern-btn" type="button"  data-controls="withOutLining">With Out Lining</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link filter-btn pattern-btn" type="button" data-controls="withLining">With Lining</button>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col-md-9">
+          <div class="tab-content">
+            <div class="tab-pane fade show active"  id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row setup-content m-0"   id="step-1">
+                    <div class="customTabContent">
+                    <h2 class="itemssearch-heading">Items <span id="itemCount">200</span>
+                        <div class="search-input">
+                          <input type="text" id="itemsText" name="itemsText" class="form-control" placeholder="Search" autocomplete="off"/>
+                          
+                          <button type="button" id="itemsSearch" class="search-btn"><i class='bx bx-search'></i></button>
+                        </div>
+                      </h2>
+                      <div class="row-data active" data-tag="girls,restyling,regular,withLining">
+                        <div class="row">
+                          <div class="col-md-8">
+                            <h3>Blouse</h3>
+                            <p id="selectedTags">Women | Custom Stitching | Regular | Without Lining</p>
+                            <p id="priceTag">Starting Price: ₹<span class="priceValue">499</span></p>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="items-add">
+                              <img src="/static/img/items/item1.png" alt="Items">
+                              <button type="button" class="btn btn1 add" name="button" id="add1">Add</button>
+                              <div class="quantity-wrapper">
+                                <button type="button" class="btn btn2 quantity-btn decrease" name="button">&#8722;</button>
+                                <span class="quantity-txt" data-count="1">1</span>
+                                <button type="button" class="btn btn2 quantity-btn increase" name="button">&#43;</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row-data active" data-tag="women,restyling,regular,withOutLining">
+                        <div class="row">
+                          <div class="col-md-8">
+                            <h3>Item Name</h3>
+                            <p id="selectedTags">Women | Custom Stitching | Regular | Without Lining</p>
+                            <p id="priceTag">Starting Price: ₹<span class="priceValue">499</span></p>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="items-add">
+                              <img src="/static/img/items/item1.png" alt="Items">
+                              <button type="button" class="btn btn1 add" name="button" id="add1">Add</button>
+                              <div class="quantity-wrapper">
+                                <button type="button" class="btn btn2 quantity-btn decrease" name="button">&#8722;</button>
+                                <span class="quantity-txt" data-count="1">1</span>
+                                <button type="button" class="btn btn2 quantity-btn increase" name="button">&#43;</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row-data" data-tag="men,customStitching">
+                        <div class="row">
+                          <div class="col-md-8">
+                            <h3>Item Name</h3>
+                            <p id="selectedTags">Men | Custom Stitching | Regular | Without Lining</p>
+                            <p id="priceTag">Starting Price: ₹<span class="priceValue">499</span></p>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="items-add">
+                              <img src="/static/img/items/item1.png" alt="Items">
+                              <button type="button" class="btn btn1 add" name="button" id="add1">Add</button>
+                              <div class="quantity-wrapper">
+                                <button type="button" class="btn btn2 quantity-btn decrease" name="button">&#8722;</button>
+                                <span class="quantity-txt" data-count="1">1</span>
+                                <button type="button" class="btn btn2 quantity-btn increase" name="button">&#43;</button>
+                              </div>
+        
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row-data" data-tag="women,customStitching,regular,withOutLining">
+                        <div class="row">
+                          <div class="col-md-8">
+                            <h3>Item Name</h3>
+                            <p id="selectedTags">Women | Custom Stitching | Regular | Without Lining</p>
+                            <p id="priceTag">Starting Price: ₹<span class="priceValue">499</span></p>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="items-add">
+                              <img src="/static/img/items/item1.png" alt="Items">
+                              <button type="button" class="btn btn1 add" name="button" id="add1">Add</button>
+                              <div class="quantity-wrapper">
+                                <button type="button" class="btn btn2 quantity-btn decrease" name="button">&#8722;</button>
+                                <span class="quantity-txt" data-count="1">1</span>
+                                <button type="button" class="btn btn2 quantity-btn increase" name="button">&#43;</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="sticky-cart-footer">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="sticky-cart-total">
+                              <div class="items-cart">
+                                <h4>Items in Cart</h4>
+                                <p id="total-item">0</p>
+                              </div>
+                              <div class="items-cart">
+                                <h4>Estimated Total</h4>
+                                <p>&#x20B9; <span id="estimated-total-item">0</span></p>
+                              </div>
+                              <div class="items-cart">
+                                <h4>Advance Payable</h4>
+                                <p id="estimated-total-item">&#x20B9; 500</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6 text-right btn-flex">
+                            <button type="button" class="btn btn25" name="button">Cancel</button>
+                            <button type="button" class="btn btn7 nextBtn" id="continue_book" name="button">Continue</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="row setup-content m-0" id="step-2" style="display:none">
+                    <div class="customTabContent">
+                    <div class="p-0">
+                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h2 class="itemssearch-heading">Items <span id="itemCount">2</span>
+                        </h2>
+                        <div class="row-data active" data-tag="girls,restyling,regular,withLining">
+                          <div class="row">
+                            <div class="col-md-8">
+                              <h3>Blouse</h3>
+                              <p id="selectedTags">Women | Custom Stitching | Regular | Without Lining</p>
+                              <p id="priceTag">Starting Price: ₹<span class="priceValue">499</span></p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="items-add">
+                                <img src="static/img/items/item1.png" alt="Items">
+                                <button type="button" class="btn btn1 add" name="button" id="add1">Add</button>
+                                <div class="quantity-wrapper active">
+                                  <button type="button" class="btn btn2 quantity-btn decrease" name="button">−</button>
+                                  <span class="quantity-txt" data-count="1">1</span>
+                                  <button type="button" class="btn btn2 quantity-btn increase" name="button">+</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row-data active" data-tag="women,restyling,regular,withOutLining">
+                          <div class="row">
+                            <div class="col-md-8">
+                              <h3>Item Name</h3>
+                              <p id="selectedTags">Women | Custom Stitching | Regular | Without Lining</p>
+                              <p id="priceTag">Starting Price: ₹<span class="priceValue">499</span></p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="items-add">
+                                <img src="static/img/items/item1.png" alt="Items">
+                                <button type="button" class="btn btn1 add" name="button" id="add1">Add</button>
+                                <div class="quantity-wrapper active">
+                                  <button type="button" class="btn btn2 quantity-btn decrease" name="button">−</button>
+                                  <span class="quantity-txt" data-count="1">1</span>
+                                  <button type="button" class="btn btn2 quantity-btn increase" name="button">+</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="sticky-cart-footer show">
+                          <div class="row">
+                            <div class="col-md-7">
+                              <div class="sticky-cart-total">
+                                <div class="items-cart">
+                                  <h4>Items in Cart</h4>
+                                  <p id="total-item">2</p>
+                                </div>
+                                <div class="items-cart">
+                                  <h4>Estimated Total</h4>
+                                  <p>₹ <span id="estimated-total-item">2200</span></p>
+                                </div>
+                                <div class="items-cart">
+                                  <h4>Advance Payable</h4>
+                                  <p id="estimated-total-item">₹ 500</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-5 text-right btn-flex">
+                              <button type="button" class="btn btn25" name="button">Back</button>
+                              <button type="button" class="btn btn7 pay-btn nextBtn" name="button">Pay Now</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="selection-details">
+                      <div class="row form-group">
+                       <div class="col-md-6">
+                         <label for="">Service Mode</label>
+                         <select name="addressType" class="form-control" value="">
+                           <option value="">Select</option>
+                           <option value="">Designer Visit</option>
+                         </select>
+                       </div>
+                       <div class="col-md-6">
+                         <label for="">Designer Preference</label>
+                         <select name="addressType" class="form-control" value="">
+                           <option value="">Select</option>
+                           <option value="">Female</option>
+                         </select>
+                       </div>
+                     </div>
+                    </div>
+                    <div class="address-details">
+                      <h4><label for="">Address</label> <button type="button" class="btn btn7" data-bs-target="#addAddressModal" data-bs-toggle="modal" name="button">+</button></h4>
+                      <div class="address-row row">
+                        <div class="col-md-4 address-box">
+                          <div class="btn-icons">
+                            <button type="button" class="btn" name="button" data-bs-target="#addAddressModal" data-bs-toggle="modal"><img src="static/img/edit.png" alt="edit"></button>
+                            <button type="button" class="btn" name="button"><img src="static/img/cancel.png" alt="close"></button>
+                          </div>
+                          <h5>Poornima Mahajan</h5>
+                          <p>#227, Ground Floor, 10th Main, Motappanapalya, Indiranagar, Bangalore 560 038 +91 9108902222</p>
+                          <span class="badge badge-light" id="typeOfAddress">Home</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="note-txt">
+                      <ul>
+                        <li><b>Starting</b> price is for guidance only, final price / bill amount will be communicated during Designer Consultation</li>
+                        <li><b>Advance Payable</b> amount needs to be paid to book an appointment. If you cancel the booking (only) before 24 Hrs of designer’s visit to your location, full advance amount would be refunded.</li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="row setup-content m-0" id="step-3" style="display:none">
+                    <div class="sticky-cart-footer payment-details show mb-34">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="sticky-cart-total">
+                              <div class="items-cart">
+                                <h4>Items in Cart</h4>
+                                <p id="total-item">2</p>
+                              </div>
+                              <div class="items-cart">
+                                <h4>Estimated Total</h4>
+                                <p>₹ <span id="estimated-total-item">2200</span></p>
+                              </div>
+                              <div class="items-cart">
+                                <h4>Advance Payable</h4>
+                                <p id="estimated-total-item">₹ 500</p>
+                              </div>
+                              <div class="items-cart">
+                                <h4>Estimated Consultation Date</h4>
+                                <p id="order-date">30 May, 2022</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <div class="payment-wrapper">
+                      <h3>Payment Options</h3>
+                      <div class="payment-platform">
+                        <input type="hidden" name="paymentPlatform" id="paymentPlatform" value="">
+                        <div class="payment-row row">
+                          <div class="payment-box col-md-4">
+                            <input type="radio" name="paymentPlatform" value="phonePay" class="paymentPlatformHandle">
+                            <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                            <img src="static/img/payment/phone-pay.png" alt="Phonepay">
+                          </div>
+                          <div class="payment-box col-md-4">
+                            <input type="radio" name="paymentPlatform" value="gpay" class="paymentPlatformHandle">
+                            <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                            <img src="static/img/payment/gpay.png" alt="Gpay">
+                          </div>
+                          <div class="payment-box col-md-4">
+                            <input type="radio" name="paymentPlatform" value="paytm" class="paymentPlatformHandle">
+                            <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                            <img src="static/img/payment/paytm.png" alt="Paytm">
+                          </div>
+                          <div class="payment-box col-md-4">
+                            <input type="radio" name="paymentPlatform" value="amazonPay" class="paymentPlatformHandle">
+                            <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                            <img src="static/img/payment/amazon-pay.png" alt="AmazonPay">
+                          </div>
+                          <div class="payment-box col-md-4">
+                            <input type="radio" name="paymentPlatform" value="jioMoney" class="paymentPlatformHandle">
+                            <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                            <img src="static/img/payment/jio-money.png" alt="JioMoney">
+                          </div>
+                          <div class="payment-box col-md-4">
+                            <input type="radio" name="paymentPlatform" value="easypay" class="paymentPlatformHandle">
+                            <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                            <img src="static/img/payment/easy-pay.png" alt="EasyPay">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="sticky-cart-footer show">
+                        <div class="row">
+                          <div class="col-md-12 text-right btn-flex">
+                            <button type="button" class="btn btn25" name="button">Pay Estimated Amount  -  ₹<span id="payableAmount">2200</span></button>
+                            <button type="button" class="btn btn7 pay-btn nextBtn" name="button">Pay Advance  -  ₹<span id="payableAdvance">500</span></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   
+                    <div class="note-txt payment-details">
+                      <p>By clicking on either of the buttons above you agree to <a href="#">Term &amp; Conditions</a> &amp; <a href="#">Privacy Policy</a> </p>
+                    </div>
+                  </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script type="text/javascript" src="/static/js/custom-stitching.js"></script>
+  {% endblock %}

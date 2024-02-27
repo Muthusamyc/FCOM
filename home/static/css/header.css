@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@100&display=swap');
+.navbar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 0 26px;
+}
+
+.image {
+    width: auto;
+}
+.navbar-nav {
+      align-items: center;
+}
+.navbar-brand {
+  margin-right:0;
+}
+.navbar-nav .nav-item .nav-link {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 26px;
+    margin-bottom: 27px;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #000000;
+    position: relative;
+}
+.navbar-nav .nav-item .nav-link:hover, .navbar-nav .whatsapp:hover{
+  color:#F28077;
+}
+.navbar-nav .nav-item .nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -28px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 2px;
+  background-color: #f28077;
+  width: 90%;
+}
+.navbar-toggler {
+  display: flex;
+  padding:0;
+  border:0;
+  flex-direction: column;
+}
+.navbar-light .navbar-toggler-icon {
+  height: 2px;
+  background: #000;
+  margin: 3px 0;
+  width: 22px;
+  border-radius: 10px;
+}
+.navbar-light .close-icon{
+  float: right;
+  color: #fff;
+}
+.tab-menu-header {
+    display:none;
+    font-family: 'Futura';
+    font-size: 24px;
+    line-height: 28px;
+    color: #fff;
+    font-weight: 500;
+    padding: 21px 20px;
+    margin: 0;
+}
+.dropdown-menu {
+  border-radius: 16px;
+  box-shadow: none;
+  border: 0;
+  width: 248px;
+  left: -40px;
+  top: 64px;
+  padding: 24px;
+}
+.dropdown-menu .dropdown-item {
+  padding-left:0;
+  padding-right:0;
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 300%;
+  color: #000000;
+}
+.profile-title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom:6px;
+}
+.profile-title h3 {
+  font-size: 18px;
+  line-height: 150%;
+  color: #F28077;
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 500;
+  margin: 0;
+}
+.profile-customer{
+  font-size:12px;
+  bottom:10px;
+  position: relative;
+  opacity: 0.5;
+  font-family: 'Futura';
+  font-weight: 500;
+  font-style: normal;
+}
+
+.profile-title p {
+  font-size: 12px;
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.015em;
+  color: rgba(0, 0, 0, 0.4);
+}
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  .tab-menu-header {
+    display: block;
+  }
+  .profile-customer{
+    text-align: center;
+  }
+  .navbar-expand-lg .navbar-toggler {
+      display: flex;
+    }
+    .navbar-nav  {
+      flex-direction: row;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 15px !important;
+    }
+    .navbar-expand-lg .navbar-collapse {
+      position: absolute;
+      right: 0;
+      width: 50%;
+      top: 0;
+      background: rgba(0, 0, 0, 0.9);;
+      height: 100vh;
+      z-index: 18;
+      display: none !important;
+    }
+    .navbar-expand-lg .navbar-collapse.show {
+      display: block !important;
+    }
+    .navbar-nav .nav-item .nav-link
+     {
+      color:#fff;
+      font-family: 'Didot';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 64px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .navbar-light .navbar-nav .nav-link.active {
+      color:#f28077;
+    }
+    .navbar-light .navbar-nav .nav-link.active::after{
+      display: none;
+    }
+    .navbar-collapse .navbar-nav{
+      flex-direction: column;
+          max-height: inherit;
+          align-items: flex-start;
+    }
+}
+
+.fcomimg {
+  width: 127px;
+  margin-right: 40px;
+}
+
+.whatsapp {
+    text-decoration: none;
+    font-family: 'Futura';
+    font-style: normal;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    margin-top: 26.5px;
+    margin-bottom: 26.5px;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #000000;
+}
+
+.whatsapp1 {
+  font-size: 17px;
+  color: #000000;
+  margin-right: 13px;
+  margin-top: 27.5px;
+  margin-bottom: 26.5px;
+}
+
+@media screen and (max-width: 992px) {
+    .whatsapp {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+
+/* button {
+
+} */
+
+.btn25 {
+    font-family: 'Futura';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 0;
+    padding: 11px 25px;
+    background: #fff;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: #000000;
+}
+.btn25:hover {
+  color:#F28077;
+  border-color:#F28077;
+}
+
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 900px)
+{
+.btn25{
+  font-size: 12px;
+}
+.nextBtn{
+  font-size: 12px;
+  line-height: normal;
+}
+}
+@media screen and (max-width: 767px) {
+  .tab-menu-header {
+    display: block;
+  }
+  .navbar {
+    padding:5px 15px;
+  }
+  #navCollapse2{
+    margin-right: 0 !important;
+    /* display: none; */
+  }
+  .whatsapp,.whatsapp1 {
+    display:none;
+  }
+ 
+  .profile-title h3 {
+    font-size: 15px;
+    line-height: normal;
+  }
+  .dropdown-menu .dropdown-item {
+    font-size: 15px;
+    line-height: 36px;
+  }
+  .navbar-nav .dropdown-menu {
+    padding: 15px;
+    position: absolute;
+    width: 200px;
+  }
+  .tooltip-drpdown{
+    padding: 20px;
+    border-radius: 10px;
+    width: 335px;
+    border-radius: 10px;
+    left: 0;
+    right: 0;
+    margin: auto; 
+  }
+  .fcomimg {
+    margin-right :10px;
+  }
+  .navbar-collapse {
+      position: absolute;
+      right: 0;
+      width: 100%;
+      top: 0;
+      background: rgba(0, 0, 0, 0.9);
+      height: 100vh;
+      z-index: 18;
+  }
+  .navbar-nav .nav-item .nav-link {
+      color: #fff;
+      font-family: 'Didot';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 64px;
+      margin-top: 0;
+      margin-bottom: 0;
+  }
+  .navbar-light .navbar-nav .nav-link.active {
+      color: #f28077;
+  }
+  .navbar-nav .nav-item .nav-link.active::after {
+    display:none;
+  }
+  .navbar-nav-scroll {
+    overflow-y: visible;
+    align-items: flex-start;
+  }
+  .place1{
+    width: calc(317px - 44px);
+  }
+  .services1 span a {
+    display: block;
+    margin: 5px 0 0!important;
+  }
+}

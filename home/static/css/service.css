@@ -1,0 +1,95 @@
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@100&display=swap');
+    #Home10 {
+        margin-top: 60px;
+        width: 100%;
+        height: auto;
+        background: linear-gradient(72.78deg, rgba(255, 120, 98, 0.28) 39.74%, rgba(196, 196, 196, 0) 87.61%, rgba(255, 119, 99, 0.5) 100%), url(../img/Photograph.svg);
+        background-size: cover;
+        align-items: center;
+        background-position: center;
+        display: flex;
+    }
+    
+    .serviceh1 {
+        font-family: 'Didot';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 31px;
+        /* identical to box height */
+        align-items: center;
+        letter-spacing: -0.015em;
+        /* Primary */
+        color: #F28077;
+    }
+    
+    .para15 {
+        width: 742px;
+        left: 39px;
+        top: 176px;
+        font-family: 'Futura';
+        font-size: 20px;
+        line-height: 24px;
+        /* or 120% */
+        /* Black */
+        color: #000000;
+    }
+    
+    @media only screen and (max-width: 992px) {
+        .para15 {
+            width: 75%;
+        }
+    }
+    
+    @media only screen and (max-width: 600px) {
+        .para15 {
+            width: 100%;
+        }
+    }
+    
+    .btn12 {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 91px;
+        left: 0px;
+        top: 0px;
+        color: #F28077;
+        font-family: 'Futura';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 27px;
+        text-decoration: none;
+        /* Primary */
+        background: #FFFFFF;
+        border-radius: 4px;
+        /* Inside auto layout */
+        margin: 0px 10px;
+        padding: 24px;
+    }
+    
+    @media only screen and (max-width: 992px) {
+        .btn12 {
+            margin: 0px 8px;
+            padding: 20px 6px;
+        }
+    }
+    
+    @media only screen and (max-width: 600px) {
+        .btn12 {
+            margin: 0px 40px;
+            padding: 1px 10px;
+        }
+    }
+    
+    .btn12:hover {
+        background-color: #F28077;
+        color: #FFFFFF;
+        transition: 0.7s;
+    }
+    
+    .buttons {
+        margin-top: 175px;
+        margin-bottom: -78px;
+    }

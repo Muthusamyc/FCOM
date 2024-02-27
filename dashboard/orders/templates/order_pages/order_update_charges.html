@@ -1,0 +1,89 @@
+<tr>
+    <th style="width:50%">Extra Material/Fabric:</th>
+    <td>₹ {{transaction_details.extra_material}}</td>
+    {% if order.status == booking_stage.ORDER_PICKEDUP or order.status == booking_stage.WAIT_FOR_APPROVAL  or order.status == booking_stage.APPROVAL_REJECTED %}
+    <td>
+        <input type="number" step="any" class="form-control" name="extra_material" required />
+    </td>
+    {% else %}
+    <td></td>
+    {% endif %}
+</tr>
+
+<tr>
+    <th style="width:50%">Designer Charges:</th>
+    <td>₹ {{transaction_details.designer_charges}}</td>
+
+    {% if order.status == booking_stage.ORDER_PICKEDUP or order.status == booking_stage.WAIT_FOR_APPROVAL  or order.status == booking_stage.APPROVAL_REJECTED %}
+    <td>
+        <input type="number" step="any" class="form-control" name="designer_charges" required />
+    </td>
+    {%else%}
+    <td></td>
+    {% endif %}
+
+</tr>
+<tr>
+    <th>Pick & Drop Charges:</th>
+    <td>₹ {{transaction_details.shipping_charges}}</td>
+
+    {% if order.status == booking_stage.ORDER_PICKEDUP or order.status == booking_stage.WAIT_FOR_APPROVAL  or order.status == booking_stage.APPROVAL_REJECTED %}
+    <td>
+        <input  type="number" step="any" class="form-control" name="shipping_charges" required />
+    </td>
+    {%else%}
+    <td></td>
+    {% endif %}
+</tr>
+<tr>
+    <th style="width:50%">Coupon Discount:</th>
+    <td>₹ {{transaction_details.coupon_discount}}</td>
+    {% if order.status == booking_stage.ORDER_PICKEDUP or order.status == booking_stage.WAIT_FOR_APPROVAL  or order.status == booking_stage.APPROVAL_REJECTED %}
+    <td>
+        <input type="number" step="any" class="form-control" name="coupon_discount" value="" required />
+    </td>
+    {% else %}
+    <td></td>
+    {% endif %}
+</tr>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const inputs = Array.from(
+    document.querySelectorAll('input[name=extra_material], input[name=shipping_charges], input[name=coupon_discount], input[name=designer_charges]')
+  );
+
+  const inputListener = e => {
+    inputs
+      .filter(i => i !== e.target)
+      .forEach(i => (i.required = !e.target.value.length));
+
+    // Validate designer_charges
+    if (e.target.name === 'designer_charges' && e.target.value.length > 0) {
+      const value = parseFloat(e.target.value);
+      if (isNaN(value) || value < 50 || value > 150) {
+        e.target.setCustomValidity('Designer charges must be a number between 50 and 150');
+      } else {
+        e.target.setCustomValidity('');
+      }
+    }
+
+    // Validate shipping_charges
+    // if (e.target.name === 'shipping_charges' && e.target.value.length > 0) {
+    //   const value = parseFloat(e.target.value);
+    //   if (isNaN(value) || value < 99) {
+    //     e.target.setCustomValidity('Shipping charges must be a number greater than 99');
+    //   } else {
+    //     e.target.setCustomValidity('');
+    //   }
+    // }
+  };
+
+  inputs.forEach(i => i.addEventListener('input', inputListener));
+});
+
+
+</script>
+

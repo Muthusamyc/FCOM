@@ -1,0 +1,98 @@
+{% load static %}
+<footer>
+    <div class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="mainfooter" style="display: none;">
+                        <strong class="para5">Want to bacome a partner?</strong>
+                        <input type="text" class="place1" placeholder="Enter your mobile number">
+                        <button type="submit" class="btn7">Submit</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-txt">
+                <div class="row">
+                    <div class="col-md- mt-2 ">
+
+                        <img src="{% static 'img/fcom.png' %}" class="img1 footer-logo" alt="fcom"><br>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 mt-2 text-white">
+                        <strong class="footer-head">Address</strong>
+                        <p class="para22"><a target="_blank" class="map-link" href="https://www.google.com/maps/dir/13.0230049,77.6434209/fcom+india/@13.0140173,77.5899239,13z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3bae16a9ccfa17e1:0x7c9ca1b712b932e!2m2!1d77.639391!2d12.981893">Fcom India, Division of Rhapso Fashion Tech India P Ltd, No.12, 2nd Floor, 8th Cross, 1st Stage Indiranagar, Binnamangala,, Bangalore-560 038</a></p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 mt-2 text-white">
+                        <strong class="footer-head">About Fcom</strong>
+                        <div class="links mt-2">
+                            <a href="{% url 'our_story' %}" class="text-white links">Our Story</a><br>
+                            <a href="https://medium.com/@fcomblogsmed" target="_blank"  class="text-white links">Blogs</a> <br>
+                            <a href="{% url 'contact' %}" class="text-white links">Contact Us</a>
+
+                        </div>
+                    </div>
+                    <div class=" col-lg-3 col-md-3 mt-2 text-white ">
+                        <strong class="footer-head">Others</strong>
+                        <div class="links mt-2 ">
+                            <a href="{% url 'faqs' %}" class="text-white links">FAQs</a><br>
+                            <a href="#" class="text-white links">Our Social Responsiblity</a> <br>
+                            <a href="{% url 'fabric_care' %}" class="text-white links">Fabric Care</a>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 mt-2 text-white ">
+                        <strong class="footer-head">Policies</strong>
+                        <div class="links mt-2 ">
+                            <a href="{% url 'policy_cancelation_refund' %}" class="text-white links">Cancellations & Refund</a><br>
+                            <a href="{% url 'terms_and_conditions' %}" class="text-white links">Terms & Conditions</a> <br>
+                            <a href="# " class="text-white links">Privacy</a>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col text-white m-1">
+                        <strong>Contact</strong>
+                        <p class="para22 mb-0"><a href="tel:919108902222"> +91 9108902222</a> </p>
+                        <p class="para22"><a href="mailto:customercare@fcomindia.com">customercare@fcomindia.com</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class=" col-lg-4 col-md-4">
+                        <p class="para3">2022 FCOM INDIA, All Rights Reserved</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <a href="https://techvaraha.com/" target="_blank" class="paraa4">Powered by TechVaraha Solutions Pvt Ltd </a></div>
+                    <div class=" col-lg-4 col-md-4 ">
+                        <div class="icon">
+                            <a href="https://www.facebook.com/FCOMIndia/" target="_blank"><i class='bx bxl-facebook m-3 text-white'></i></a>
+                            <a href="https://www.instagram.com/fcomtailor/" target="_blank"><i class='bx bxl-instagram m-3 text-white'></i></a>
+                            <a href="https://www.youtube.com/channel/UC5gdsAX1mSMqIEr8wmHPOWA" target="_blank"><i class='bx bxl-youtube m-3 text-white'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165971702-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-165971702-1');
+    </script>
+</footer>

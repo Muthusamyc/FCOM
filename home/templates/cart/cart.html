@@ -1,0 +1,81 @@
+{% extends 'public_template.html' %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/custom-stitching.css">
+
+<section id="custom-stitching">
+  <div class="container-fluid container-width">
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <h1 class="mainh1">Custom Stitching</h1>
+        <p class="text-white para2">We provide the most exceptional and beautiful bespoke stitching services. Our team
+          of highly skilled designers, fitters, tailors and pattern cutters advise on a style that suites
+          you.<br /><br /> We can sketch a design to help you visualize your garment. You can choose the fabric, lining
+          and trims you want and we can source them for you. You get to decide exactly how you’d like your garment to
+          look, fit and feel with a little help from us.</p>
+        <p class="text-highlight">Starting @ ₹299</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="customTabs">
+  <div class="container-fluid container-width">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="progress-bar-wrapper">
+          <div class="stepwizard col-md-offset-3">
+            <div class="stepwizard-row setup-panel">
+              <div class="stepwizard-step">
+                <a href="#step-1" type="button" class="btn btn-primary btn-circle"></a>
+                <p>Select Items</p>
+              </div>
+              <div class="stepwizard-step">
+                <a href="#step-2" type="button" class="btn btn-default btn-circle next" disabled="disabled"></a>
+                <p>Summary</p>
+              </div>
+              <div class="stepwizard-step">
+                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled"></a>
+                <p>Pay</p>
+              </div>
+            </div>
+          </div>
+
+          {% include 'cart/step-1.html' %}
+          {% include 'cart/step-2.html' %}
+          {% include 'cart/step-3.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  $('button[name="back_button"]').on('click', function () {
+    window.location.href = '/services'
+  });
+
+  let cachedItem = JSON.parse(localStorage.getItem('cart'))
+
+  $('select[name="designersPreference"]').change(function () {
+    
+    cachedItem['designersPreference'] = $(this).val();
+    localStorage.setItem('cart', JSON.stringify(cachedItem));
+  });
+  $('select[name="serviceMode"]').change(function () {
+  
+    cachedItem['serviceMode'] = $(this).val();
+    localStorage.setItem('cart', JSON.stringify(cachedItem));
+  });
+
+  $(document).ready(function(){
+
+    cachedItem["advanceTransactionDetails"] = "";
+    cachedItem["estimatedTransactionDetails"] = "";
+
+    localStorage.setItem('cart', JSON.stringify(cachedItem));
+
+  });
+
+</script>
+
+{% endblock %}

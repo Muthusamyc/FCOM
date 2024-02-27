@@ -1,0 +1,114 @@
+{% extends "admin/base_template.html" %} {% block content %}
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">Add Stitching Item</h3>
+                    </div>
+                    <form action="{% url 'edit_stiching_items' relation.id  %}" method="POST"  enctype="multipart/form-data">
+                        <div class="card-body">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Item Name</label>
+                                        <input type="text" name="name" value="{{ relation.item.name }}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Starting Price</label>
+                                        <input type="text" name="startingPrice" value="{{ relation.item.starting_price }}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Estimated Price</label>
+                                        <input type="text" name="estimatedPrice" value="{{ relation.item.estimated_price }}" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="">Tags</label>
+                                        <input type="text" name="tags" value="{{ relation.item.tags }}" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="">Image</label>
+                                        {% if relation.item.image %}
+                                            <img src="{{ relation.item.image.url }}" style="width: 40px;" />
+                                        {% endif %}
+                                        <input type="file" name="itemImage" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                    <div class="form-group">
+                                        <label for="">Category</label>
+                                        <select class="form-control" name="Category" id="Category">
+                                            <option value=""> Select Category</option>                                            
+                                            {% for service in services.category %}
+                                                <option value="{{service.id}}" {% if relation.category_id == service.id %} selected {% endif %} > {{ service.name }}</option>                                            
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Service</label>
+                                        <select class="form-control" name="Service" id="Service">
+                                            <option value=""> Select Service</option>
+                                            {% for service in services.service %}
+                                            <option value="{{service.id}}" {% if relation.service_id == service.id %} selected {% endif %}> {{ service.name }}</option>                                            
+                                        {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Finishing</label>
+                                        <select class="form-control" name="Finishing" id="Finishing">
+                                            <option value=""> Select Finishing</option>
+                                            {% for service in services.finishing %}
+                                            <option value="{{service.id}}" {% if relation.finishing_id == service.id %} selected {% endif %}> {{ service.name }}</option>                                            
+                                        {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Pattern</label>
+                                        <select class="form-control" name="Pattern" id="Pattern">
+                                            <option value=""> Select Pattern</option>
+                                            {% for service in services.pattern %}
+                                            <option value="{{service.id}}" {% if relation.pattern_id == service.id %} selected {% endif %}> {{ service.name }}</option>                                            
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <!-- <div class="form-group">
+                                        <label for="">Priority</label>
+                                        <select class="form-control" name="Priority" id="Priority" required>
+                                            <option value=""> Select Priority</option>
+                                            <option value="1" {% if relation.priority == 1 %} selected {% endif %}>1</option>
+                                            <option value="2" {% if relation.priority == 2 %} selected {% endif %}>2</option>
+                                            <option value="3" {% if relation.priority == 3 %} selected {% endif %}>3</option>
+                                            <option value="4" {% if relation.priority == 4 %} selected {% endif %}>4</option>                                            
+                                            <option value="5" {% if relation.priority == 5 %} selected {% endif %}>None</option>                                            
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Item For</label>
+                                        <select class="form-control" name="ItemType" id="ItemType">
+                                            <option value=""> Select Pattern</option>
+                                            <option value="1"{% if relation.item_type  == 1 %} selected="selected"{% endif %}>For Customer </option>
+                                            <option value="2"{% if relation.item_type == 2 %} selected="selected"{% endif %}>For Designer</option>
+                                                                               
+                                        </select>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color: #F28077">Submit</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

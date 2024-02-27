@@ -1,0 +1,61 @@
+{% extends "admin/base_template.html" %} {% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">Personal Details</h3>
+                    </div>
+                    <form method="post" action="{% url 'update_service' service1.id %}">
+                        <div class="row">
+                            <div class="card-body">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="">Service Name</label>
+                                    <input type="text" value="{{ service1.service_name }}" name="service_name"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Service Description</label>
+                                    <input type="text" value="{{ service1.service_description }}"
+                                        name="service_description" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Gender</label>
+                                    <select name="gender" value="{{ service1.gender }}" class="form-control">
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                                <!-- <div class="form-group">
+                            <label for="">Created By</label>
+                            <input type="text" value="{{ service_list.created_by }}" name="created_by" class="form-control">
+                        </div> -->
+                                <!-- <div class="form-group">
+                            <label for="">Created Date</label>
+                            <input type="datetime" value="{{ service1.created_date }}" name="created_date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Modified By</label>
+                            <input type="text" value="{{ service1.modified_by }}" name="modified_by" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Modified Date</label>
+                            <input type="datetime" value="{{ service1.modified_date }}" name="modified_date" class="form-control">
+                        </div> -->
+                                <div class="form-group mt-3">
+                                    <button class="btn btn-success" type="submit">UPDATE</button>
+                                    <a href="{% url 'list_service' %}" class="fa fa-warning">Back To List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

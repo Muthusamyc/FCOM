@@ -1,0 +1,110 @@
+{% extends "admin/base_template.html" %} {% block content %}
+{% load ordertags %}
+<style>
+    /* padding-bottom and top for image */
+.mfp-no-margins img.mfp-img {
+	padding: 0;
+}
+/* position of shadow behind the image */
+.mfp-no-margins .mfp-figure:after {
+	top: 0;
+	bottom: 0;
+}
+/* padding for main container */
+.mfp-no-margins .mfp-container {
+	padding: 0;
+}
+
+
+</style>
+
+<div class="content">
+    <div class="container-fluid">
+      
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">Partner galleries</h3>
+                    </div>
+                      {% for partner in patners %}
+                      <div class="card-body">
+                        <h1>{{partner.first_name}}</h1>
+                        <hr>
+
+
+                        <div class="row text-center portfolio">
+                            {% for img in partner.partnergallery_set.all %}
+                            <div class="col-lg-2 col-sm-3 col-xs-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                       
+                                        <a class="image-popup-vertical-fit" href="{{img.image.url}}" title="{{img.title}}">
+                                            <img class="img-fluid" alt="img-2" src="{{img.image.url}}"  >
+                                        </a>
+                                    </div>
+                                 
+                                    <div class="panel-footer">
+                                        {{img.title}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            {% endfor %}
+
+
+                        </div>
+
+                    </div>
+                     
+                      {% endfor %}
+                   
+                  
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+
+$('.image-popup-vertical-fit').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    mainClass: 'mfp-img-mobile',
+    image: {
+        verticalFit: true
+    }
+    
+});
+
+$('.image-popup-fit-width').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    image: {
+        verticalFit: false
+    }
+});
+
+$('.image-popup-no-margins').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    closeBtnInside: false,
+    fixedContentPos: true,
+    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+    image: {
+        verticalFit: true
+    },
+    zoom: {
+        enabled: true,
+        duration: 300 // don't foget to change the duration also in CSS
+    }
+});
+
+});
+
+</script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'public_template.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom-stitching.css' %}">
+<section id="custom-stitching">
+  <div class="container-fluid container-width">
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <h1 class="mainh1">Custom Stitching</h1>
+        <p class="text-white para2">We provide the most exceptional and beautiful bespoke stitching services. Our team
+          of highly skilled designers, fitters, tailors and pattern cutters advise on a style that suits
+          you.<br /><br /> We can sketch a design to help you visualize your garment. You can choose the fabric, lining
+          and trims you want and we can source them for you. You get to decide exactly how you’d like your garment to
+          look, fit and feel with a little help from us.</p>
+        <p class="text-highlight">Starting @ ₹299</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="customTabs">
+  <div class="container-fluid container-width">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="progress-bar-wrapper">
+          <div class="stepwizard col-md-offset-3">
+            <div class="stepwizard-row setup-panel" style="display: none;">
+              <div class="stepwizard-step">
+                <a href="#step-1" type="button" class="btn btn-primary btn-circle"></a>
+                <p>Select Items</p>
+              </div>
+              <div class="stepwizard-step">
+                <a href="#step-2" type="button" class="btn btn-default btn-circle next" disabled="disabled"></a>
+                <p>Summary</p>
+              </div>
+              <div class="stepwizard-step">
+                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled"></a>
+                <p>Pay</p>
+              </div>
+            </div>
+          </div>
+          <input type="hidden" name="cartId" value="{{ saved_cart.id }}" />
+          {% include 'step-1-select-items.html' %}
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script type="text/javascript" src="{% static 'services/itemcard.js' %}"></script>
+<script>
+  $('button[name="back_button"]').on('click', function () {
+    window.location.replace('/services');
+  });
+</script>
+
+{% endblock %}

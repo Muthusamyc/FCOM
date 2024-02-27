@@ -1,0 +1,124 @@
+{% extends 'public_template.html' %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/my-account.css">
+
+<section id="MyAccount">
+  <div class="col text-center">
+    <h1 class="mainh1">My Account</h1>
+    <p class="text-white para2">Add / Update Your Profile</p>
+  </div>
+</section>
+
+<section class="workTabs">
+  <div class="container">
+    <div class="row">
+      {% include 'my_profile/side-nav.html' %}
+      <div class="col-md-7">
+        <div class="tab-content" id="myProfileContent">
+          <div class="tab-pane fade show active title-plus" id="home" role="tabpanel" aria-labelledby="home-tab">
+            {% include 'my_profile/profile.html' %}
+            {% include 'my_profile/family.html' %}
+            {% include "my_profile/address-book.html" %}
+           
+           
+           
+        
+           
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% include 'common/modal.html' %}
+<script type="text/javascript">
+  function readURL(input,dataId) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#imagePreview[data-id="' + dataId + '"]').css('background-image', 'url(' + e.target.result + ')');
+        $('#imagePreview[data-id="' + dataId + '"]').hide();
+        $('#imagePreview[data-id="' + dataId + '"]').fadeIn(650);
+
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $(".imageUpload").change(function () {
+    var dataId = $(this).attr("data-id");
+    readURL(this,dataId);
+  });
+  var sections = $('.scrollable-item')
+    , nav = $('.nav-item')
+    , nav_height = $('.nav').outerHeight();
+
+  $(window).on('scroll', function () {
+    var cur_pos = $(this).scrollTop();
+
+    sections.each(function () {
+      var top = $(this).offset().top - nav_height,
+        bottom = top + $(this).outerHeight();
+
+      if (cur_pos >= top && cur_pos <= bottom) {
+        nav.find('.nav-link').removeClass('active');
+        sections.removeClass('active');
+
+        $(this).find("h3").addClass('active');
+        nav.find('button[data-bs-target="#' + $(this).find("h3").attr('id') + '"]').addClass('active');
+      }
+    });
+  });
+
+  nav.find('button').on('click', function () {
+    var $el = $(this), id = $el.attr('data-bs-target')
+  });
+
+  $('html, body').animate({
+    scrollTop: $(id).offset().top - nav_height
+  }, 500);
+</script>
+<script type="text/javascript">
+  $('.header .navbar-nav .nav-item .nav-link').removeClass('active')
+</script>
+<script>
+  $(document).ready(function() {
+  // Scroll to Family Members section on tab click
+  $('#profile-tab').click(function() {
+    $('html, body').animate({
+      scrollTop: $('#familyMembers').offset().top
+    }, 100);
+  });
+
+  $('#home-tab').click(function() {
+    $('html, body').animate({
+      scrollTop: $('#my_profile').offset().top
+    }, 100);
+  });
+
+  $('#contact-tab').click(function() {
+    $('html, body').animate({
+      scrollTop: $('#addressBook').offset().top
+    }, 100);
+  });
+
+  
+});
+</script>
+
+
+<script>
+  $(document).ready(function() {
+    // Image upload event listener
+    $('.imageUpload').on('change', function() {
+      var input = $(this);
+  
+      if (input[0].files && input[0].files[0]) {
+        var dataId = $(this).attr("data-id");
+        $('#oldpic[data-id="' + dataId + '"]').hide()
+        $('#imagePreview[data-id="' + dataId + '"]').hide()
+      }
+    });
+  });
+  </script>
+{% endblock %}

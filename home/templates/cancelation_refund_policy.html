@@ -1,0 +1,180 @@
+{% extends 'public_template.html' %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/policies.css">
+
+<section id="MyAccount">
+    <div class="col text-center">
+        <h1 class="mainh1">Policies</h1>
+        <p class="text-white para2">Complete customer satisfaction</p>
+    </div>
+  </section>
+
+  <section class="workTabs">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" href="{% url 'policy_cancelation_refund' %}">Cancellation & Refund</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" href="{% url 'terms_and_conditions' %}">Terms and Conditions</a>
+            </li>
+            <!-- <li class="nav-item" role="presentation">
+              <a class="nav-link" >Privacy</a>
+            </li> -->
+            
+          </ul>
+        
+          
+        </div>
+          <div class="col-md-9 " >
+            <p class="policies">
+                Refund and Cancellation policy are applicable on all the platforms FcomIndia (company) operates. The usage of FcomIndia platform warrants customer acceptance of the latest terms and conditions.
+                <br /><br />
+                FcomIndia is an online – offline platform and most of its service specifications including handwork, seam specifications, measurements and product specifications including  colour/weight/grains of the fabric are approximate as the whole service proposition is custom made as per the customer’s preferences.
+                <br /><br /> 
+            </p>
+            <h5 class="title-policies">Refunds on services provided</h5>
+            <ol  class="policies">
+                <li>Each order placed on Fcom India is personalised in terms of the fit, style and finishes as discussed and approved by the customers. Garments are altered or custom made as close as possible to the approved specifications and designs. Hence refunds will not be possible on the orders placed. </li>
+                <br>
+                <li>Customers can reach Fcom India on <span class="title-policies">9108902222</span> or <span class="title-policies">customercare@fcomindia.com</span> for any queries related to their orders. Our QC team will analyse and revert to the customers.</li>
+                <br>
+                <li>No cash / online refunds will be issues at any time. </li>
+            </ol>
+            <br>
+            <h5 class="title-policies">Cancellation of orders:</h5>
+            <p class="policies">Any booked visit can be cancelled only before a representative from FcomIndia is assigned. 
+                Once the fabric / garment is collected and approval is given by the customer, order cannot be cancelled. If there are any changes in the order, it can go as a fresh order. 
+                
+                <br /><br />
+            Incase of any damage or colour or print issues are found when the master is cutting / stitching, we will inform immediately. We recommend that the customer checks for these while placing the order.
+            <br /><br />
+            In case of ambiguity, Fcom India reserves the right to decide the possibility of cancellation of the order form case-to-case basis. In such cases, Fcom India reserves the right to reimburse the advance amount collected except for the cost paid for fabrics, transport, logistics and other incidental charges expended to service the order till such time.</p>
+        <br>
+        <h5 class="title-policies">Alterations or Replacement:</h5>
+        <p class="policies">
+            If the customer is not satisfied with the fitting of the garment stitched by FcomIndia, alterations on fitting (including length, letting out or taking in) are done at free of cost upto 15 days from the day of delivery. However, the information should be sent as text on 9108902222 within 48hrs. 
+            <br /><br />
+        fadChange of design or style or size (to another individual) is considered as fresh order and is charged as per the rate card. Decision of company to consider the request as free alteration or paid restyling is final and is made as per specifications of the original order which is approved by the customer before stitching the garment.
+        <br /><br />
+        Garments due for applicable alterations should be sent to Fcom India office at Indiranagar, Bangalore or customer could book another visit. In case, the delivery person picks up for alteration at the time of delivery itself, garment would be delivered within 10 days of time after alterations, with applicable delivery charges.
+        <br /><br />
+        Fcom India will not take responsibility of the alterations done by other tailors on these garments and of any monetary losses faced by the customer.
+        <br /><br />
+        Fcom India is liable to compensate upto Rs. 2,500/- (depending on the proof of purchase / market value of similar product) in the form of vouchers, in the below cases:
+        </p>
+        <ol class="policies">
+            <li >If Fcom India misplaces new fabric given for stitching or garment given as alteration order by the customer</li>
+            <br>
+            <li>If the customer is not satisfied with the design or fitting that is attributable to the team Fcom India, which the audit team confirms that there is a deviation from the original order</li>
+        </ol>
+        <br>
+        <p class="policies">(Vouchers can be used in the next order and have terms and conditions for due usage)</p>
+        <br>
+        <!-- <h5 class="title-policies">For any queries contact us on:</h5>
+        <p class="policies">
+            <b>Number :</b> 9108902222
+            <br/>
+            <b>Email :</b> customersupport@fcomindia.com
+            <br>
+            <b>Address :</b> No. 12, 2nd floor, 8th cross, Binnamangala, Indiranagar 1st stage, Bangalore – 560 038
+        </p> -->
+        </div> 
+
+            <div class="col-md-9" id="test2" style="display: none;">
+              <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"> 
+              <div class="gallery-grid">
+                  <img src="static/img/men3.jpg" alt="men1" data-slide="1" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+                  <img src="static/img/men5.jpg" alt="men5" data-slide="2" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+              </div>
+              <div class="gallery-grid">
+                <img src="static/img/men2.jpg" alt="men2" data-slide="3" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+                <img src="static/img/men1.jpg" alt="men3" data-slide="4" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+                <img src="static/img/men7.jpg" alt="men7" data-slide="5" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+              </div>
+              <div class="gallery-grid">
+                <img src="static/img/men4.jpg" alt="men4" data-slide="6" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+                <img src="static/img/men6.jpg" alt="men6" data-slide="7" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+              </div>
+            </div></div></div>
+       
+            <div class="col-md-9" id="test3" style="display:none;">
+              <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab" > 
+              <div class="gallery-grid">
+                <img src="static/img/kid2.jpg" alt="kid1" data-slide="1" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+                <img src="static/img/kid1.jpg" alt="kid5" data-slide="2" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+            </div>
+            <div class="gallery-grid">
+              <img src="static/img/kid5.jpg" alt="kid2" data-slide="3" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+              <img src="static/img/kid3.jpg" alt="kid3" data-slide="4" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+              <img src="static/img/kid6.jpg" alt="kid7" data-slide="5" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+            </div>
+            <div class="gallery-grid">
+              <img src="static/img/kid4.jpg" alt="kid4" data-slide="6" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+              <img src="static/img/kid7.jpg" alt="kid6" data-slide="7" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+            </div>
+            </div></div></div>
+
+
+            <div class="col-md-9" id="test4" style="display: none;">
+              <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade" id="decor" role="tabpanel" aria-labelledby="decor-tab"> 
+              <div class="gallery-grid">
+                <img src="static/img/decor4.jpg" alt="decor4" data-slide="1" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+                <img src="static/img/decor3.jpg" alt="decor5" data-slide="2" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+            </div>
+            <div class="gallery-grid">
+              <img src="static/img/decor5.jpg" alt="decor1" data-slide="" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+              <img src="static/img/decor2.jpeg" alt="decor3" data-slide="3" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+              <img src="static/img/decor6.jpeg" alt="decor6" data-slide="6" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+            </div>
+            <div class="gallery-grid"> 
+              <img src="static/img/decor7.jpg" alt="decor2" data-slide="2" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+              <img src="static/img/decor1.jpg" alt="decor7" data-slide="7" data-bs-toggle="modal" data-bs-target="#workImageSlider">
+            </div>
+            </div>
+          </div>
+        </div>
+           
+  </section>
+  <script type="text/javascript">
+    $('.header .navbar-nav .nav-item .nav-link').removeClass('active')
+    $('#our_work_menu').addClass('active')
+    
+    $(function(){
+    $("#home-tab").click(function(e) {
+       $('#test1 ').show();
+       $('#test2 ').hide();
+       $('#test3 ').hide();
+       $('#test4 ').hide();
+    }); //  $('#id').hide();
+
+      $("#profile-tab").click(function(e) {
+      $('#test2').show();
+       $('#test1 ').hide();
+       $('#test3 ').hide();
+       $('#test4 ').hide();
+    });
+
+    $("#contact-tab").click(function(e) {
+       $('#test3').show();
+       $('#test2 ').hide();
+       $('#test1 ').hide();
+       $('#test4 ').hide();
+    });
+
+    $("#decor-tab").click(function(e) {
+       $('#test4').show();
+       $('#test2 ').hide();
+       $('#test3 ').hide();
+       $('#test1 ').hide();
+    });
+
+  });
+
+</script>
+{% endblock %}

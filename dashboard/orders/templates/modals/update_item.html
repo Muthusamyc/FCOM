@@ -1,0 +1,184 @@
+<div class="modal fade" id="update-item">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Order Item</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{% url 'update_item_price' %}" id="">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        {% csrf_token %}
+                        <input type="hidden" name="orderId" value="{{ order.id }}" />
+                        <input type="hidden" name="cartId" value="{{ order.cart.id }}" />
+                        <input type="hidden" name="itemId" id="itemId" value="" />
+                        <div class="form-group">
+                            <label>Update Item Price</label>
+                            <input class="form-control" type="number" step="any" name="itemUpdatedPrice" id="itemUpdatedPrice" value="" />
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<div class="modal fade" id="add-extra-fabric">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Extra Fabric</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{% url 'add_extra_material_to_order' %}" id="">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        {% csrf_token %}
+                        <input type="hidden" name="orderId" value="{{ order.id }}" />                  
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input class="form-control" name="extra_material" id="extra_material" value=""  required/>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="add-item" style="background: rgba(242, 128, 119, 0.05);">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add new item to order</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="search-order-item" action="" method="dialog" enctype="multipart/form-data">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Category</label>
+                                    <select class="form-control" name="category" id="category" required>
+                                        <option value=""> Select Category</option>
+                                        {% for service in services.category %}
+                                        <option value="{{service.id}}"> {{ service.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Finishing</label>
+                                    <select class="form-control" name="finishing" id="finishing" required>
+                                        <option value=""> Select Finishing</option>
+                                        {% for service in services.finishing %}
+                                        <option value="{{service.id}}"> {{ service.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Service</label>
+                                    <select class="form-control" name="service" id="service" required>
+                                        <option value=""> Select Service</option>
+                                        {% for service in services.service %}
+                                        <option value="{{service.id}}"> {{ service.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Pattern</label>
+                                    <select class="form-control" name="pattern" id="pattern" required>
+                                        <option value=""> Select Pattern</option>
+                                        {% for service in services.pattern %}
+                                        <option value="{{service.id}}"> {{ service.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label for="">Item For</label>
+                                    <select class="form-control" name="ItemType" id="ItemType" required>
+                                        <option value=""> Select Pattern</option>
+                                        <option value="1"> For Customer </option>
+                                        <option value="2"> For Designer </option>
+                                    </select>
+                                </div> -->
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-search">
+                                        Search
+                                    </i>                                    
+                                </button>
+                                <p style="display: none;" id="searchedItemsError" class="fa fa-danger"> No items found!</p>
+                                <p style="display: none;" id="searchedItemsCount" class="fa fa-danger"> </p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form action="{% url 'add_item_to_order' %}" id="add-order-item" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="orderId" value="{{ order.id }}" />
+                    <input type="hidden" name="cartId" value="{{ order.cart.id }}" />                    
+
+                    <div class="form-group">
+                        <label for="">Item</label>
+                        <select class="form-control" name="item" id="item" required>
+                            <option value="">Select Item</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Designer Quoted Price</label>
+                        <input type="number" class="form-control" placeholder="0.0" name="designer_updated_price"
+                            value="" />
+                    </div>
+                    <div class="form-group">
+                        <label for="">Qty</label>
+                        <input type="number" class="form-control" placeholder="0.0" name="qty"
+                            value="" />
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@100&display=swap');
+* {
+    padding: 0%;
+    margin: 0%;
+}
+
+body {
+    line-height: 1.8;
+    color: #898fa1;
+    font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: #11245a;
+    font-family: 'Didot';
+    font-style: normal;
+    font-size: 52px;
+    line-height: 72px;
+    /* or 138% */
+    letter-spacing: -0.015em;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+}
+
+a {
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.45 ease;
+}
+
+img {
+    width: 100%;
+}
+
+small {
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+#Benifits {
+    background: rgba(242, 128, 119, 0.05);
+}
+
+#Home5 {
+    top: auto;
+    width: 100%;
+    margin-top: 60px;
+    background: linear-gradient(72.78deg, rgba(255, 118, 98, 0.5) 39.74%, rgba(196, 196, 196, 0) 87.61%, rgba(255, 119, 99, 0.5) 100%), url(../img/contact.png);
+    background-size: cover;
+    align-items: center;
+    background-position: center;
+    display: flex;
+    height: 900px;
+}
+
+p {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    letter-spacing: -0.015em;
+}
+
+.cnh1 {
+    font-family: 'Didot';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 52px;
+    /* identical to box height, or 100% */
+    align-items: center;
+    letter-spacing: -0.015em;
+    /* White */
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+}
+
+.para7 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    /* or 150% */
+    /* black 60 */
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.iconbox1 {
+    color: #000000;
+    font-size: 30px;
+}
+
+.check {
+    width: 270px;
+    background: #FFFFFF;
+    box-shadow: 0px 16px 60px rgba(242, 128, 119, 0.1);
+    border-radius: 16px;
+}
+
+.para8 {
+    width: 190px;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* or 125% */
+    /* black 60 */
+    align-items: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+    /* Inside auto layout */
+}
+
+.h6 {
+    font-family: 'Didot';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 20px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #F28077;
+}
+
+.hh1 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 36px;
+    /* identical to box height, or 129% */
+    display: flex;
+    align-items: center;
+    /* Mono / Black */
+    color: #000000;
+}
+
+.worktimings {
+    background: #FFFFFF;
+    box-shadow: 0px 16px 60px rgba(242, 128, 119, 0.1);
+    border-radius: 16px;
+}
+
+.p10 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    /* or 150% */
+    /* black 60 */
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.p11 {
+    width: auto;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* or 125% */
+    text-align: center;
+    /* black 60 */
+    color: rgba(0, 0, 0, 0.6);
+    /* Inside auto layout */
+}
+
+.btn11 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    /* Primary */
+    color: #F28077;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    background: #FFFFFF;
+    /* Primary */
+    border: 2px solid #F28077;
+    box-sizing: border-box;
+    border-radius: 4px;
+    /* Inside auto layout */
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    margin: 24px 0px;
+}
+
+.p12 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    /* or 150% */
+    /* black 60 */
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.l1 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    /* identical to box height, or 100% */
+    letter-spacing: 1px;
+    /* Black */
+    color: #000000;
+}
+
+.btn13 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    /* identical to box height, or 100% */
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    height: 48px;
+    background: #F28077;
+    border-radius: 4px;
+}
+
+.wh6 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 36px;
+    /* identical to box height, or 225% */
+    text-align: center;
+    /* Black */
+    color: #000000;
+}
+
+.leavequestions {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    /* primary 5 */
+    background: rgba(242, 128, 119, 0.05);
+    border-radius: 16px;
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 1;
+    margin: 0px 30px;
+}

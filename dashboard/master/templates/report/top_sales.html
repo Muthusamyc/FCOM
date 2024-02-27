@@ -1,0 +1,199 @@
+{% extends "admin/base_template.html" %}
+{% load ordertags %}
+{% load orderitemtags %}
+{% block content %}
+
+<div class="tabs-verical m-5">
+    <div class="row">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="women-tab" data-toggle="pill" href="#women-list" role="tab" aria-controls="women-list" aria-selected="true" name="women-tab">
+                    Women
+                </a>
+                <a class="nav-link" id="men-tab" data-toggle="pill" href="#men-list" role="tab" aria-controls="men-list" aria-selected="false" name="men-tab">
+                    Men
+                </a>
+                <a class="nav-link" id="kids-tab" data-toggle="pill" href="#kids-list" role="tab" aria-controls="kids-list" aria-selected="false" name="kids-tab">
+                    Kids
+                </a>
+                <a class="nav-link" id="general-tab" data-toggle="pill" href="#general-list" role="tab" aria-controls="general-list" aria-selected="false" name="general-tab">
+                    Home Decor
+                </a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="women-list" role="tabpanel" aria-labelledby="women-tab">
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header" style="background-color: #F28077">
+                                            <h3 class="card-title">Women Top 10 Sales</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-bordered  table-hover" >
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Item Name</th>
+                                                        <th>Total sales</th>                                                        
+                                                    </tr>
+                                                </thead>                                                
+                                                <tbody>
+                                                    {% for item in top_sales_women %}
+                                                    <tr>
+                                                        <th>{{forloop.counter}}</th>
+                                                        <th>{{item.product_item_id |get_order_item_name}}</th>
+                                                        <th>{{ item.total }}</th>
+                                                    </tr>  
+                                                    {% endfor %}                                  
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                           
+                                    </div>
+                                      
+                                    
+                                </div>
+                             
+                    
+                            </div>
+                        </div>
+                    
+                        
+                        
+                    
+                    
+                    
+                    
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="men-list" role="tabpanel" aria-labelledby="men-tab">
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header" style="background-color: #F28077">
+                                            <h3 class="card-title">Men Top 10 Sales</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-bordered  table-hover" >
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Item Name</th>
+                                                        <th>Total sales</th>                                                        
+                                                    </tr>
+                                                </thead>  
+                                                <tbody>
+                                                    {% for item in top_sales_men %}
+                                                    <tr>
+                                                        <th>{{forloop.counter}}</th>
+                                                        <th>{{item.product_item_id |get_order_item_name}}</th>
+                                                        <th>{{ item.total }}</th>
+                                                    </tr>  
+                                                    {% endfor %}                                  
+                                                </tbody>                                              
+                                            
+                                            </table>
+                                        </div>
+                                           
+                                    </div>
+                                      
+                                    
+                                </div>
+                             
+                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="kids-list" role="tabpanel" aria-labelledby="kids-tab">
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header" style="background-color: #F28077">
+                                            <h3 class="card-title">Kids Top 10 Sales</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-bordered  table-hover" >
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Item Name</th>
+                                                        <th>Total sales</th>                                                        
+                                                    </tr>
+                                                </thead>  
+                                                <tbody>
+                                                    {% for item in top_sales_kids %}
+                                                    <tr>
+                                                        <th>{{forloop.counter}}</th>
+                                                        <th>{{item.product_item_id |get_order_item_name}}</th>
+                                                        <th>{{ item.total }}</th>
+                                                    </tr>  
+                                                    {% endfor %}                                  
+                                                </tbody>                                            
+                                            
+                                            </table>
+                                        </div>
+                                           
+                                    </div>
+                                </div>
+                    
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="general-list" role="tabpanel" aria-labelledby="general-tab">
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header" style="background-color: #F28077">
+                                            <h3 class="card-title">Home Decor Top 10 Sales</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-bordered  table-hover" >
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Item Name</th>
+                                                        <th>Total sales</th>                                                        
+                                                    </tr>
+                                                </thead>                                                
+                                                <tbody>
+                                                    {% for item in top_sales_home_decor %}
+                                                    <tr>
+                                                        <th>{{forloop.counter}}</th>
+                                                        <th>{{item.product_item_id |get_order_item_name}}</th>
+                                                        <th>{{ item.total }}</th>
+                                                    </tr>  
+                                                    {% endfor %}                                  
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                           
+                                    </div>
+                                      
+                                    
+                                </div>
+                             
+                    
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                                                                            
+{% endblock%}

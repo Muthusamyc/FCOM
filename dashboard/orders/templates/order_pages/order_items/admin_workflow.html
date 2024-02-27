@@ -1,0 +1,13 @@
+{% if order.status != booking_stage.ORDER_CANCELED %}
+    {% if not order.designer_assigned %}
+    <button type="button" style="margin: 5px;" data-toggle="modal" data-target="#assigne-desinger"
+        class="btn btn-success float-right">
+        Assignee Designer
+    </button>
+    {% else %}
+    <button type="button" style="margin: 5px;" data-toggle="modal" data-target="#assigne-desinger"
+        class="btn btn-success float-right">
+        Change Assigned Designer
+    </button>
+    {% endif %}
+{% endif %}

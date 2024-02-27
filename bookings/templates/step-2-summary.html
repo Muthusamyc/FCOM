@@ -1,0 +1,85 @@
+{% load static %}
+<div class="row setup-content" id="step-2">
+  <div class="payment-wrapper">
+    <h3>Payment Options</h3>
+    <div class="payment-platform">
+      <div class="loader"><img src="../../static/img/ajax-loader.gif"></div>
+      <div class="payment-row row">
+        <input type="hidden" name="cartId" value="{{ saved_cart.id }}" />
+
+        <div class="payment-box col-md-4">
+          <input type="radio" name="paymentPlatform" value="phonePay" class="paymentPlatformHandle" disabled>
+          <img src="{% static 'img/check-circle.png' %}" alt="Check circle" class="verified-check">
+          <img src="{% static 'img/payment/phone-pay.png' %}" alt="Phonepay">
+        </div>
+        <div class="payment-box col-md-4">
+          <input type="radio" name="paymentPlatform" value="gpay" class="paymentPlatformHandle" disabled>
+          <img src="{% static 'img/check-circle.png' %}" alt="Check circle" class="verified-check">
+          <img src="{% static 'img/payment/gpay.png' %}" alt="Gpay">
+        </div>
+        <div class="payment-box col-md-4 selected">
+          <input type="radio" name="paymentPlatform" value="paytm" class="paymentPlatformHandle" >
+          <input type="hidden" id="paytmToken" name="paytmToken" value="" />
+          <img src="{% static 'img/check-circle.png' %}" alt="Check circle" class="verified-check">
+          <img src="{% static 'img/payment/paytm.png' %}" alt="Paytm">
+        </div>
+        <div class="payment-box col-md-4">
+          <input type="radio" name="paymentPlatform" value="amazonPay" class="paymentPlatformHandle" disabled>
+          <img src="{% static 'img/check-circle.png' %}" alt="Check circle" class="verified-check">
+          <img src="{% static 'img/payment/amazon-pay.png' %}" alt="AmazonPay">
+        </div>
+        <div class="payment-box col-md-4">
+          <input type="radio" name="paymentPlatform" value="jioMoney" class="paymentPlatformHandle" disabled>
+          <img src="{% static 'img/check-circle.png' %}" alt="Check circle" class="verified-check">
+          <img src="{% static 'img/payment/jio-money.png' %}" alt="JioMoney">
+        </div>
+        <div class="payment-box col-md-4">
+          <input type="radio" name="paymentPlatform" value="easypay" class="paymentPlatformHandle" disabled>
+          <img src="{% static 'img/check-circle.png' %}" alt="Check circle" class="verified-check">
+          <img src="{% static 'img/payment/easy-pay.png' %}" alt="EasyPay">
+        </div>
+      </div>
+    </div>
+    <div class="sticky-cart-footer show">
+      <div class="row">
+
+        <div class="col-md-12 text-right btn-flex">
+          <p class="error-msg" style="display: none;">Please Select PayTM As Payment Mode</p>
+          <button type="button" class="btn btn25" name="estimatedAmountBtn">Pay
+            Estimated Amount - ₹<span id="payableAmount">{{ saved_cart.estimated_price }}</span></button>
+          <button type="button" class="btn btn7 pay-btn nextBtn" name="advanceAmountBtn">Pay
+            Advance - ₹<span id="payableAdvance">{{ saved_cart.advance_payable }}</span></button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sticky-cart-footer payment-details show">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sticky-cart-total">
+          <div class="items-cart">
+            <h4>Items in Cart</h4>
+            <p id="">{{ saved_cart.total_items }}</p>
+          </div>
+          <div class="items-cart">
+            <h4>Estimated Total</h4>
+            <p>&#x20B9; <span id="">{{ saved_cart.estimated_price }}</span></p>
+          </div>
+          <div class="items-cart">
+            <h4>Advance Payable</h4>
+            <p id="">&#x20B9; {{ saved_cart.advance_payable }}</p>
+          </div>
+          <!-- <div class="items-cart">
+              <h4>Estimated Consultation Date</h4>
+              <p id="order-date">30 May, 2022</p>
+            </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="note-txt payment-details">
+    <p>By clicking on either of the buttons above you agree to <a href="#">Term & Conditions</a> & <a href="#">Privacy
+        Policy</a> </p>
+  </div>
+</div>

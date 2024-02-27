@@ -1,0 +1,54 @@
+{% extends "admin/base_template.html" %} {% block content %}
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">Add Estimation Date</h3>
+                    </div>
+                    <form action="" method="POST">
+                        <div class="card-body">
+                            {% csrf_token %}                    
+                            <div class="form-group">
+                                <label for="">Service Mode</label>
+                                <select class="form-control" name="service_mode">
+                                    {% for mode in service_modes %}
+                                    <option value="{{ mode.id }}"
+                                        {% if mode.id == estimation_dates.service_mode_id %} selected="selected" {% endif %}>
+                                        {{mode.name}}
+                                    </option>
+                                    {% endfor %}
+                                </select>                               
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Designer Preference</label>
+                                <select class="form-control" name="designer_preference_mode">
+                                    {% for mode in designer_preferences %}
+                                    <option value="{{ mode.id }}"
+                                        {% if mode.id == estimation_dates.designer_preference_mode_id %}selected="selected"{% endif %}>
+                                        {{mode.name}}
+                                    </option>
+                                    {% endfor %}
+                                </select>                               
+                            </div>
+                              <div class="form-group">
+                                <label>Estimation Date</label>
+                                
+                                <input type="date"  class="form-control" id="est_dates" name="est_dates" value="{{estimation_dates.date|date:'Y-m-d'}}" >
+                            </div>
+                           
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color: #F28077">Submit</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

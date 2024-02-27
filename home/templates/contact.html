@@ -1,0 +1,98 @@
+{% extends 'public_template.html' %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/work.css">
+
+<section id="Work" style="background-image: url('/static/img/contact-bg.jpg');background-size: cover;">
+    <div class="col text-center">
+        <h1 class="mainh1">Contact Us</h1>
+        <p class="text-white para2">We always Just a Call / Email away</p>
+    </div>
+  </section>
+
+
+
+  <section class="workTabs">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 pt-5">
+
+            <h4 class="modal-title">How can we Help?</h4>
+            <p class="text-dark para2">Our team was HandPicked for their understanding of materials,process and passion for fashion.wheather you are browsing our site (or) visiting our store,we are always willing to share our deep knowledge and understading of our makers and their craft.<br /></p>
+            <p class="text-dark para2">You can check our facts section page or contact us by filling the form or calling our customer service team</p>
+
+
+          <div style="display: flex;flex-wrap: wrap;">
+            <div class="callback-action" style="margin-right:15%;">
+                <h3 class="h11"><i class='bx bx-question-mark'></i></h3>
+                <p>Check your frequently asked <br />questions to know more<br />about Inquiries </p>
+                <div class="rel">
+                <button type="button" data-id="Request_callback" class=" btn btn2">Visit FAQs</button>
+                
+           </div>
+       </div>
+
+          <div class="callback-action">
+            <h3 class="h11"><i class='bx bx-phone-call'></i></h3>
+            <a href="tel:919108902222">Call us at<br />
+            <b>+91 9108902222</b><br />
+            or </a>
+            <div class="rel">
+            <button type="button" data-id="Request_callback" class="tooltip-wrapper btn btn2">Request Callback</button>
+            <div class="tooltip-drpdown v1 v2" id="Request_callback">
+              <span class="close-icon">✕</span>
+              <p>Please submit the form below, our customer care will reach you on given number to get more details
+              </p>
+              <input type="number" class="form-control" name="mobile_no" id="mobile_no" value="" placeholder="Enter your mobile number">
+              <textarea name="note" maxlength="100" id="note" class="form-control" placeholder="Enter note"></textarea>
+              <button id="request_callback" type="submit" class="btn btn-primary">Submit</button>
+           </div>
+         </div>
+      </div>
+  </div>
+  <div class="card mt-5 mb-3" style="border-radius: 25px;height:15%;width:85%;">
+    <div class="card-body text-center p-2">
+     <h6 class="h11">Working Hours</h6> 
+     <p>Mon-Fri 9:00 AM - 7.00 PM IST</p>
+     <p>Sat-Sun 9:00 AM - 6.00 PM IST</p>
+    </div>
+  </div>
+        </div>
+          <div class="col-md-6 mt-0" id="contact-left" >
+              <div class="modal-dialog1">
+                <div class="callback-action">
+                  <div class="modal-header">
+                    <h5 class="modal-title" style="color:black;">Leave a Questions?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form method="post" action="">
+                    {% csrf_token %} 
+                  <div class="modal-body">
+                    
+                      <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label"><strong>Name</strong></label>
+                        <input type="text" class="form-control" name="name">
+                      </div>
+                      <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label"><strong>Mobile</strong></label>
+                        <input type="text" class="form-control" name="mobile">
+                      </div>
+                      <div class="mb-3">
+                        <label for="message-text" class="col-form-label"><strong>Message</strong></label>
+                        <textarea class="form-control" name="message"></textarea>
+                      </div>
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn " style="width: 100%;background-color: #F28077;">Submit</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+        </div> 
+
+  </section>
+ 
+<div class="container mb-3">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.8428979619675!2d77.636816074287!3d12.98189821465405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16a9ccfa17e1%3A0x7c9ca1b712b932e!2sFCOM%20INDIA-quality%20doorstep%20tailoring%20-%20Alterations%20and%20Stitching!5e0!3m2!1sen!2sin!4v1685971409556!5m2!1sen!2sin" width="100%" height="500px" style="border:0;border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+  {% endblock %}

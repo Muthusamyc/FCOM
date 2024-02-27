@@ -1,0 +1,172 @@
+{% load ordertags %}
+<div class="invoice-info">
+    <div class="card">    
+        <!-- <div class="card-header">
+            {% if request.user.is_superuser %}
+
+            <button class="btn btn-primary" onclick="window.location.replace('{% url "orders_listing" order.status   %}')">
+                Back
+            </button>
+            {%  else %}
+            
+            <button class="btn btn-primary" onclick="window.location.replace('{% url "orders_listing_for_designer" order.status   %}')">
+                Back
+            </button>
+            {% endif %}
+        </div>         -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <tr>
+                                    <th colspan="2" class="text-center" style="width: auto;">Order Details</th>
+                                </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Order ID</td>
+                                <td>
+                                    <span class="">
+                                        {{ order.id }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Made By</td>
+                                <td>
+                                    <span class="">
+                                        {{ order.made_by.first_name}} {{ order.made_by.last_name }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <span class="">{{ order.status|get_order_status }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Payment Type</td>
+                                <td>
+                                    <span class="">
+                                        {{order.transactiondetails.transactionamount_set.last.payment_type }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>payment_amount </td>
+                                <td>
+                                    <span class=""> 
+                                        {{ order.transactiondetails.transactionamount_set.last.payment_amount }}
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Created On</td>
+                                <td>
+                                    <span class="">{{ order.created_on }} </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Updated On</td>
+                                <td>
+                                    <span class=""> {{ order.updated_on }} </span>
+                                </td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                
+                                <tr>
+                                    <th colspan="2" class="text-center" style="width: auto;">Customer Details</th>
+                                </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>
+                                    <span class="">
+                                        {{ order.made_by.first_name }} {{ order.made_by.last_name }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>
+                                    <span class="">
+                                        {{ order.made_by.userdetail_set.first.address }}
+
+                                        {{order.made_by.userdetail_set.first.pincode}}
+
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>City</td>
+                                <td>
+                                    <span class="">
+                                        {{ order.made_by.userdetail_set.first.location }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pincode</td>
+                                <td>
+                                    <span class="">
+                                        {{ order.made_by.userdetail_set.first.pincode }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Phone Number</td>
+                                <td><span class="">
+                                        {{order.made_by.mobile_no}}
+                                    </span></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td><span class="">
+                                        {{order.made_by.email}}
+                                    </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+  
+                    {% if order.status == booking_stage.ORDER_DELIVERED and order.customerreview_set.last.rating %}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="2" class="text-center" style="width: auto;">Customer Review</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rating</td>
+                                <td>
+                                    <span class=""> {{ reviews.rating }} </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Review</td>
+                                <td>
+                                    <span class=""> {{  reviews.review }} </span>
+                                </td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

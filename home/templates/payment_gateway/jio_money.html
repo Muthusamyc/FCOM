@@ -1,0 +1,28 @@
+<form id="jio-money" name="payment" method="POST"  action="https://testpg.rpay.co.in/reliance-webpay/v1.0/jiopayments">
+    {% csrf_token %}
+    <!-- General Info -->
+    <input type='hidden' name="version" value="2.0" />
+    <input type='hidden' name="merchantid" value="100001003477639" />
+    <input type='hidden' name="clientid" value="10327695" />
+    <input type='hidden' name="merchantname" value="TEST" />
+    <input type='hidden' name="channel" value="WEB" />
+    <input type='hidden' name="returl" value="{% url 'cart' %}" />
+    <input type='hidden' name="checksum"
+        value="mWocKRMEiC0JzqBE63TANJ8aP46kRKwIiajSoLeSQSkesRslDFKOYhkBq8LGVqEpf3grRrt3VLhhxQIwx9J8RCBpJsrAa3N40R6rlMMr8JhHw5HDOg0dQEs7r8Z5Wibx3LHOhsThu2f0bVk1Ia1U7nRc5TX7HmKsAlsN8jV46VhP09dLwP53tJUUYeSCcqzvrQBkaVO2j4nCfa9JPXDH8Ts8a3c4gJKjbiVpSVx8ik5OKthZx1Xv3WiOdhHzdTFZ" />
+    <input type='hidden' name="token" value="" />
+    <!-- Transaction Info -->
+    <input type='hidden' name="transaction.extref" value="P8564G73I19I3P6" />
+    <input type='hidden' name="transaction.timestamp" value="20170203173956" />
+    <input type='hidden' name="transaction.txntype" value="PURCHASE" />
+    <input type='hidden' name="transaction.amount" value="1.00" />
+    <input type='hidden' name="transaction.currency" value="INR" />
+    <input type='hidden' name="subscriber.mobilenumber" value="7738221020" />
+    <input type='hidden' name="subscriber.customerid" value="7738221020" />
+    <input type='hidden' name="productdescription" value="Product1" />
+    <input type='hidden' name="udf1" value="u1" />
+    <input type='hidden' name="udf2" value="u2" />
+    <input type='hidden' name="udf3" value="u3" />
+    <input type='hidden' name="udf4" value="u4" />
+    <input type='hidden' name="udf5" value="u5" />
+    <input type="submit" value="Jio Pay" />
+</form>

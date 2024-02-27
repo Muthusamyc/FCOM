@@ -1,0 +1,215 @@
+{% load ordertags %}
+{% pickedup_image order_detail.id as result %}
+<div class="tab-content booking-details">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row setup-content m-0 bookin-cart-items show" id="step-1">
+            <div class="customTabContent">
+                <h2 class="itemssearch-heading">
+                    <div class="row full-width">
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <div class="items-name">
+                                <div class="col-md-3 itemstop-title" id="id">Estimation</div>                                
+                            </div>
+                            {% if order_detail.status != booking_stage.ORDER_FAILED and order_detail.status != booking_stage.ORDER_CANCELED %}
+                            {% if order_detail.status == booking_stage.APPROVAL_ACCEPTED or order_detail.status == booking_stage.ORDER_IN_PROGRESS or order_detail.status == booking_stage.READY_FOR_DISPATCH or order_detail.status == booking_stage.ORDER_DELIVERED or order_detail.status == booking_stage.BALANCE_AMOUNT_PAID or order_detail.status == booking_stage.ORDER_DISPATCHED%}
+                                
+
+                                <div  class="items-name" id='view-invoice' data-toggle="modal" data-target="#invoice-statement">
+                                    <p style="margin-bottom: 0px;">Download</p>
+                                    {% if order_detail.status == booking_stage.ORDER_DELIVERED %}
+                                    <p style="color: #F28077;margin-bottom: 0px;">Finalized</p>
+                                    {% else %}
+                                    <p style="color: #F28077;margin-bottom: 0px;">Estimation</p>
+                                    {% endif %}
+                                    
+                                </div>
+                                {%include 'invoice.html' %}
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <div class="col text-end">
+                            {% if order_detail.status != 10 %}
+                            <!-- <label for="">Download</label>
+                            <a href="" class="link-btn form-line m-0">Estimations</a> -->
+                            {% endif %}
+                        </div>
+                    </div>
+                </h2>
+                <div class="row-data active" data-tag="girls,restyling,regular,withLining">
+                    <div class="row">
+                        {% for data in items_in_cart %}
+                        {% if data.status == 1 %}
+                        {% with ''|center:data.qty as range %}
+                            {% for _ in range %}
+                                <div class="col-md-12 d-flex justify-content-between">
+                                   <div class=".col-md-10 items-details d-flex align-items-center my-1">
+                                    {% if result %}
+                                    {% if data.image %}
+                                    <img class="img-responsive" src="/media/{{data.image}}" style="width: 50px;" />
+                                    {% else %}
+                                    <img class="img-responsive" src="/media/pickedup/not_avaialbe.jpg" style="width: 50px;" />
+                                    {% endif %}
+                                    {% endif %}
+                                    <div class="items-name">
+                                       
+                                        <h4>{{data.product_item.item.name}}</h4>
+                                        <p>{{data.product_item.item.tags}}</p>
+                                    </div>
+                                  
+                                    </div>
+                                    
+                                    {% if not data.is_cart_item_updated %}
+                                        <p class="items-price">₹{{data.product_item.item.estimated_price}}</p>
+                                    {% else %}
+                                        <p class="items-price">₹{{data.sub_total}}</p>
+                                    {% endif %}
+
+                                </div>
+                            {% endfor %}
+                        {% endwith %}
+                       {% endif %}
+                        {% endfor %}         
+                        {% if transaction_details.extra_material %}
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <div class="items-name">
+                                <h4>Extra Materials</h4>
+                                <p>Designer Updated</p>
+                            </div>
+                            <p class="items-price">₹{{ transaction_details.extra_material }}</p>
+                        </div>              
+                        {% endif %}
+                        {% if transaction_details.shipping_charges %}
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <div class="items-name">
+                                <h4>Pick & Drop charges</h4>
+                                <p>Pick & Drop charges are applicable for 3km. anything above would be charged ₹11/km</p>
+                            </div>
+                            <p class="items-price">₹{{ transaction_details.shipping_charges }}</p>
+                        </div>
+                        {% endif %}
+                        {% if transaction_details.designer_charges %}
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <div class="items-name">
+                                <h4>Designer Charges</h4>
+                                <p>Designer charges applicable based on customer discussions</p>
+                            </div>
+                            <p class="items-price">₹{{ transaction_details.designer_charges }}</p>
+                        </div>
+                        {% endif %}
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <div class="items-name">
+                                <h4>Taxes (5%)</h4>
+                                <p>CGST 2.5% & SGST 2.5%</p>
+                            </div>
+                            <p class="items-price">₹{{ transaction_details.calcualted_tax }}</p>
+                        </div>
+                        <!-- <div class="col-md-12 d-flex justify-content-between">
+                            <div class="items-name">
+                                <h4>Advance Payment</h4>
+                                <p>{% if order_detail.is_advance_paid %}Paid {% else %} Not Paid {% endif %} | By Paytm
+                                </p>
+                            </div>
+                            <p class="items-price">- ₹{{ transaction_details.advance_paid_amount }}</p>
+                        </div> -->
+                    </div>
+
+                </div>
+                <div class="items-grid-footer">
+                    <div class="row full-width">
+                        <div class="col">
+                                {% include 'my_booking_status/approve_estimation.html' %}
+                                {% include 'my_booking_status/confirm_delivery.html' %}
+                                <!-- order canceled, order failed  -->
+                                {% if order_detail.status == booking_stage.WAIT_FOR_APPROVAL %}
+                                    {%  if order_detail.status != booking_stage.APPROVAL_ACCEPTED %}                                                            
+                                        <button type="button" class="btn btn25" data-bs-toggle="modal" data-bs-target="#approveEstimationBookingModal" name="button">Approve Estimation</button>
+                                        
+                                    {% else %}
+                                        {% include 'my_booking_status/reject_estimation.html' %}
+                                        <button type="button" class="btn btn25" data-bs-toggle="modal" data-bs-target="#rejectEstimationBookingModal" name="button">Reject Estimation</button>
+                                    {% endif %} 
+
+                                {% elif order_detail.status == booking_stage.ORDER_DISPATCHED%}
+                                                                                    
+                                <button type="button" class="btn btn25" data-bs-toggle="modal" data-bs-target="#delivery_confirmed" name="button">Confirm Order is Delivered </button>
+                                       
+                                {% endif %}                 
+
+                        </div>
+                        <div class="col text-end">
+                            <label for="">Total</label>
+                            <span class="highlighted-text">
+                                {% if order_detail.status != 10 %}
+                                ₹{{ transaction_details.net_amount|floatformat:"-2" }}
+                                {% else %}
+                                <s>₹{{ transaction_details.net_amount|floatformat:"-2" }}</s>
+                                {% endif %}
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sticky-cart-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="sticky-cart-total">
+                                <div class="items-cart">
+                                    <h4>Items in Cart</h4>
+                                    <p id="total-item">0</p>
+                                </div>
+                                <div class="items-cart">
+                                    <h4>Estimated Total</h4>
+                                    <p>&#x20B9; <span id="estimated-total-item">0</span></p>
+                                </div>
+                                <div class="items-cart">
+                                    <h4>Advance Payable</h4>
+                                    <p id="estimated-total-item">&#x20B9; 500</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right btn-flex">
+                            <button type="button" class="btn btn25" name="button">Cancel</button>
+                            <button type="button" class="btn btn7 nextBtn" id="continue_book"
+                                name="button">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br>
+{% if reviews %}
+<div class="tab-content booking-details">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row setup-content m-0 bookin-cart-items show" id="step-1">
+            <div class="customTabContent">
+                <h2 class="itemssearch-heading">
+                    <div class="row full-width">
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <div class="items-name">
+                                <div class="col-md-3 itemstop-title" id="id">Review</div>                                
+                            </div>
+                          
+                           
+                        </div>
+                        
+                    </div>
+                </h2>
+
+                <div class="card" style="margin: 5%; text-align: left; border: #f7aca6 1px solid;">
+                    <div class="card-body">
+                        <p style="color:black;">Customer Service Star Rating : <span class="star-rate" data-rating="{{reviews.customer_services}}"></span></p>
+                        <p style="color:black;">Designer Performance  Star Rating : <span class="star-rate" data-rating="{{reviews.designer}}"></span></p>
+                        <p style="color:black;">Delivery Service Star Rating : <span class="star-rate" data-rating="{{reviews.delivery_services}}"></span></p>
+                        <p style="color:black;font-size: 20px;"><b><i>{{reviews.review}}</i></b></p>
+                    </div>
+                  </div>
+              
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endif %}

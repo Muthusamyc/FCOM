@@ -1,0 +1,37 @@
+<div class="modal fade" id="remove_pickedup_image{{ order.id }}{{item.id}}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Attention</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'upload_picked_image' %}" method="POST" enctype="multipart/form-data">
+                
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        {% csrf_token %}
+                        
+                        <div class="text-center" style="padding-top: 1%;">
+                            <p style="font-size: 18px;">Do you want to delete the image?</p>
+                            <button type="submit"  class="btn" style="background-color: #F28077">Delete</button>
+                          <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+                        </div>
+                        <input type="hidden" name="orderId" value="{{ order.id }}" />
+                        <input type="hidden" name="itemId" value="{{item.id}}" />
+                     
+                    </div>
+                </div>
+
+            </div>
+         
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

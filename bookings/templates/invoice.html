@@ -1,0 +1,380 @@
+<style>
+
+    table,
+td {
+    
+  border: solid 2px black;
+  width:650px;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.bold~tr td {
+  border: solid 1px lightgray;
+}
+
+td {
+  padding: 0.5em;
+}
+
+[colspan="4"][rowspan="2"] {
+  height: 6em;
+}
+</style>
+<div class="modal fade bd-example-modal-xl" id="invoice-statement">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            
+            <div class="row justify-content-md-center"  id="invoice">
+                   <div class="col-md-10">
+                    <div class="modal-header justify-content-md-center">
+                        {% if order_detail.status == booking_stage.ORDER_DELIVERED %}
+                        <h4 class="modal-title">INVOICE</h4>
+                        {% else %}
+                        <h4 class="modal-title">PROFORMA INVOICE</h4>
+                        {% endif %}
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">&#9587;</button>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-12">
+                            <font size="4" >
+                          <table style="width: 100%;">
+                            <div  class="text-end"><b>GSTIN:</b> 29AALCR2328G1Z7</div>
+                            <tr>
+                            <td colspan="4">
+                                <div><b>Customer Info</b></div>
+                                <input type="hidden" name="user_full_name" id="user_full_name" value="{{ user_details.fullName }}" />
+                                <div> <b style="font-size: 18px;text-transform: capitalize;">{{ user_details.fullName }} </b></div>
+                                <div> {{ user_details.address.address}} </div>
+                                <div >{{ user_details.address.pincode}}</div>
+                                <div >{{ user_details.address.location}} </div>
+                                <div id="phoneno"> Ph:{{ user_details.mobileNo}}</div>
+                              </td>
+                              <td colspan="4">
+                                <div class="row">
+                                    <div class="col-md-8 text-left">
+                                      
+                                        <div>Fcom India, </div>
+                                        <div>Division of Rhapso Fashion Tech India P Ltd, </div>
+                                        <div>No.12, 2nd Floor, 8th Cross, </div>
+                                        <div>1st Stage Indiranagar,</div>
+                                        <div>Binnamangala,</div>
+                                        <div>Bangalore-560 038</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      
+                                      <div><img src="/static/img/invoicelogo.jpg" style="width: 80px;height: 80px;border-radius: 50% ;margin-top: 40px;" /> </div>
+                                
+                                    </div>
+                                  </div>
+                              </td>
+                              </tr>
+
+
+                              <tr>
+                                
+                                    <td colspan="2">
+                                        <div>Invocie No</div>
+                                          <div><b>FCOM-INV-{{ order_detail.id }}</b></div>
+                                      </td>
+                                      <td colspan="2">
+                                        <div>Order ID</div>
+                                        <div><b>FCOM-{{ order_detail.id }}</b></div>
+                                      </td>
+                                      <td colspan="2"><div>Order Date</div>
+                                        <div><b>{{ order_detail.created_on|date:"d-m-Y"}}</b></div>
+                                        </td> 
+                                        <td colspan="2">
+                                            <div>Delivery Date</div>
+                                            <div>
+                                                <b>
+                                                    {% if order_detail.delivery_date %}
+                                                        {{order_detail.delivery_date}}
+                                                    {% else %}
+                                                        Yet-To-Update
+                                                    {% endif %}
+                                                </b>
+                                            </div>
+                                          </td>
+                                    </td>
+                             
+
+                              </tr>
+
+
+                              <tr>
+                                <td colspan="8">
+                                 <div class="">
+                                   <table style="width: 100%;">
+                                       <thead>
+                                           <tr>
+                                               <th>S.No</th>
+                                               <th>Image</th>
+                                               <th>Item</th>
+                                               <th>Price</th>
+                                               <th>Qty</th>
+                                               <th>Total</th>
+                                           </tr>
+                                       </thead>
+                                       {% for item in items_in_cart %}
+                                       <tbody>                        
+                                           <tr>
+                                               <td>1</td>                                              
+                                               <td id="product_image"><img src="{{item.product_item.item.image.url}}" style="width: 30px;" /> </td>
+                                               <td id="product_name"> {{item.product_item.item.name}} </td>
+                                               <td id="product_price"> {{item.sub_total}}</td>
+                                               <td id="product_qty"> {{item.qty}} </td>
+                                               <td id="product_total"> {{item.sub_total}} </td>
+                                               
+                                           
+                                           </tr>                                
+                                       </tbody>
+                                       {% endfor %}
+                                   </table>
+                               </div>
+                                </td>
+                                 </tr>
+                                 
+                                <tr>
+                                  
+                                    <td colspan="8">
+                                      <div class="row justify-content-end">
+                                        <div class="col-md-5">
+                                            <div class="row">
+  
+  
+                                              <div class="col-md-12 d-flex justify-content-between">
+                                                <label for="" class="label-tag">Sub Total</label>
+                                                <p class="text-end">₹{{ transaction_details.sub_total }}</p>
+                                            </div>
+                                        
+                                            <div class="col-md-12 d-flex justify-content-between">
+                                                <label for="" class="label-tag"> Extra Material</label>
+                                                <p class="text-end">₹{{ transaction_details.extra_material }} </p>
+                                            </div>
+                                            <div class="col-md-12 d-flex justify-content-between">
+                                                <label for="" class="label-tag">Designer Charges</label>
+                                                <p class="text-end">₹{{ transaction_details.designer_charges }} </p>
+                                            </div>
+                                            <div class="col-md-12 d-flex justify-content-between">
+                                                <label for="" class="label-tag">Pick & Drop Charges</label>
+                                                <!-- <p class="text-end"><s>₹25.00</s> ₹0.00 </p> -->
+                                                <p class="text-end"> ₹{{ transaction_details.shipping_charges }} </p>
+                                            </div>
+                                            {% if transaction_details.coupon_discount > 0 %}
+                                                <div class="col-md-12 d-flex justify-content-between">
+                                                    <label for="" class="label-tag">Coupon Discount</label>
+                                                    <p class="text-end">- ₹{{ transaction_details.coupon_discount }} </p>
+                                                </div>
+                                            {% endif %}
+                                            <div class="col-md-12 d-flex justify-content-between">
+                                                <label for="" class="label-tag">Taxes(5%)</label>
+                                                <p class="text-end">₹{{ transaction_details.calcualted_tax }} </p>
+                                            </div>
+                                            <hr />
+                                            <div class="col-md-12 d-flex justify-content-between">
+                                                <label for="">Total</label>
+                                                <p id="total" class="label-tag"> 
+                                                    {% if order_detail.status != 10 %}
+                                                        ₹{{ transaction_details.net_amount|floatformat:"-2" }}
+                                                    {% else %}
+                                                        <s>₹{{ transaction_details.net_amount|floatformat:"-2" }}</s>
+                                                    {% endif %}
+                                                 </p>
+                                            </div>
+                                            <div class="col-md-12 d-flex justify-content-between">
+                                                <label for="" class="label-tag">Advance Paid</label>
+                                                <p class="text-end">-
+                                                    ₹{{transaction_details.estimation_paid_amount|add:transaction_details.advance_paid_amount|floatformat:"-2"}}
+                                                </p>
+                                            </div>
+                                            <hr />
+                                            <div class="col-md-12 d-flex payment-footer justify-content-between">
+                                                <label for="">Net Total</label>
+                                                <p id="total" class="text-end"> 
+                                                    {% if order_detail.status != 10 %}
+                                                        ₹{{transaction_details.balance_amt_due|floatformat:"-2"}}
+                                                    {% else %}
+                                                        <s>₹{{transaction_details.balance_amt_due|floatformat:"-2"}}</s>
+                                                    {% endif %}
+                                                 </p>
+                                            </div>                                              
+                                            </div>
+                                            </div>
+                                    
+                                        
+                                    </div>
+                                    </td>  
+                                  </tr>   
+                              </table>
+                            </font>
+                        </div>
+                     </div>
+                    
+                    
+                   </div>
+
+
+                    <!-- <div class="col-md-10">
+                        <div class="modal-header justify-content-md-center">
+                            <h4 class="modal-title">Performance Invoice</h4>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">&#9587;</button>
+                        </div>
+                        <div class="row justify-content-between">
+                                
+                            <div class="col-md-4 ">
+                                    <div sty> <b id="name" style="font-size: 18px;text-transform: capitalize;"></b></div>
+                                    <div id="address"></div>
+                                    <div id="city"></div>
+                                    <div id="pincode"></div>
+                                    <div id="phoneno"></div>
+                            </div>
+                            <div class=" col-md-5">
+                                <p id="orderid"><b>Order ID :</b> 12</p>
+                                <p id="createdon"><b>Date Of Booking :</b> Jan. 27, 2023</p>
+                                <p id="orderid"><b>GSTIN:</b> 29AALCR2328G1Z7</p>
+                            </div>
+
+                    </div>
+                        <div class="row justify-content-md-center">
+                            <div class="col-12 table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Image</th>
+                                            <th>Item</th>
+                                            <th>Price</th>
+                                            <th>Qty</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                        
+                                        <tr>
+                                            <td>1</td>
+                                            
+                                            <td id="product_image"><img src="/media/items/new.jpg" style="width: 30px;" /> </td>
+                                            <td id="product_name"> Chudi </td>
+                                            <td id="product_price"> 500 </td>
+                                            <td id="product_qty"> 1 </td>
+                                            <td id="product_total"> 500 </td>
+                                            
+                                        
+                                        </tr>
+                                
+                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>   
+                                        
+                        <div class="row justify-content-end">
+                            <div class="col-5">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-between">
+                                        <label for="" class="label-tag">Sub Total</label>
+                                        <p id="sub_total" class="text-end"></p>
+                                    </div>
+                                
+                                    <div class="col-md-12 d-flex justify-content-between">
+                                        <label for="" class="label-tag"> Extra Material</label>
+                                        <p id="extra_material" class="text-end">500</p>
+                                    </div>
+                                    <div class="col-md-12 d-flex justify-content-between">
+                                        <label for="" class="label-tag">Designer Charges</label>
+                                        <p id="designer_charges" class="text-end">50</p>
+                                    </div>
+                                    <div class="col-md-12 d-flex justify-content-between">
+                                        <label for="" class="label-tag">Shipping Charges</label>
+                                        <p id= "shipping_charges" class="text-end"> </p>
+                                    </div>
+                                    
+                                        <div class="col-md-12 d-flex justify-content-between">
+                                            <label for="" class="label-tag">Coupon Discount</label>
+                                            <p id= "coupon_discount" class="text-end"></p>
+                                        </div>
+                                    
+                                    <div class="col-md-12 d-flex justify-content-between">
+                                        <label for="" class="label-tag">Taxes(5%)</label>
+                                        <p id="taxes" class="text-end"></p>
+                                    </div>
+                                    <hr />
+                                    <div class="col-md-12 d-flex justify-content-between">
+                                        <label for="">Total</label>
+                                        <p id="total" class="label-tag"> 
+                                    
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12 d-flex justify-content-between">
+                                        <label for="" class="label-tag">Advance Paid</label>
+                                        <p id="advance_paid" class="text-end">-
+                                            
+                                        </p>
+                                    </div>
+                                    <hr />
+                                    <div class="col-md-12 d-flex payment-footer justify-content-between">
+                                        <label for="">Net Total</label>
+                                        <p id="net_total" class="text-end"></p>
+                                    </div>
+                                    
+                                </div>
+                                </div>
+                        
+                            
+                        </div>
+                        <div class="card-footer"> <span class="text-muted">
+                                Thank You for shopping here</span> </div>
+                    
+                    </div> -->
+                    
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" id="download" class="btn btn-primary">Download Invoice</button>
+                <!-- <button type="submit" id="print" class="btn btn-primary">print Invoice</button> -->
+            </div>
+        </div>
+      
+    </div>
+        
+</div>
+    
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+<script>
+    window.onload = function () {
+    document.getElementById("download")
+        .addEventListener("click", () => {
+            const invoice = this.document.getElementById("invoice");
+            var fileName;
+            fileName = "fcom-invoice-for-"
+            fileName = $('#user_full_name').val()
+            fileName = fileName + ".pdf";
+            // console.log(invoice);
+            // console.log(window);
+            var opt = {
+                // margin: 1,
+                filename: fileName,
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 1 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+}
+
+
+
+
+$('#print').click(function(){
+            Popup($('#invoice')[0].outerHTML);
+            function Popup(data) 
+            {
+                window.print();
+                return true;
+            }
+        });
+</script>
+
+

@@ -1,0 +1,525 @@
+{% extends 'public_template.html' %}
+
+{% block content %}
+
+<section id="Home">
+    <div class="col mainhome">
+        <h1 class="mainh1">High Quality Tailoring At Your Doorstep</h1>
+        <p class="text-white para2">We help you achieve the best fit for your garments. Our services
+            include alterations, custom stitching, restyling, upcycling and more</p>
+        <p class="para4">We also offer 48 Hour Express Service</p>
+        <div class="mainbuttons">
+            {% csrf_token %}
+            <a href="{% url 'cart' %}" class="btn1 btn-white"> Book Now</a>
+            <a href="javascript:void(0)" data-id="Request_callback" class="btn16 btn-white tooltip-wrapper">Request Call
+                Back
+            </a>
+            <div class="tooltip-drpdown" id="Request_callback">
+                <span class="close-icon">&#x2715;</span>
+                <p>Please submit the form below, our customer care will reach you on given number to get more details
+                </p>
+                <input type="number" class="form-control" name="mobile_no" id="mobile_no" value=""
+                    placeholder="Enter your mobile number">
+                <textarea name="note" maxlength="100" id="note" class="form-control"
+                    placeholder="Enter note"></textarea>
+                <button id="request_callback" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <br>
+        </div>
+    </div>
+    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="static/img/hero1.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="static/img/hero2.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="static/img/hero3.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="static/img/hero4.png" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% include 'home/howitworks.html' %}
+
+<section id="service">
+    <div class="container-fluid service2">
+        <div class="row ">
+            <div class="col-lg-6 col-md-6 image1">
+                <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="static/img/services/services1.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="static/img/services/services2.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="static/img/services/services3.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="static/img/services/services4.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="static/img/services/services5.png" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="Services text-center">
+                    <div class="services-top">
+                        <h2 class="h2">Services</h2>
+                        <p class="mt-1 p3">We offer personalized and high quality services at affordable rates</p>
+                        <h4 class="h4 mt-1">Starting @ ₹79</h4>
+                        <div class="services-list">
+                            <p class="serviceh3">Custom Stitching </p>
+                            <p class="serviceh3">Alterations</p>
+                            <p class="serviceh3">Restyling & Refitting</p>
+                            <p class="serviceh3">Repurposing </p>
+                            <p class="serviceh3">Dyeing & Darning </p>
+                            <p class="serviceh3">Design Consultation </p>
+                        </div>
+                    </div>
+                    <div class="services-bottom">
+                        <div class="row ">
+                            <div class="col-lg-12 col-md-12 col-sm-12 ">
+                                <div class="services1 mt-5">
+                                    <span>For all categories - Men, Women, Kids and More
+                                        <a href="{% url 'our_services' %}" class="services2 mt-3 m-3">View all services</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section id="number">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 text-center">
+                <h1 class="h1 counter" data-number="5300"></h1>
+                <p class="p4 ">Satisfied Customers</p>
+            </div>
+            <div class="col-lg-3 col-md-3 text-center">
+                <h1 class="h1 counter" data-number="15760"></h1>
+                <p class="p4 ">Orders Delivered</p>
+            </div>
+            <div class="col-lg-2 col-md-2 text-center">
+                <h1 class="h1 counter" data-number="44230"></h1>
+                <p class="p4 ">Garments worked on</p>
+            </div>
+            <div class="col-lg-2 col-md-2 pd-l-3 text-center">
+                <h1 class="h1 counter" data-number="175"></h1>
+                <p class="p4 ">Partners</p>
+            </div>
+            <div class="col-lg-3 col-md-3 text-center">
+                <h1 class="h1 counter" data-number="17"></h1>
+                <p class="p4">Locations served across world</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<a href="https://api.whatsapp.com/send?phone=919108902222" class="float1" target="_blank">
+<i class="fa fa-whatsapp my-float1"></i>
+</a> -->
+
+<section id="whychooseus">
+    <div class="container-fluid whychooseus">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center">
+                    <h2 class="h2 text-center">Why Choose Us</h2>
+                    <p class="p6 m-3 p3" >One Stop Shop, All services under one roof, Single platform for men, women, kids
+                        and home</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex-grid">
+            <div class="chooseus-block">
+                <div class="choose text-center">
+                    <img src="static/img/chooseUs/icon1.png" class="d-block" alt="...">
+                    <h6 class="h6">Convenient</h6>
+                    <p class="para">Door-step pick & drop; Transparency in every step</p>
+                </div>
+            </div>
+            <div class="chooseus-block">
+                <div class="choose text-center ">
+                    <img src="static/img/chooseUs/icon2.png" class="d-block" alt="...">
+                    <h6 class="h6 ">Quality Design & Execution</h6>
+                    <p class="para ">Personalized style recommendations; high quality end product</p>
+                </div>
+            </div>
+            <div class="chooseus-block">
+                <div class="choose text-center ">
+                    <img src="static/img/chooseUs/icon3.png" class="d-block" alt="...">
+                    <h6 class="h6 ">Friendly & Affordable</h6>
+                    <p class="para ">Easy to approach, Reasonable prices starting from ₹79</p>
+                </div>
+            </div>
+            <div class="chooseus-block">
+                <div class="choose text-center ">
+                    <img src="static/img/chooseUs/icon4.png" class="d-block" alt="...">
+                    <h6 class="h6 ">Digital</h6>
+                    <p class="para ">Trackable orders & online payments</p>
+                </div>
+            </div>
+            <div class="chooseus-block">
+                <div class="choose text-center ">
+                    <img src="static/img/chooseUs/icon5.png" class="d-block" alt="...">
+                    <h6 class="h6 ">One Stop Shop</h6>
+                    <p class="para ">Solution for you & your family's bespoke tailoring needs</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section id="comments">
+    <div class="container ">
+        <div class="row ">
+            <div class="col-md-12 col-lg-10 offset-lg-1">
+                <div id="carouselExampleFade" class="carousel slide" data-bs-ride="carousel">
+                    <div class="slider-btn">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                            data-bs-slide="prev">
+                            < </button>
+                                <span id="slider_no"><em>1</em> / 10</span>
+                                <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                                    >
+                                </button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class=" col-lg-3 col-md-3 ">
+                                    <div class="img2 d-flex ">
+                                        <img class="colon " src="static/img/colon.png" alt="colon" />
+                                        <img src="static/img/avatarWomen.png" alt="one" />
+                                    </div>
+                                </div>
+                                <div class=" col-lg-8 col-md-8">
+                                    <h6 class="cmh6">Rashmika Kuppanna
+
+                                        <i class="bx bxs-star stars "></i>
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                    </h6>
+                                    <p class="p7">TI genuinely appreciate the beautiful work which was done on my saree and blouse. Simple and elegant, just how I like it . Hassle free work and good Pricing. But, Most importantly the work was done within the given time frame and packaged well. Thank you and I wish you keep up the good work and service throughout.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class=" col-lg-3 col-md-3 ">
+                                    <div class="img2 d-flex ">
+                                        <img class="colon " src="static/img/colon.png" alt="colon" />
+                                        <img src="static/img/avatarWomen.png" alt="one" />
+                                    </div>
+                                </div>
+                                <div class=" col-lg-8 col-md-8">
+                                    <h6 class="cmh6">Neeta Singh 
+
+                                        <i class="bx bxs-star stars "></i>
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                    </h6>
+                                    <p class="p7">Went to this place as I saw they had great reviews and someone had mentioned they were pleased with their jeans alteration. They did not disappoint!!
+                                        Work was done quickly and to a high standard - would definitely recommend :)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class=" col-lg-3 col-md-3 ">
+                                    <div class="img2 d-flex ">
+                                        <img class="colon " src="static/img/colon.png" alt="colon" />
+                                        <img src="static/img/avatarMen.png" alt="one" />
+                                    </div>
+                                </div>
+                                <div class=" col-lg-8 col-md-8">
+                                    <h6 class="cmh6">Ganesan
+
+                                        <i class="bx bxs-star stars "></i>
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                    </h6>
+                                    <p class="p7">My.grand daughter, who was visiting India from the US, was very happy with the Indian ethnic dress stitched in less than a week. Thanks Fcom!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class=" col-lg-3 col-md-3 ">
+                                    <div class="img2 d-flex ">
+                                        <img class="colon " src="static/img/colon.png" alt="colon" />
+                                        <img src="static/img/avatarWomen.png" alt="one" />
+                                    </div>
+                                </div>
+                                <div class=" col-lg-8 col-md-8">
+                                    <h6 class="cmh6">Aditi
+
+                                        <i class="bx bxs-star stars "></i>
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                    </h6>
+                                    <p class="p7">Had an amazing experience with the designers and service here at FCOM. I came in last minute as another tailor messed up my clothes and I was to leave for an outstation wedding in 8 days! The designers here took out time and worked from scratch on the outfits. They even altered some of my clothes which others denied. The crazy part was I didn't even have time to try the clothes on after they were stitched but the fit was just amazing and it did not need any further alterations. They even followed up later to check if all was fine. It was an outstanding end-to-end experience that I would definitely recommend to everyone to try out! Looking forward to more such experiences and services from them. :)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class=" col-lg-3 col-md-3 ">
+                                    <div class="img2 d-flex ">
+                                        <img class="colon " src="static/img/colon.png" alt="colon" />
+                                        <img src="static/img/avatarMen.png" alt="one" />
+                                    </div>
+                                </div>
+                                <div class=" col-lg-8 col-md-8">
+                                    <h6 class="cmh6">Nithin Fernando
+
+                                        <i class="bx bxs-star stars "></i>
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                    </h6>
+                                    <p class="p7">I was happy to know that they do alteration for Men’s wear as well when I came to know about them for the first time. The service is really good & they value their customers. The coordinators are very helpful & empathetic. At times delivery can take longer based on the availability of staffs.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class=" col-lg-3 col-md-3 ">
+                                    <div class="img2 d-flex ">
+                                        <img class="colon " src="static/img/colon.png" alt="colon" />
+                                        <img src="static/img/avatarMen.png" alt="one" />
+                                    </div>
+                                </div>
+                                <div class=" col-lg-8 col-md-8">
+                                    <h6 class="cmh6">Chetan Rao
+
+                                        <i class="bx bxs-star stars "></i>
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                    </h6>
+                                    <p class="p7">Awesome service and great designs. Will recommend it if you are looking for hassle free service and premium quality.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class=" col-lg-3 col-md-3 ">
+                                    <div class="img2 d-flex ">
+                                        <img class="colon " src="static/img/colon.png" alt="colon" />
+                                        <img src="static/img/avatarMen.png" alt="one" />
+                                    </div>
+                                </div>
+                                <div class=" col-lg-8 col-md-8">
+                                    <h6 class="cmh6">Thimmaiah Mandanna
+
+                                        <i class="bx bxs-star stars "></i>
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                    </h6>
+                                    <p class="p7">I got my denim jacket altered by the master in FCOM. He did an excellent job and absolutely happy the service managed by FCom team. Great work FCOM !!! Thank you.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class=" col-lg-3 col-md-3 ">
+                                    <div class="img2 d-flex ">
+                                        <img class="colon " src="static/img/colon.png" alt="colon" />
+                                        <img src="static/img/avatarMen.png" alt="one" />
+                                    </div>
+                                </div>
+                                <div class=" col-lg-8 col-md-8">
+                                    <h6 class="cmh6">Joseph Mathew
+
+                                        <i class="bx bxs-star stars "></i>
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                    </h6>
+                                    <p class="p7">Fcom's services for alteration of clothes is excellent. They take orders and deliver on the mark as per your specifications and on time.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class=" col-lg-3 col-md-3 ">
+                                    <div class="img2 d-flex ">
+                                        <img class="colon " src="static/img/colon.png" alt="colon" />
+                                        <img src="static/img/avatarWomen.png" alt="one" />
+                                    </div>
+                                </div>
+                                <div class=" col-lg-8 col-md-8">
+                                    <h6 class="cmh6">Deepali Paul
+
+                                        <i class="bx bxs-star stars "></i>
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                    </h6>
+                                    <p class="p7">Nice experience with FCOM...
+                                        Good and efficient work.On time delivery and most importantly the fitting is just wow..
+                                        Loved their work.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class=" col-lg-3 col-md-3 ">
+                                    <div class="img2 d-flex ">
+                                        <img class="colon " src="static/img/colon.png" alt="colon" />
+                                        <img src="static/img/avatarWomen.png" alt="one" />
+                                    </div>
+                                </div>
+                                <div class=" col-lg-8 col-md-8">
+                                    <h6 class="cmh6">Kavana Menon
+
+                                        <i class="bx bxs-star stars "></i>
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                        <i class="bx bxs-star stars "></i>
+
+                                    </h6>
+                                    <p class="p7">It was one of those rare experience with a tailor were I did not have to go back and forth
+                                        the designer understood exactly what I wanted and delivered .</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+</section>
+
+
+
+<div class="whats-float2">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <a href="https://api.whatsapp.com/send?phone=919108902222"
+       target="_blank">
+        <i class="fa fa-whatsapp"></i><span>WhatsApp<br><small>9108902222</small></span>
+    </a>
+</div>
+
+<script type="text/javascript">
+    // Counter Animation
+    var a = 0;
+$(window).scroll(function () {
+    var oTop = $("#number").offset().top - window.innerHeight;
+    if (a == 0 && $(window).scrollTop() > oTop) {
+        $(".counter").each(function () {
+            var $this = $(this),
+                countTo = $this.attr("data-number");
+            $({
+                countNum: $this.text()
+            }).animate(
+                {
+                    countNum: countTo
+                },
+
+                {
+                    duration: 1000,
+                    easing: "swing",
+                    step: function () {
+                        //$this.text(Math.ceil(this.countNum));
+                        $this.text(
+                            Math.ceil(this.countNum).toLocaleString("en")
+                        );
+                    },
+                    complete: function () {
+                        $this.text(
+                            Math.ceil(this.countNum).toLocaleString("en")
+                        );
+                        //alert('finished');
+                    }
+                }
+            );
+        });
+        a = 1;
+    }
+});
+</script>
+
+{% endblock %}

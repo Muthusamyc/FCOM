@@ -1,0 +1,50 @@
+<li class="nav-item">
+    <a href="#" class="nav-link">
+        <p>
+            Services / Stiching
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{% url 'add_stiching_categories' 'category' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Category</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{% url 'add_stiching_categories' 'service' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Service</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{% url 'add_stiching_categories' 'finishing' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Finishing</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'add_stiching_categories' 'pattern' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Pattern</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'add_measurement_groups' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Measurements</p>
+            </a>
+        </li>
+        <!-- <li class="nav-item">
+            <a href="{% url 'add_stiching_items' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Items</p>
+            </a>
+        </li> -->
+
+   
+    </ul>
+</li>

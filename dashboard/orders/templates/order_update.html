@@ -1,0 +1,250 @@
+{% extends "admin/base_template.html" %}
+{% load ordertags %}
+{% load static %}
+{% block content %}
+
+<div class="invoice p-3 mb-3">
+    <div class="invoice-info">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Order Details</th>
+                                    <th style="width: auto;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Oder ID</td>
+                                    <td>
+                                        <span class="">
+                                            {{ order.id }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Made By</td>
+                                    <td>
+                                        <span class="">
+                                            {{ order.made_by.first_name}} {{ order.made_by.last_name }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>
+                                        <span class="">{{ order.status|get_order_status }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Payment Type</td>
+                                    <td>
+                                        <span class=""> {{order.transactiondetails_set.last.payment_type }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>payment_amount </td>
+                                    <td>
+                                        <span class=""> {{order.transactiondetails_set.last.payment_amount }} </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Created On</td>
+                                    <td>
+                                        <span class="">{{ order.created_on }} </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Updated On</td>
+                                    <td>
+                                        <span class=""> {{ order.updated_on }} </span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: auto;">Customer Details</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Customer Name</td>
+                                    <td>
+                                        <span class="">
+                                            {{ order.made_by.first_name }} {{ order.made_by.last_name }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td>
+                                        <span class="">
+                                            {{ order.made_by.userdetail_set.first.address }} 
+                                            
+                                            {{order.made_by.userdetail_set.first.pincode}}
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td>
+                                        <span class="">
+                                        {{ order.made_by.userdetail_set.first.location }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pincode</td>
+                                    <td>
+                                        <span class="">
+                                        {{ order.made_by.userdetail_set.first.pincode }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td><span class="">
+                                            {{order.made_by.userdetail_set.first.mobile_no}}
+                                        </span></td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><span class="">
+                                            {{order.made_by.email}}
+                                        </span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item Id</th>                            
+                            <th>Item</th>                          
+                            <th>Image</th>                          
+                            <th>Category</th>                          
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>
+                                {{ item.item.item.name }}
+                            </td>
+                            <td>
+                                <img src="/media/{{item.item.item.image}}" style="width: 50px;" />                               
+                            </td>
+                            <td>
+                                {{item.item.category.name }} | {{item.item.service.name }} | {{item.item.finishing.name }} | {{item.item.pattern.name }}
+                            </td>              
+                            <td>
+                                {{item.qty}}
+                            </td>           
+                            <td>{{ item.item.item.starting_price|floatformat }}</td>
+                            <td>
+                                {{ item.sub_total}}
+                            </td>
+                        </tr>
+                        {%  endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="row">
+        
+            <div class="col-6">
+                <p class="lead">Payment Methods & Status:</p>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th style="width:50%">Order Status:</th>
+                            <td>{{order.status|get_order_status}}</td>
+                        </tr> 
+                        <tr>
+                            <th style="width:50%">Payment Type:</th>
+                            <td>{{transaction_details.payment_type}}</td>
+                        </tr>         
+                        {% if order.is_advance_paid %}                  
+                        <tr>
+                            <th style="width:50%">Payment Amount:</th>
+                            <td>{{transaction_details.payment_amount}}</td>
+                        </tr>  
+                        {% endif %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="col-6">
+                <p class="lead">Transaction Details</p>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th style="width:50%">Subtotal:</th>
+                                <td>₹{{transaction_details.sub_total}}</td>
+                            </tr>                           
+                            <tr>
+                                <th style="width:50%">Advance Paid:</th>
+                                <td>- ₹{{transaction_details.advance_paid_amount}}</td>
+                            </tr>                           
+                            <tr>
+                                <th style="width:50%">Designer Charges:</th>
+                                <td>₹{{transaction_details.designer_charges}}</td>
+                            </tr>
+                              <tr>
+                                <th style="width:50%">Coupon Discount:</th>
+                                <td>₹{{transaction_details.coupon_discount}}</td>
+                            </tr>
+                            <tr>
+                                <th>Shipping:</th>
+                                <td>₹{{transaction_details.shipping_charges}}</td>
+                            </tr>
+                            <tr>
+                                <th>Tax (5%)</th>
+                                <td>₹{{transaction_details.calcualted_tax}}</td>
+                            </tr>
+                            <tr>
+                                <th>Total:</th>
+                                <td>₹{{transaction_details.net_amount|floatformat:"-2"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

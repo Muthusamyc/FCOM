@@ -1,0 +1,355 @@
+<div class="row setup-content"   id="step-1">
+  <!-- Items in cart -->
+
+   <!-- Preferences -->
+   <div class="selection-details">
+    <!-- <div class="alert alert-info" role="alert">
+      <b></b>We are currently experiencing issues with card payments. Please consider using <b>UPI payment</b>  instead.
+    </div> -->
+    <div class="row form-group" id="toppage">
+      <div id='service_required' class="col-md-6">
+
+        
+        
+        <label for="">Service Mode</label>
+       
+        <select name="serviceMode" class="form-control" id="servicemode" value="" required>          
+          <option value="">Select</option>
+          {% for preference in service_modes %}
+          <option value="{{ preference.id }}" >{{ preference.name }}</option>
+          {% endfor %}
+        </select>
+        <p class="error-msg">Please Select Service Mode</p>
+      </div>
+      <div class="col-md-6">
+        <label for="">Designer Preference</label>
+        <select name="designersPreference" class="form-control" id='designer_pref' value="" required>
+          <option value="">Select</option>
+          {% for mode in designer_preferences %}
+          <option value="{{ mode.id }}" {% if mode.id == items_in_cart.service_mode %} selected {% endif%} >{{ mode.name }}</option>
+          {% endfor %}
+        </select>
+        <p class="error-msg">Please Select Designer Preference</p>
+      </div>
+     
+    </div>
+  </div>
+  <div id="customTabContent" class="p-0">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      
+      <h2 class="itemssearch-heading">
+       Cart Items <span id="total-item" style="padding-left: 0.5%;"> {{ saved_cart.total_items }}</span>                
+      </h2>
+      
+      {% for item_row in items_in_cart %}
+      <div class="row-data active" data-tag="girls,restyling,regular,withLining">
+        <div class="row">
+          <div class="col-md-8">
+            <h3>{{ item_row.item.item.name }}</h3>
+            <p id="selectedTags">{{ item_row.item.item.tags }}</p>
+            <p id="priceTag">Starting Price: 
+              <span class="priceValue" id="{{ item_row.item.item.id }}">
+                {{item_row.item.item.starting_price }}
+              </span>
+            </p>
+            <p class="error-msg">Something Went Wrong please try again later</p>
+          </div>
+          <div class="col-md-4">
+            <div class="items-add">
+              <img src="/media/{{ item_row.item.item.image }}" alt="Items">
+              <button type="button" class="btn btn1 add" name="button" id="add1">Add</button>
+              <div class="quantity-wrapper active">
+                <button type="button" class="btn btn2 quantity-btn decrease" name="button">&#8722;</button>
+                <span class="quantity-txt" data-count="{{item_row.qty}}">{{item_row.qty}}</span>
+                <button type="button" class="btn btn2 quantity-btn increase" name="button">&#43;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- <div class="sticky-cart-footer show">
+        <div class="row">
+          <div class="col-md-7">
+            <div class="sticky-cart-total">
+              <div class="items-cart">
+                <h4>Items in Cart</h4>
+                <p id="total-item">{{ saved_cart.total_items }}</p>
+              </div>
+              <div class="items-cart">
+                <h4>Estimated Total</h4>
+                <p>&#x20B9; <span id="estimated-total-item">{{ saved_cart.estimated_price }}</span></p>
+              </div>
+              <div class="items-cart">
+                <h4>Advance Payable</h4>
+                <p>&#x20B9; <span id="advance-payable">{{ saved_cart.advance_payable }}</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 text-right btn-flex">
+            <button type="button" class="btn btn25" name="back_button">Back</button>
+            <button type="button" class="btn btn7 pay-btn nextBtn" name="button">Pay Now</button>
+          </div>
+        </div>
+      </div> -->
+      <div class="sticky-cart-footer {% if saved_cart.total_items > 0 %} show {% else %} hide {% endif %}">
+        <div class="row">
+  
+          <div class="col-md-12 text-right btn-flex">
+            <div class="row">
+              <div class="col-md-2 col-sm-12">
+                <button type="button" class="btn btn25" id="back-Bttn" name="back_button" style="margin-bottom: 5px;">Back</button>
+                <!-- <p class="error-msg" style="display: none;">Please Select PayTM As Payment Mode</p> -->
+                <button type="button" class="btn btn25" id="back-Bttn" name="back_button"  style="visibility: hidden;">Back</button>
+              </div>
+    
+              <div class="col-md-7 col-sm-12 ">
+                <form method="post" id="estimatedPaymentForm" action="{% url 'create_order_redirect' %}">
+                {% csrf_token %}
+                <input type="hidden" name="cartId" value="{{ saved_cart.id }}" />
+                <input type="hidden" name="amount" id="estimatedAmtPaytm" value="{{ saved_cart.estimated_price }}" />                
+                <input type="hidden" name="serviceType" id="serviceType" value="" />
+                <input type="hidden" name="bookingType" id="bookingType" value="" />
+                <input type="hidden" name="paymentType" value="estimated" />
+                  
+                  <button type="button" id='estimate' class="btn btn25 nextBtn" name="estimatedAmountBtn" style="width: 100%;margin-bottom: 5px;" >Pay
+                    Estimated Amount - ₹<span id="estimated-total-item">{{ saved_cart.estimated_price }}</span>
+                    <i class='bx bx-info-circle cr1' id="tooltip1">
+                      <span class="tooltiptext1">
+                      <table class="toltab">
+                        <tr>         
+                          <th id="toltd" style="text-align: end;"><u>Estimated Total</u></th>  
+                        </tr>
+                      <tr>         
+                        <td id="toltd">Sub Total</td>  
+                        <td id="box3">{{ saved_cart.estimated_price }}</td>      
+                      </tr>
+                      <tr>
+                        <td id="toltd">PickUp & Drop<BR><small>(min Upto 3km)</small></td> 
+                        <td id="box1">-</td>
+                      </tr>
+                      <tr>
+                        <td id="toltd">Disigner Charges</td> 
+                        <td id="box2">50</td> 
+                      </tr> 
+                      <tr>
+                        <td id="toltd">GST 5%</td> 
+                        <td id="box4"></td>
+                      </tr>
+                      <tr id="estAmt">
+                      <td><b>Total Amount</b></td>
+                      <td id="TotAmt_Tax"></td>
+                      </tr>
+                      </table>
+                    </span>
+                  </i>
+                </button>
+
+              </form>
+              </div> 
+              <div class="col-md-3 col-sm-12 ">
+                <form method="post" id="advancePaymentForm" action="{% url 'create_order_redirect' %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="cartId" value="{{ saved_cart.id }}" />
+                  <input type="hidden" name="amount" value="{{ saved_cart.advance_payable }}" />                
+                  <input type="hidden" name="serviceType" id="serviceType" value="" />
+                  <input type="hidden" name="bookingType" id="bookingType" value="" />
+                  <input type="hidden" name="paymentType" value="advance" />
+                  <button type="button" id="advance-btn" class="btn btn7 pay-btn nextBtn" name="advanceAmountBtn" style="width: 100%;">Pay
+                    Advance - ₹<span id="advance-payable">{{ saved_cart.advance_payable }}</span></button>
+                </div>
+                </form>
+            </div>
+       
+          </div>
+        </div>
+        <div class='row text-left pt-3 disclaimerTxt' >
+          <div>
+            <i class='bx bxs-star disclaimerWord'Style="font-size:11px;line-height:1.5;" >&ensp;Pick & Drop charges - ₹99 upto 3km. anything above is charged at ₹11/km</i><br>
+            <i class='bx bxs-star disclaimerWord'Style="font-size:11px;line-height:1.5;" >&ensp;Co-ordination charges - ₹50 for alteration order, ₹150 for striching orders Note - this for Complete Order</i>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="sticky-cart-footer payment-details hide">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sticky-cart-total">
+          <div class="items-cart">
+            <h4>Items in Cart</h4>
+            <p id="">2</p>
+          </div>
+          <div class="items-cart">
+            <h4>Estimated Total</h4>
+            <p>? <span id="">1498</span></p>
+          </div>
+          <div class="items-cart">
+            <h4>Advance Payable</h4>
+            <p id="">? 350</p>
+          </div>
+          <!-- <div class="items-cart">
+              <h4>Estimated Consultation Date</h4>
+              <p id="order-date">30 May, 2022</p>
+            </div> -->
+        </div>
+      
+      </div>
+      
+    </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-md-5 "></div>
+    <div class="col-md-7">
+      <div class='row text-left'>
+        <div>
+          <i class='bx bxs-star'Style="font-size:11px;">&ensp;Pick & Drop charges are applicable for 3km. anything above would be charged ₹11/km</i><br>
+          <i class='bx bxs-star'Style="font-size:11px;">&ensp;Designer charges applicable based on customer discussions</i>
+        </div>
+        
+      </div>
+    </div>
+  </div> -->
+
+
+ 
+
+  <!-- Address Details -->
+  <div class="address-details">
+    <!-- <h4><label for="">Address</label> <button type="button" class="btn btn7" data-bs-target="#addAddressModal"
+        data-bs-toggle="modal" name="button">&#43;</button></h4> -->
+    <div class="address-row row">
+      <div class="col-md-4 address-box">
+        <div class="btn-icons">
+          <!-- <button type="button" class="btn" name="button" data-bs-target="#addAddressModal" data-bs-toggle="modal"><img
+              src="static/img/edit.png" alt="edit" /></button>
+          <button type="button" class="btn" name="button"><img src="static/img/cancel.png" alt="close" /></button> -->
+        </div>
+        <h5>{{ user_details.fullName }}</h5>
+        <p>{{ user_details.address.address }} {{ user_details.address.location }} {{user_details.address.pincode}} +91
+          {{ user_details.mobileNo }}</p>
+        <span class="badge badge-light" id="typeOfAddress">{{ user_details.address.addressType }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Note Text -->
+  <div class="note-txt">
+    <ul>
+      <li><b>Starting</b> price is for guidance only, final price / bill amount will be communicated during
+        Designer Consultation</li>
+      <li><b>Advance Payable</b> amount needs to be paid to book an appointment. If you cancel the booking
+        (only) before 24 Hrs of designer’s visit to your location, full advance amount would be refunded.
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<!-- <script>
+  var box1 = Number($( "#box1" ).text());
+  var box2 = Number($( "#box2" ).text());
+  var box3 = Number($( "#box3" ).text());
+  var result = box1 + box2 + box3 ;
+  $('#total_amount').text(result);
+ 
+  var num1 = $("#box1").text();
+  var num2 = $("#box2").text();
+  var num3 = $("#box3").text();
+  var answer = parseInt(num1) + parseInt(num2) + parseInt(num3);
+  $("#total_amount").text(answer);
+</script>
+
+<script>
+  var num1 = $("#total_amount").text();
+  var answermu1 =( (0.05) * parseInt(num1)) ;
+  $("#box4").text( answermu1.toFixed(2));
+</script> -->
+<script>
+//  $('#servicemode').on('change', function() {
+//   alert( this.value );
+// });
+
+
+
+$("#estimate, #advance-btn").click(function(){
+var dropval = $('#servicemode option:selected').text();
+var dropval2 = $('#designer_pref option:selected').text();
+if (dropval == 'Select' || dropval2 == 'Select'){
+  $([document.documentElement, document.body]).animate({
+        scrollTop: $("#toppage").offset().top
+    }, 100);
+   }
+  });
+
+  $("#tooltip1").hover(function(){
+
+  var num1 = $("#box1").text();
+  var num2 = $("#box2").text();
+  var num3 = $("#estimated-total-item").text();
+  if (num1=="-"){
+    var total = parseInt(num2) + parseInt(num3);
+  }
+  else
+  {
+    var total = parseInt(num1) + parseInt(num2) + parseInt(num3);
+  }
+  
+// tax
+  var answermu1 =( (0.05) * parseInt(total)) ;
+  $("#box4").text( answermu1.toFixed(2));
+// Total
+   var num2 = $("#box4").text();
+   var answertot = parseInt(total) + parseFloat(num2);
+   $("#box1").text(num1);
+   $("#box3").text(num3);
+
+   $("#TotAmt_Tax").text(answertot).css("font-weight", "bold").text( answertot.toFixed(2));
+});
+
+  
+
+
+  $('#servicemode').on('change', function() {
+  var num2 = $("#box2").text();
+  var num3 = $("#box3").text();
+    if(this.value == 1) {
+    var num1 = 99;
+    var total = parseInt(num1) + parseInt(num2) + parseInt(num3);
+
+  } else{
+    num1 = "-";
+    var total = parseInt(num2) + parseInt(num3);
+  }
+  
+ 
+// tax
+  var answermu1 =( (0.05) * parseInt(total)) ;
+  $("#box4").text( answermu1.toFixed(2));
+// Total
+   var num2 = $("#box4").text();
+   var answertot = parseInt(total) + parseInt(num2);
+   $("#box1").text(num1);
+   $("#TotAmt_Tax").text(answertot).css("font-weight", "bold").text( answertot.toFixed(2));
+  })
+
+
+
+
+
+
+
+//   var num1 = $("#box1").text();
+//   var num2 = $("#box2").text();
+//   var num3 = $("#box3").text();
+//   var total = parseInt(num1) + parseInt(num2) + parseInt(num3);
+//  tax
+//   var answermu1 =( (0.05) * parseInt(total)) ;
+//   $("#box4").text( answermu1.toFixed(2));
+//  Total
+//    var num2 = $("#box4").text();
+//    var answertot = parseInt(total) + parseInt(num2);
+//    $("#TotAmt_Tax").text(answertot).css("font-weight", "bold").text( answertot.toFixed(2));
+</script>

@@ -1,0 +1,107 @@
+{% extends "admin/base_template.html" %} {% block content %}
+{% load ordertags %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <!-- <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">Personal Details</h3>
+                    </div> -->
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Select Option</label>
+                                    <select required  class="form-control" name="filter" id="filter">
+                                        <option value>Select Option</option>
+                                        <option value="first_name"{% if filter_opt == 'first_name' %} selected="selected"{% endif %}>First Name</option>
+                                        <option value="mobile_no"{% if filter_opt == 'mobile_no' %} selected="selected"{% endif %}>Mobile No</option>
+                                        <option value="order_id"{% if filter_opt == 'order_id' %} selected="selected"{% endif %}>Order Id</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Search</label>
+                                    <div class="input-group">
+                                        <input type="search" name="search" class="form-control" placeholder="Search Customer Infomation"
+                                            value="{{search_opt}}" required >
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">List</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered  table-hover" id="sortTable">
+                            <thead>
+                                <tr>
+                                    <th>Order No</th>
+                                    <th>Full Name</th>
+                                    <th>Mobile Number</th>
+                                    <th>Order Status</th>
+                                    <th>View</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                    <td>{{order.id}}</td>
+                                    <td>{{order.made_by.first_name}} {{order.made_by.last_name}}</td>
+                                    <td>{{order.made_by.mobile_no}}</td>
+                                    <td>{{order.status|get_order_status}}</td>
+                                    <th>
+                                        <a href="{% url 'order_details' order.id  %}" class="fa fa-eye"></a>
+                                    </th>
+
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    $(function () {
+        $("#sortTable").DataTable({
+            "responsive": false, "lengthChange": true, "autoWidth": false,
+            order: [
+                    [0, "desc"]
+                ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+    });
+</script>
+
+{% endblock %}

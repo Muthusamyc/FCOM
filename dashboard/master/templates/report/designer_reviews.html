@@ -1,0 +1,127 @@
+{% extends "admin/base_template.html" %}
+{% load ordertags %}
+{% load orderitemtags %}
+{% block content %}
+
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title" id="report-title">Reviews</h3>
+                        <div class="card-tools">
+                            
+                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <i class="fas fa-filter"></i>Filter
+                              </button>
+                          </div>
+                    </div>
+                   
+                  
+                    <div class="card-body">
+                        <div class="row">
+                         
+                            <div class="col-md-6">
+                             
+                            </div>   
+                           
+                        </div>
+                       
+                        <table class="table table-bordered  table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Customer Name</th>
+                                    <th>Designer Name</th>
+                                    <th>Order No</th>
+                                    <th>Designer Rating</th>
+                                    <th>Service Rating</th>
+                                    <th>Delivery Rating</th>
+                                    <th>Review</th>
+                                    
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                {% for review in reviews %}
+                                
+                                <tr>
+                                    <th>{{forloop.counter}}</th>
+                                    <th><a href="{% url 'order_details' review.order.id  %}">{{review.order.made_by.first_name}} {{review.order.made_by.last_name}}</a></th>
+                                    <th>{{review.order.designer_assigned}}</th>
+                                    <th>{{review.order_id}}</th>
+                                    <th>{{review.designer|default:""}}</th>
+                                    <th>{{review.customer_services|default:""}}</th>
+                                    <th>{{review.delivery_services|default:""}}</th>
+                                    <th>{{review.review}}</th>
+                                    
+                                </tr>
+                                {% endfor %}                                        
+                            </tbody>
+                           
+                       
+                        </table>
+                    </div>
+                       
+                </div>
+                  
+                
+            </div>
+           
+
+        </div>
+    </div>
+
+    
+    
+
+
+
+
+</div>
+
+
+<div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Select Date</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="post" action="{% url 'designer_reviews' %}">
+        {% csrf_token %}
+        <div class="modal-body">
+            <div class="form-group">
+                <label>From Date</label>
+                
+                <input type="date" class="form-control" name="fromDate" value="" required="">
+            </div>
+            <div class="form-group">
+                <label>To Date</label>
+                
+                <input type="date" class="form-control" name="toDate" value="" required="">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary">Reset</button>
+          <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+   
+
+
+
+
+
+
+
+{% endblock%}

@@ -1,0 +1,43 @@
+<div class="modal fade" id="assigne-desinger">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Assignee Designer</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{% url 'assign_order_designer' %}" id="">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        {% csrf_token %}
+                        <input type="hidden" name="orderId" value="{{ order.id }}" />
+                        <input type="hidden" name="cartId" value="{{ order.cart.id }}" />
+                        <input type="hidden" name="itemId" id="itemId" value="" />
+                        <div class="form-group">
+                            <label>Select Designer</label>
+                            <select class="form-control" name="designer" id="designer" >
+                                <option value="" >Select</option>
+                                {% for designer in designers  %}
+                                    <option value="{{ designer.id }}" >{{ designer.first_name }} {{ designer.last_name }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

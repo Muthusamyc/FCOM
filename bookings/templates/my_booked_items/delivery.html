@@ -1,0 +1,26 @@
+<h3 class="mid-title">Delivery</h3>
+<div class="row booking-status-details">
+    <div class="col-md-12 p-0">
+        <div class="status-items">
+            <label for="" class="label-tag">Shipping To</label>
+            <p id="payment_status" class="mb-25">                
+                <p>{{ user_details.address.address }} {{ user_details.address.location }} {{user_details.address.pincode}} +91
+                  {{ order_detail.made_by.mobile_no}}</p>
+                <span class="badge badge-light" id="typeOfAddress">{{ user_details.address.addressType }}</span>
+            </p>
+        </div>
+
+    </div>
+    <div class="col-md-12 p-0">
+        <div class="status-items">
+            <label for="" class="label-tag">Delivery Date</label>
+            <p id="delivery_date">
+                {% if order_detail.delivery_date %}
+                    {{ order_detail.delivery_date }}
+                {% else %}
+                    Yet-To-Assign
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>

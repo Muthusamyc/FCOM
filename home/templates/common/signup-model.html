@@ -1,0 +1,231 @@
+{% load static %}
+<!-- Signup -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signupModalLabel">Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+
+            </div>
+            <div class="modal-body">
+                <form id="signup-form" method="dialog">
+                    
+                    <h3 class="form-heading">Sign Up as</h3>
+                    <div class="row">
+                        <input type="hidden" value="3" id="userType" name="userType" />
+                        <input type="hidden" name="sigupModalInfo" id="sigupModalInfo" value="" />
+                        <div class="col-md-6">
+                            <div class="category-box selected">
+                                <img src="{% static '' %}img/check-circle.png" alt="Check circle"
+                                    class="verified-check">
+                                <label>Customer</label>
+                                <p>
+                                    Hey !
+                                    You are one step away from looking gorgeous !
+
+                                    Fill in the form to help us reach you
+                                </p>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <div class="category-box">
+                                <img src="{% static '' %}img/check-circle.png" alt="Check circle" class="verified-check">
+                                <label>Designer</label>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore</p>
+                            </div>
+                        </div> -->
+                    </div>
+                    <h3 class="form-heading">Update your address</h3>
+
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="">First Name</label>
+                            <input type="text" placeholder="" name="firstName" class="form-control" value=""
+                                maxlength="50" required="" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Last Name</label>
+                            <input type="text" placeholder="" name="lastName" class="form-control" value=""
+                                maxlength="50" required="" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="">Address</label>
+                            <input type="text" placeholder="" name="address" class="form-control" value=""
+                                maxlength="200" required="" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="">Pin Code</label>
+                            <input name="pincode" id="pincode" placeholder="" class="form-control" value=""
+                                type="number" required="" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">City/State</label>
+                            <input type="text" placeholder="" name="location" class="form-control" value=""
+                                maxlength="20" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="">Landmark</label>
+                            <input type="text" placeholder="" name="landMark" class="form-control" value=""
+                                maxlength="20"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Address Type</label>
+                            <select name="addressType" class="form-control" value="">
+                                <option value="">Select</option>
+                                <option value="home">Home</option>
+                                <option value="office">Office</option>
+                                <option value="other">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6" id="emailid">
+                            <label for="">Email Id</label>
+                            <input type="email" name="email" id="sigupModalEmail" class="form-control" value="" maxlength="50" />
+                            <p class="error-msg">Email id is already exist</p>
+                        </div>
+                        
+                        <div class="col-md-6" id="mobileno">
+                            <label for="">Mobile No</label>
+                            <input type="number" name="mobile_no" id="sigupModalMobileNo" class="form-control" value=""/>
+                            <p class="error-msg">Email id is already exist</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Alternate Mobile Number</label>
+                            <input type="number" placeholder="" id="altMobileNumber" name="altMobileNumber"
+                                class="form-control" value="" />
+                        </div>
+                    </div>
+
+                    <h3 class="form-heading">Update your address on map</h3>
+                    <div class="row form-group">
+                      <div class="col-md-12">
+                        <label for="">Type your address</label>
+                        <div class="search-input">
+                          <input type="text" id="addAddressGeoLocation" name="addAddressGeoLocation" class="form-control" value=""
+                            placeholder="#227, Ground Floor, 10th Main, Motappanapalya" />
+                          <button type="button" id="submitAddress" data-source="addAddress" class="search-btn"><i
+                              class='bx bx-search'></i></button>
+                        </div>
+                        <p id="error-msg"></p>
+                        <iframe id="map-canvas-add-address" src="" allowfullscreen></iframe>
+                      </div>
+                    </div>
+                    <div class="btn-footer btn-flex">
+                      <button type="button" class="btn btn25" name="button">Cancel</button>
+                      <button type="submit" class="btn btn7 save-btn" name="button">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal fade show" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+        
+        <div class="modal-body">
+            
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class='bx bxs-check-circle'></i> Your profile has been successfully created.
+              </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+<div class="modal fade hide" id="success-modal" tabindex="-1" aria-labelledby="success-modal" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class='bx bxs-check-circle'></i> Your profile has been successfully created.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Thankyou Modal -->
+<div class="modal fade hide" id="thankyou-modal" tabindex="-1" aria-labelledby="thankyou-modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+
+            </div>
+            <div class="modal-body text-center">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong> Your profile has been successfully created.!</strong>
+                  
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--End Signup-->
+<!-- Partner Modal -->
+
+<!-- Order Tracking Modal -->
+<div class="modal fade" id="orderTrackingModal" tabindex="-1" aria-labelledby="orderTrackingModal" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tracking</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+        </div>
+        <div class="modal-body">
+         <div class="border-dashed-line"></div>
+          <ul class="tracking-bullets">
+            <li>
+              <h4>Booking</h4>
+              <p id="booking_date">15 May, 2022</p>
+            </li>
+            <li>
+              <h4>Consultation</h4>
+              <p id="consultation_date">15 May, 2022</p>
+            </li>
+            <li>
+              <h4>Estimations</h4>
+              <p id="estimation_date">15 May, 2022</p>
+            </li>
+            <li>
+              <h4>Order In-progress</h4>
+              <p id="order_in_progress_date">15 May, 2022</p>
+            </li>
+            <li>
+              <h4>Order - Complete</h4>
+              <p id="order_complete_date">15 May, 2022</p>
+            </li>
+            <li>
+              <h4>Invoice - Payments</h4>
+              <p id="invoice_date">15 May, 2022</p>
+            </li>
+            <li>
+              <h4>Out for Delivery</h4>
+              <p id="out_delivery_date">15 May, 2022</p>
+            </li>
+            <li>
+              <h4>Delivered</h4>
+              <p id="delivery_date">15 May, 2022</p>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </div>

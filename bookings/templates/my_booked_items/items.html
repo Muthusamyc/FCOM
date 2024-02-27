@@ -1,0 +1,78 @@
+<h3 class="mid-title">Items <span class="badge badge-secondary">{{ order_detail.cart.total_items }}</span>
+</h3>
+<div class="items-listing">
+ 
+  <div class="row">
+    
+    {% for item in items_in_cart %}
+    {% if item.status == 0 %}
+    <div class="col-md-10 items-details d-flex align-items-center">
+      <img src="{{item.product_item.item.image.url}}" alt="Items">
+      <div class="items-name">
+        <h4><s>{{item.product_item.item.name}}</s></h4>
+        <p><s>{{item.product_item.item.tags}}</s></p>
+        
+      </div>
+    </div>
+    {% else %}
+    <div class="col-md-10 items-details d-flex align-items-center">
+      <img src="{{item.product_item.item.image.url}}" alt="Items">
+      <div class="items-name">
+        <h4>{{item.product_item.item.name}}</h4>
+        <p>{{item.product_item.item.tags}}</p>
+        
+      </div>
+    </div>
+    
+    
+    {% if order_detail.status == booking_stage.ORDER_BOOKED or order_detail.status == booking_stage.ORDER_ASSINGED or order_detail.status == booking_stage.ORDER_CONSULTED or  order_detail.status == booking_stage.ORDER_PICKEDUP or order_detail.status == booking_stage.WAIT_FOR_APPROVAL or order_detail.status == booking_stage.APPROVAL_REJECTED %}
+    <div class="col-md-2 d-flex align-items-center">
+      <div class="items-name">
+        <!-- <a href=""><i class="bx bxs-trash " style="color:#f28077; font-size:30px;"></i></a> -->
+        <i class="bx bxs-trash " data-bs-toggle="modal" data-bs-target="#remove_order_items{{item.id}}" style="color:#f28077; font-size:18px;"></i>
+      </div>
+      
+    </div>
+    {% endif %}
+    {% include 'my_booking_status/remove_order_item.html' %}
+   
+    {% endif %}
+    {% endfor %}
+  </div>
+  
+</div>
+
+<div class="row booking-status-details">
+  <div class="col-md-6 p-0">
+    <div class="status-items">
+      <label for="" class="label-tag">Designer Assigned</label>
+      <p id="assigned_person">
+        {% if order_detail.designer_assigned %}
+        {{ order_detail.designer_assigned }}
+        {% else %}
+        Yet-To-Assign
+        {% endif %}
+      </p>
+    </div>
+
+  </div>
+  <div class="col-md-6 p-0 text-end">
+    <div class="status-items">
+      <label for="" class="label-tag">Visit Date</label>
+      <p id="visit_date">
+        {% if order_detail.consultation_date %}
+        {{ order_detail.consultation_date }}
+        {% else %}
+        Yet-To-Assign
+        {% endif %}
+      </p>
+    </div>
+
+  </div>
+  {% if order_detail.status == booking_stage.ORDER_ASSINGED or order_detail.status == booking_stage.ORDER_CONSULTED %}
+  <div class="col-md-12 p-0 text-end">
+    <a href="javascript:void(0)" class="link-btn form-line" data-bs-target="#rescheduleModal"
+      data-bs-toggle="modal" name="button">Reschedule</a>
+  </div>
+  {% endif %}
+</div>

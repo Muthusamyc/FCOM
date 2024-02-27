@@ -1,0 +1,114 @@
+{% extends 'public_template.html' %}
+{% load static %}
+{% load ordertags %}
+{% block content %}
+<script src="{% static 'orders/order_status_update.js' %}"></script>
+<script src="{% static 'payments/estimation_payment.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static '' %}css/custom-stitching.css">
+
+<section id="book-now">
+  <div class="container-fluid container-width">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1 class="mainh1">My Bookings</h1>
+     
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="customTabs p2">
+  <div class="container-fluid container-width">
+    <h4 class="booking-breadcums">My Bookings 
+      <span id="booking_id" class="highlighted-text">ID: #{{ order_detail.id}}
+    </h4>
+    <div class="row">
+      <div class="col-md-3 sideTabs filters">
+        <div id="booking_id_status">
+
+          {% include 'my_booked_items/details.html' %}
+          {% include 'my_booked_items/items.html' %}
+          {% include 'my_booked_items/payments.html' %}
+          {% include 'my_booked_items/delivery.html' %}
+        </div>
+      </div>
+      <div class="col-md-9">
+        {% include 'my_booked_items/estimations.html' %}
+
+
+   
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% if order_detail.designer_assigned %}
+  {% include 'my_booked_items/chat.html' %}
+{% endif %}
+
+{% include 'common/modal.html' %}
+<!-- <script type="text/javascript" src="/static/js/custom-stitching.js"></script> -->
+<script type="text/javascript" src="{% static 'chat/user.js'%}"></script>
+<script>
+  $("#trk_odr").on('click', function (e) {
+    $('#track-orderid').toggle();
+});
+$("#trkclsbtn").on('click', function (e) {
+$(".track-order").hide();
+});
+</script>
+<script>
+  $(document).ready(function() {
+  $('#rateMe1').mdbRate();
+});
+</script>
+
+<script>
+  var logID = 'log',
+  log = $('<div id="'+logID+'"></div>');
+$('body').append(log);
+  $('[type*="radio"]').change(function () {
+    var me = $(this);
+    log.html(me.attr('value'));
+    $('#rating').val(me.attr('value'));
+  });
+</script>
+<!-- <script>
+  $("#chat_icon").click(function(){
+    $("#chat_box").toggle('.show')
+    $(".chat-content").animate({ scrollTop: $('.chat-content').height() }, 1000);
+    $(".chat-content").scroll(0)
+  
+  })
+</script> -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('fromDate').setAttribute('min', today);
+});
+
+</script>
+
+<script>
+  function generateStarRating(rating) {
+      const maxRating = 5;
+      let starHtml = '';
+      for (let i = 1; i <= maxRating; i++) {
+          if (i <= rating) {
+              starHtml += '<span class="star filled">&#9733;</span>';
+          } else {
+              starHtml += '<span class="star">&#9734;</span>';
+          }
+      }
+      return starHtml;
+  }
+
+  const starRatingElements = document.querySelectorAll(".star-rate");
+  starRatingElements.forEach((element) => {
+      const rating = parseInt(element.getAttribute("data-rating"));
+      element.innerHTML = generateStarRating(rating);
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,197 @@
+{% load static %}
+{% load ordertags %}
+{% load orderitemtags %}
+<div class="card col-md-12">
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-6">
+                <p class="lead"><strong>Payment Methods & Status</strong></p>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th style="width:50%">Order Status:</th>
+                            <td>{{order.status|get_order_status}}</td>
+                        </tr>
+                        <tr>
+                            <th style="width:50%">Payment Type:</th>
+                            <td>{{transaction_details.transactionamount_set.last.payment_type}}</td>
+                        </tr>
+                        {% if order.is_advance_paid %}
+                        <tr>
+                            <th style="width:50%">Payment Amount:</th>
+                            <td>{{transaction_details.transactionamount_set.last.payment_amount}}</td>
+                        </tr>
+                        {% endif %}
+
+                        <tr>
+                            <th style="width:50%">Service Mode:</th>
+                            <td>{{ order.service_type.name }}</td>
+                        </tr>
+                        <tr>
+                            <th style="width:50%">Designer Preference:</th>
+                            <td>{{ order.booking_type.name }}</td>
+                        </tr>
+                        {% if order.status == booking_stage.ORDER_CANCELED or order.status == booking_stage.ORDER_CANCELED_READY_FOR_DISPATCH or order.status == booking_stage.ORDER_CANCELED_DELIVERED or order.status == booking_stage.REFUND_INITIATED or order.status == booking_stage.ORDER_CANCELED_DISPATCHED%}
+                        {% include 'modals/update_canceled_status.html' %}
+                        {% elif order.status == booking_stage.REFUND_COMPLETED %}
+                        <h1></h1>
+                        {% for ord in order.ordertracking_set.last.status_name %}
+                        <tr>{{ord}}</tr>
+                        {% endfor %}
+                        {% else %}
+                        {% include 'modals/update_positive_status.html' %}
+                        {% endif %}
+                                       
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <p class="lead"><strong>Transaction Details</strong></p>
+                <div class="table-responsive">
+                    <table class="table">
+                        <form method="post" id="updateDates" action="{% url 'order_details' order.id %}">
+                            {% csrf_token %}
+                            <tbody>
+                                <tr>
+                                    <th style="width:50%">Sub total:</th>
+                                    <td>₹ {{transaction_details.sub_total}}</td>
+                                    <td></td>
+                                </tr>
+                            
+                                    {% include 'order_pages/order_update_charges.html' %}                                
+                               
+
+                                <tr>
+                                    <th>Tax (5%) (CGST 2.5% & SGST 2.5%)</th>
+                                    <td>₹{{transaction_details.calcualted_tax}}</td>
+                                    
+                                    
+                                    {% if order.status == booking_stage.ORDER_PICKEDUP or order.status == booking_stage.WAIT_FOR_APPROVAL or order.status == booking_stage.APPROVAL_REJECTED %}
+                                    <td>
+                                        <button id='recalculate' type="submit" class="btn btn-success">Recalculate</button>
+                                    </td>
+                                    {% else %}
+                                    <td></td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <th>Total:</th>
+                                    <td>₹{{transaction_details.net_amount|floatformat:"-2"}}</td>
+                                    <td></td>
+                                </tr>                                
+                                <tr>
+                                    <th style="width:50%">Amount Paid:</th>
+                                    <td>- ₹ {{transaction_details.id|get_paid_amount|floatformat:"-2"}}</td>
+                                    <td></td>
+                                </tr>  
+                                                     
+                                <tr>
+                                    <th>Balance:</th>
+                                    <td>₹{{transaction_details.balance_amt_due|floatformat:"-2"}}</td>
+                                    <td></td>
+                                </tr>
+                                {% if transaction_details.refund_amount %} 
+                                <tr>
+                                    <th style="width:50%" >Refund Amount:</th>
+                                    
+                                    <td style="color:red" > ₹ {{transaction_details.refund_amount|floatformat:"-2"}}
+                                    {% if order.status == booking_stage.REFUND_COMPLETED %}
+                                    Refund Completed
+                                    {% endif %}
+                                </td>
+                                    <td></td>
+                                </tr>   
+                                {% endif %}  
+                                <!-- <tr>
+                                    <th>
+                                        <button type="button" class="btn btn-success" name="update_consultation_date" value="" >Update</button>
+                                    </th>                                   
+                                </tr> -->
+                            </tbody>
+                        </form>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet"
+
+    type="text/css" />
+<script>
+
+    $("#consultation_date").datepicker({
+        minDate: 0,
+        dateFormat: 'dd-mm-yy',
+        onSelect: function (dateText) {   
+            $(this).val(dateText)         
+            // let orderId = $('input[name="orderId"]').val();            
+            // updateStatusAndDate(orderId, "Visit/Consultation", this.value);
+        }
+    });
+
+    // $("#pickup_date").datepicker({
+    //     minDate: 0,
+    //     dateFormat: 'dd-mm-yy',
+    //     onSelect: function (dateText) {
+    //         let orderId = $('input[name="orderId"]').val();            
+    //         updateStatusAndDate(orderId, "Pick Up", this.value);
+    //     }
+    // });
+
+    $("#inprogress_date").datepicker({
+        minDate: moment($('#consultation_date').text()).format('DD-MM-YYYY'),
+        dateFormat: 'dd-mm-yy',
+        onSelect: function (dateText) {
+            
+            // let orderId = $('input[name="orderId"]').val();            
+            // updateStatusAndDate(orderId, "InProgress", this.value);
+        }
+    });
+
+    $("#delivery_date").datepicker({
+        minDate: moment($('#inprogress_date').text()).format('DD-MM-YYYY'),
+        dateFormat: 'dd-mm-yy',
+        onSelect: function (dateText) { 
+        //     let orderId = $('input[name="orderId"]').val();           
+        //    updateStatusAndDate(orderId, "Delivery", this.value);
+        }
+    });
+
+    // $("#dispatch").click(function() {
+    //     $('#delivery_date').prop('disabled', true);
+    // });
+
+    
+
+    // let updateBackeEndOrderStatusDate = '/orders/update-date-with-status/'
+    // function updateStatusAndDate(orderId, dateType, date){
+    //     let csrftoken = getCookie('csrftoken');
+    //     $.post(updateBackeEndOrderStatusDate, { 'csrfmiddlewaretoken': csrftoken, 'dateType' : dateType, 'date' : date, 'orderId' : orderId }, function (data) {
+    //         if(data.status == 1){
+    //             alert("Order Status Was Successfully Updated!");
+    //             window.location.reload();
+    //         }
+    //         else{
+    //             alert("Something went wrong!");
+    //         }
+	// 	});   
+    // }
+
+$(document).ready(function() {
+$('.form-control').on('input', function() {
+    var nFilled = $('.form-control').filter(function() {
+        return $.trim( this.value ) !== '';
+    }).length;
+    $('#recalculate').prop('hidden', nFilled === 0);
+})
+.trigger('input');
+});
+</script>

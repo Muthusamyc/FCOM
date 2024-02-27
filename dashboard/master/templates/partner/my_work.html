@@ -1,0 +1,88 @@
+{% extends "admin/base_template.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header" style="background-color: #F28077">
+                    <h3 class="card-title">My work</h3>
+                </div>
+
+                <form action="{% url 'partner_my_work'  %}" method="POST" enctype="multipart/form-data">
+                    <div class="card-body">
+                        {% csrf_token %}
+
+                        {% include "admin/messages.html" %}
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+
+
+                                <div class="form-group">
+                                    <label for="">Image</label>
+                                    <input type="file" name="itemImage" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+
+
+                                <div class="form-group">
+                                    <label for="">Title</label>
+                                    <input type="text" name="imagetitle" class="form-control" required>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary" style="background-color: #F28077">Submit</button>
+                    </div>
+                    <div class="card-footer">
+                        <h1>Gallery</h1>
+                        <hr>
+
+
+                        <div class="row text-center portfolio">
+                            {% for img in images %}
+                            <div class="col-lg-2 col-sm-3 col-xs-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-header">
+                                        {{img.title}}
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <a href="#">
+                                            <img src="{{img.image.url}}" class="img-thumbnail img-responsive"
+                                                alt="hello">
+
+                                        </a>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <a href="{% url 'remove_gallery' img.id %}"><i class="fa fa-trash"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            {% endfor %}
+
+
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock%}

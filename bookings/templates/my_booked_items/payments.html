@@ -1,0 +1,111 @@
+<h3 class="mid-title">Payments</h3>
+<div class="row booking-payment-details">
+    <div class="col-md-12 d-flex justify-content-between">
+        <label for="" class="label-tag">Sub Total</label>
+        <p class="items-price text-end">₹{{ transaction_details.sub_total }}</p>
+    </div>
+    {% if transaction_details.extra_material %}
+    <div class="col-md-12 d-flex justify-content-between">
+        <label for="" class="label-tag"> Extra Material</label>
+        <p class="items-price text-end">₹{{ transaction_details.extra_material }} </p>
+    </div>
+    {% endif %}
+    {% if transaction_details.shipping_charges %}
+    <div class="col-md-12 d-flex justify-content-between">
+        <label for="" class="label-tag">Pick & Drop charges</label>
+        <!-- <p class="items-price text-end"><s>₹25.00</s> ₹0.00 </p> -->
+        <p class="items-price text-end"> ₹{{ transaction_details.shipping_charges }} </p>
+    </div>
+    {% endif %}
+    {% if transaction_details.designer_charges %}
+    <div class="col-md-12 d-flex justify-content-between">
+        <label for="" class="label-tag">Designer Charges</label>
+        <p class="items-price text-end">₹{{ transaction_details.designer_charges }} </p>
+    </div>
+    {% endif %}
+  
+    {% if transaction_details.coupon_discount > 0 %}
+        <div class="col-md-12 d-flex justify-content-between">
+            <label for="" class="label-tag">Coupon Discount</label>
+            <p class="items-price text-end">- ₹{{ transaction_details.coupon_discount }} </p>
+        </div>
+    {% endif %}
+    <div class="col-md-12 d-flex justify-content-between">
+        <label for="" class="label-tag">Taxes(5%)</label>
+        <p class="items-price text-end">₹{{ transaction_details.calcualted_tax }} </p>
+    </div>
+    <hr />
+    <div class="col-md-12 d-flex justify-content-between">
+        <label for="">Total</label>
+        <p id="total" class="label-tag"> 
+            {% if order_detail.status != 10 %}
+                ₹{{ transaction_details.net_amount|floatformat:"-2" }}
+            {% else %}
+                <s>₹{{ transaction_details.net_amount|floatformat:"-2" }}</s>
+            {% endif %}
+         </p>
+    </div>
+    {% if transaction_details.advance_paid_amount %}
+    <div class="col-md-12 d-flex justify-content-between">
+        <label for="" class="label-tag">Advance Paid</label>
+        <p class="items-price text-end">-
+            ₹ {{transaction_details.advance_paid_amount}}
+        </p>
+    </div>
+    {% endif %}
+    {% if transaction_details.estimation_paid_amount %}
+    <div class="col-md-12 d-flex justify-content-between">
+        <label for="" class="label-tag">Amount Paid</label>
+        <p class="items-price text-end">-
+            ₹ {{transaction_details.estimation_paid_amount}}
+        </p>
+    </div>
+    {% endif %}
+    <hr />
+    <div class="col-md-12 d-flex payment-footer justify-content-between">
+        <label for="">Balance</label>
+        <p id="total" class="text-end"> 
+            {% if order_detail.status != 10 %}
+                ₹{{transaction_details.balance_amt_due|floatformat:"-2"}}
+            {% else %}
+                <s>₹{{transaction_details.balance_amt_due|floatformat:"-2"}}</s>
+            {% endif %}
+         </p>
+    </div>
+    {% if not order_detail.is_total_paid and order_detail.status != booking_stage.ORDER_CANCELED %}
+        <div class="col-md-12">        
+            <form method="post" action="{% url 'transaction_order' %}">
+                {% csrf_token %}
+                <input type="hidden" name="orderId" value="{{ order_detail.id }}">
+                <input type="hidden" name="amount" value="{{transaction_details.balance_amt_due|floatformat:"-2" }}">
+                <input type="hidden" name="paymentType" value="balance">
+                
+            <button {% if order_detail.status != booking_stage.READY_FOR_DISPATCH %} disabled {% endif %} class="btn btn7 book-btn full-width" type="submit" >Pay - <span id="total">₹
+                {{transaction_details.balance_amt_due|floatformat:"-2" }}</span></button>            
+            </form>
+        </div>
+    {% endif %}
+</div>
+
+<div class="row booking-status-details">
+    <div class="col p-0">
+        <div class="status-items">
+            <label for="" class="label-tag">Payment Status</label>
+            {% if order_detail.status != booking_stage.ORDER_CANCELED %}
+                <p id="payment_status">{{ transaction_details.paymtent_status }}</p>
+            {% else %}
+             <p>Order Canceled</p>
+            {% endif %}
+        </div>
+
+    </div>
+    <!-- <div class="col p-0 text-end">
+        {% if order_detail.status != 10 %}
+        <div class="status-items">
+            <label for="" class="label-tag">View</label>
+            <p><a href="#" class="link-btn form-line m-0">Estimations</a></p>
+        </div>
+        {% endif %}
+    </div> -->
+</div>
+

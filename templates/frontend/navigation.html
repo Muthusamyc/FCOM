@@ -1,0 +1,83 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'HomePage' %}"><img class="fcomimg" src="{% static 'img/mainlogo.png' %}" alt=""></a>
+
+        <div class="collapse navbar-collapse header" id="navCollapse">
+            <h3 class="tab-menu-header">Menu <span class="close-icon">&#x2715;</span></h3>
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home_menu" href="{% url 'HomePage' %}">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="services_menu" href="{% url 'our_services' %}">Services </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="our_story_menu" href="{% url 'our_story' %}">Our Story</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="our_work_menu" href="{% url 'our_work' %}">Our Work</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" id="our_work_menu" href="https://medium.com/@fcomblogsmed">Blogs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="partner_menu" href="{% url 'partner_profile' %}">Partner</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" id="partner_menu" href="javascript:void(0)" data-bs-toggle="modal"
+                    data-bs-target="#partnerModal">Partner</a>
+                </li> -->
+            </ul>
+        </div>
+        <div class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" id="navCollapse2">
+            <ul class="navbar-nav mr-auto mt-lg-0">
+                <li class="nav-item">
+                    <i class='bx bxl-whatsapp whatsapp1'></i>
+                </li>
+
+                <li class="nav-item">
+                    <a type="link" href="https://api.whatsapp.com/send?phone=919108902222" target="_blank" class="whatsapp" aria-label="whatsapp">
+                        +91-9108902222
+                    </a>
+                </li>
+                <li class="nav-item hbtn">
+                    {% if request.user.is_authenticated %}
+                    
+                    <div class="dropdown">
+                        <button class="btn25 btn27 dropdown-toggle" type="button" id="dropdownMenuButton">
+                            
+                            {{ request.user.first_name|title }}
+                            
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="profile-title">
+                                {% if request.user.is_details_added %}
+                                    <h3 id="">Customer</h3>
+                                {% else %}  
+                                    <a href="{% url 'my_profile' %}"> Update Profile </a> 
+                                {% endif %}
+                                
+                            </div>
+                            <a class="dropdown-item" href="{% url 'my_profile' %}">My Account</a>
+                            <a class="dropdown-item" href="{% url 'my_booking' %}">My Bookings</a>
+                            <a class="dropdown-item" href="{% url 'signout' %}">Logout</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <button type="button" class="btn25" id="loginSignup" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">Login / Signup</button>
+                    {% endif %}
+
+
+                </li>
+            </ul>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navCollapse"
+            aria-controls="navbarNav" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>

@@ -1,0 +1,255 @@
+{% extends 'public_template.html' %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/custom-stitching.css">
+
+<section id="custom-stitching">
+  <div class="container-fluid container-width">
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <h1 class="mainh1">Custom Stitching</h1>
+        <p class="text-white para2">We provide the most exceptional and beautiful bespoke stitching services. Our team
+          of highly skilled designers, fitters, tailors and pattern cutters advise on a style that suites
+          you.<br /><br /> We can sketch a design to help you visualize your garment. You can choose the fabric, lining
+          and trims you want and we can source them for you. You get to decide exactly how you’d like your garment to
+          look, fit and feel with a little help from us.</p>
+        <p class="text-highlight">Starting @ ₹299</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="customTabs">
+  <div class="container-fluid container-width">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="progress-bar-wrapper">
+          <div class="stepwizard col-md-offset-3">
+            <div class="stepwizard-row setup-panel">
+              <div class="stepwizard-step">
+                <a href="#step-1" type="button" class="btn btn-primary btn-circle"></a>
+                <p>Select Items</p>
+              </div>
+              <div class="stepwizard-step">
+                <a href="#step-2" type="button" class="btn btn-default btn-circle next" disabled="disabled"></a>
+                <p>Summary</p>
+              </div>
+              <div class="stepwizard-step">
+                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled"></a>
+                <p>Pay</p>
+              </div>
+            </div>
+          </div>
+          <form role="form" action="" method="post">
+            <div class="row setup-content" id="step-1">
+              <div id="customTabContent" class="p-0">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <h2 class="itemssearch-heading">Items <span id="itemCount">{{ items_in_cart.total_items }}</span>
+                  </h2>
+                  {% for item_row in items_in_cart %}
+                  <div class="row-data active" data-tag="girls,restyling,regular,withLining">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <h3>{{ item_row.item.item.name }}</h3>
+                        <p id="selectedTags">{{ item_row.item.item.tags }}</p>
+                        <p id="priceTag">Starting Price: ₹
+                        <span class="priceValue" id="{{ item_row.item.item.id }}">
+                          {{item_row.item.item.starting_price }}
+                        </span></p>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="items-add">
+                          <img src="/media/{{ item_row.item.item.image }}" alt="Items">
+                          <button type="button" class="btn btn1 add" name="button" id="add1">Add</button>
+                          <div class="quantity-wrapper active">
+                            <button type="button" class="btn btn2 quantity-btn decrease" name="button">&#8722;</button>
+                            <span class="quantity-txt" data-count="{{item_row.qty}}">{{item_row.qty}}</span>
+                            <button type="button" class="btn btn2 quantity-btn increase" name="button">&#43;</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  <div class="sticky-cart-footer show">
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="sticky-cart-total">
+                          <div class="items-cart">
+                            <h4>Items in Cart</h4>
+                            <p id="total-item">{{ saved_cart.total_items }}</p>
+                          </div>
+                          <div class="items-cart">
+                            <h4>Estimated Total</h4>
+                            <p>&#x20B9; <span id="estimated-total-item">{{ saved_cart.estimated_price }}</span></p>
+                          </div>
+                          <div class="items-cart">
+                            <h4>Advance Payable</h4>
+                            <p id="advance-payable">&#x20B9; {{ saved_cart.advance_payable }}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-5 text-right btn-flex">
+                        <button type="button" class="btn btn25" name="back_button">Back</button>
+                        <button type="button" class="btn btn7 pay-btn nextBtn" name="button">Pay Now</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="selection-details">
+                <div class="row form-group">
+                  <div class="col-md-6">
+                    <label for="">Service Mode</label>
+                    <select name="serviceMode" class="form-control" value="">
+                      <option value="">Select</option>
+                      {% for preference in designer_preferences %}
+                      <option value="{{ preference.id }}">{{ preference.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">Designer Preference</label>
+                    <select name="designersPreference" class="form-control" value="">
+                      <option value="">Select</option>
+                      {% for mode in service_modes %}
+                      <option value="{{ mode.id }}">{{ mode.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="address-details">
+                <h4><label for="">Address</label> <button type="button" class="btn btn7"
+                    data-bs-target="#addAddressModal" data-bs-toggle="modal" name="button">&#43;</button></h4>
+                <div class="address-row row">
+                  <div class="col-md-4 address-box">
+                    <div class="btn-icons">
+                      <button type="button" class="btn" name="button" data-bs-target="#addAddressModal"
+                        data-bs-toggle="modal"><img src="static/img/edit.png" alt="edit" /></button>
+                      <button type="button" class="btn" name="button"><img src="static/img/cancel.png"
+                          alt="close" /></button>
+                    </div>
+                    <h5>Poornima Mahajan</h5>
+                    <p>#227, Ground Floor, 10th Main, Motappanapalya, Indiranagar, Bangalore 560 038 +91 9108902222</p>
+                    <span class="badge badge-light" id="typeOfAddress">Home</span>
+                  </div>
+                </div>
+              </div>
+              <div class="note-txt">
+                <ul>
+                  <li><b>Starting</b> price is for guidance only, final price / bill amount will be communicated during
+                    Designer Consultation</li>
+                  <li><b>Advance Payable</b> amount needs to be paid to book an appointment. If you cancel the booking
+                    (only) before 24 Hrs of designer’s visit to your location, full advance amount would be refunded.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="row setup-content" id="step-2">
+              <div class="payment-wrapper">
+                <h3>Payment Options</h3>
+                <div class="payment-platform">
+                  <input type="hidden" name="paymentPlatform" id="paymentPlatform" value="" />
+                  <div class="payment-row row">
+                    <div class="payment-box col-md-4">
+                      <input type="radio" name="paymentPlatform" value="phonePay" class="paymentPlatformHandle">
+                      <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                      <img src="static/img/payment/phone-pay.png" alt="Phonepay">
+                    </div>
+                    <div class="payment-box col-md-4">
+                      <input type="radio" name="paymentPlatform" value="gpay" class="paymentPlatformHandle">
+                      <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                      <img src="static/img/payment/gpay.png" alt="Gpay">
+                    </div>
+                    <div class="payment-box col-md-4">
+                      <input type="radio" name="paymentPlatform" value="paytm" class="paymentPlatformHandle">
+                      <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                      <img src="static/img/payment/paytm.png" alt="Paytm">
+                    </div>
+                    <div class="payment-box col-md-4">
+                      <input type="radio" name="paymentPlatform" value="amazonPay" class="paymentPlatformHandle">
+                      <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                      <img src="static/img/payment/amazon-pay.png" alt="AmazonPay">
+                    </div>
+                    <div class="payment-box col-md-4">
+                      <input type="radio" name="paymentPlatform" value="jioMoney" class="paymentPlatformHandle">
+                      <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                      <img src="static/img/payment/jio-money.png" alt="JioMoney">
+                    </div>
+                    <div class="payment-box col-md-4">
+                      <input type="radio" name="paymentPlatform" value="easypay" class="paymentPlatformHandle">
+                      <img src="static/img/check-circle.png" alt="Check circle" class="verified-check">
+                      <img src="static/img/payment/easy-pay.png" alt="EasyPay">
+                    </div>
+                  </div>
+                </div>
+                <div class="sticky-cart-footer show">
+                  <div class="row">
+                    <div class="col-md-12 text-right btn-flex">
+                      <button type="button" class="btn btn25" name="button">Pay Estimated Amount - ₹<span
+                          id="payableAmount">{{ saved_cart.estimated_price }}</span></button>
+                      <button type="button" class="btn btn7 pay-btn nextBtn" name="button">Pay Advance - ₹<span
+                          id="payableAdvance">{{ saved_cart.advance_payable }}</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sticky-cart-footer payment-details show">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="sticky-cart-total">
+                      <div class="items-cart">
+                        <h4>Items in Cart</h4>
+                        <p id="">{{ saved_cart.total_items }}</p>
+                      </div>
+                      <div class="items-cart">
+                        <h4>Estimated Total</h4>
+                        <p>&#x20B9; <span id="">{{ saved_cart.estimated_price }}</span></p>
+                      </div>
+                      <div class="items-cart">
+                        <h4>Advance Payable</h4>
+                        <p id="">&#x20B9; 500</p>
+                      </div>
+                      <div class="items-cart">
+                        <h4>Estimated Consultation Date</h4>
+                        <p id="order-date">30 May, 2022</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="note-txt payment-details">
+                <p>By clicking on either of the buttons above you agree to <a href="#">Term & Conditions</a> & <a
+                    href="#">Privacy Policy</a> </p>
+              </div>
+            </div>
+            <div class="row setup-content" id="step-3">
+              <div id="payment-page">
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  $('button[name="back_button"]').on('click', function(){
+    window.location.href = '/services'
+  });
+
+  $('select[name="designersPreference"]').change(function(){
+    let cachedItem = JSON.parse(localStorage.getItem('cart'))
+    cachedItem['designersPreference'] = $(this).val();
+    localStorage.setItem('cart', JSON.stringify(cachedItem));
+  });
+  $('select[name="serviceMode"]').change(function(){
+    let cachedItem = JSON.parse(localStorage.getItem('cart'))
+    cachedItem['serviceMode'] = $(this).val();
+    localStorage.setItem('cart', JSON.stringify(cachedItem));
+  })
+
+</script>
+{% endblock %}

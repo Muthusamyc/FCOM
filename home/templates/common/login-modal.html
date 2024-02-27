@@ -1,0 +1,152 @@
+<!-- Modal -->
+{% load static %}
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+                <div class="row m-0">
+                    <div class="col-md-6 p-0">
+                        <img src="{% static '' %}img/login-bg.png" class="img-login" alt="Login">
+                    </div>
+                    <div class="col-md-6 p-0">
+                        <!-- Login Box -->
+                        <form name="logInSubmit" id="logInSubmit" method="dialog" class="login-box">
+                            <img src="{% static '' %}img/mainlogo.png" class="logo" alt="FCOM Logo" />
+                            <label for="userId">Enter Mobile Number/ Email ID</label>
+                            <input placeholder="" type="text" name="otp_mobile_no" id="otp_mobile_no" value=""
+                                required="" class="form-control" />
+                            <!-- <label for="userId" class="mt-40">Password</label>
+                            <input type="password" name="password" id="password" value="" required=""
+                                class="form-control" /> -->
+
+                            <p id="userIdRequiredError" class="error-msg" style="display: none;"></p>
+
+
+                            <div class="alert alert-danger alert-dismissible fade hide" style="display: none;"
+                                id="logging-alert-id" role="alert">
+                                Invalid username/password!
+                            </div>
+
+                            <p class="note-txt">OTP would be sent to this number</p>
+                            <!-- Forget Password Text -->
+                            <!-- <p class="note-txt terms-condition">By clicking on Send OTP button you agree to <a
+                                    href="#">Terms & Conditions & Privacy policy</a></p> -->
+                            <button type="submit" id="getOtpBtn" class="btn3">Get OTP</button>
+                            <!-- <button type="submit" class="btn3">Submit</button> -->
+                            <!-- <a href="#" class="loginLink login-with-pswd">Login with Password</a> -->
+                            <p class="note-txt v2 login-txt">If you do not have an account?</p>
+                            <!-- <button type="button" class="btn25 signup-btn" data-bs-toggle="modal"
+                                data-bs-target="#signupModal">Sign Up</button> -->
+                            <button type="button" class="btn25 signup-btn" name="btnSubmitModal"
+                                id="btnSubmitModal">Sign Up</button>
+                            <!-- Forget Password Login button -->
+                        </form>
+                        <!-- OTP Box -->
+                        <div id="otpBox" class="otp-box forget-password" style="display:none;">
+                            <img src="{% static '' %}img/mainlogo.png" class="logo" alt="FCOM Logo" />
+                            <label for="">An OTP had been sent to your</label>
+                            <div class="registered-input email">
+                                <img src="{% static '' %}img/check-circle.png" alt="Check" /> ***urid@example.com
+                            </div>
+                            <div class="registered-input">
+                                <img src="{% static '' %}img/check-circle.png" alt="Check" />  <span
+                                id="displayUserNumber">******1234</span>
+                            </div>
+                            <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
+                                <input class="m-2 text-center form-control rounded" type="number" value="" id="first"
+                                    maxlength="1" required />
+                                <input class="m-2 text-center form-control rounded" type="number" value="" id="second"
+                                    maxlength="1" required />
+                                <input class="m-2 text-center form-control rounded" type="number" value="" id="third"
+                                    maxlength="1" required />
+                                <input class="m-2 text-center form-control rounded" type="number" value="" id="fourth"
+                                    maxlength="1" required />
+                                <input class="m-2 text-center form-control rounded" type="number" value="" id="fifth"
+                                    maxlength="1" required />
+                                <input class="m-2 text-center form-control rounded" type="number" value="" id="sixth"
+                                    maxlength="1" required="" />
+                            </div>
+                            <div class="error-msg">
+                                Invalid OTP click on Resend OTP
+                            </div>
+                            <button type="button" name="otpLoginBtn" class="btn3 mt-30">Login</button>
+                            <!-- <a href="#" class="loginLink">Resend OTP</a> -->
+                            <a href="#" class="loginLink mt-48 login-with-password">Login with Password</a>
+                        </div>
+                        <!-- Password box -->
+                        <div class="password-box" style="display:none;">
+                            <img src="{% static '' %}img/mainlogo.png" class="logo" alt="FCOM Logo" />
+                            <label for="">Password</label>
+                            <input class="form-control" type="password" placeholder="****" />
+                            <a href="#" class="loginLink forgot-password">Forgot Password ?</a>
+                            <button type="button" class="btn3 mt-30">Login</button>
+                            <a href="#" class="loginLink">Login with OTP</a>
+                        </div>
+                        <!-- Set User Password -->
+                        <form id="signUpCreatePassword" class="reset-password" style="display:none">
+                            <img src="{% static '' %}img/mainlogo.png" class="logo" alt="FCOM Logo" />
+                            <label for="">New Password</label>
+                            <input class="form-control" name="signUpNewPassword" id="signUpNewPassword" type="password"
+                                placeholder="****" />
+                            <label for="">Confirm Password</label>
+                            <input class="form-control" name="signupConfirmPassword" id="signupConfirmPassword" type="password"
+                                placeholder="****" />
+                            <p class="error-msg" style="display: none;"></p>
+                            <button type="submit" class="btn3 mt-30 reset-pwd-btn">Submit</button>
+                        </form>
+                        <!--Sign Up Box-->
+                        <form name="signUpSubmitModal" id="signUpSubmitModal" method="dialog" class="login-box"
+                            style="display:none">
+                            <img src="{% static '' %}img/mainlogo.png" class="logo" alt="FCOM Logo" />
+                            <label for="userId">Enter Mobile Number/ Email ID</label>
+                            <input placeholder="" type="text" name="signUpOtpMobileNumber" id="signUpOtpMobileNumber"
+                                value="" required="" class="form-control" />
+                            <p id="signUpRequiredError" class="error-msg" style="display: none;"></p>
+                            <p class="note-txt">OTP would be sent to this number</p>
+                            <!-- Terms & Condition -->
+                            <p class="note-txt terms-condition">By clicking on Send OTP button you agree to <a
+                                    href="#">Terms & Conditions & Privacy policy</a></p>
+                            <button type="submit" class="btn3">Get OTP</button>
+                            <p class="note-txt v2 forget-password-txt">If you have an account?</p>
+                            <button type="button" name="btnLoginModal" id="btnLoginModal"
+                                class="btn25 login-btn">Login</button>
+                        </form>
+
+                        <form id="signUpOtpBox" class="otp-box forget-password" style="display:none;">
+                            <img src="{% static '' %}img/mainlogo.png" class="logo" alt="FCOM Logo" />
+                            <label for="">An OTP had been sent to your</label>
+                            <div class="registered-input email">
+                                <img src="{% static '' %}img/check-circle.png" alt="Check" /> ***urid@example.com
+                            </div>
+                            <div class="registered-input">
+                                <img src="{% static '' %}img/check-circle.png" alt="Check" /> <span
+                                    id="displaySingUpNumber">******1234</span>
+                            </div>
+                            <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
+                                <input class="m-2 text-center form-control rounded" type="text" value="" id="first"
+                                    maxlength="1" required />
+                                <input class="m-2 text-center form-control rounded" type="text" value="" id="second"
+                                    maxlength="1" required />
+                                <input class="m-2 text-center form-control rounded" type="text" value="" id="third"
+                                    maxlength="1" required />
+                                <input class="m-2 text-center form-control rounded" type="text" value="" id="fourth"
+                                    maxlength="1" required />
+                                <input class="m-2 text-center form-control rounded" type="text" value="" id="fifth"
+                                    maxlength="1" required />
+                                <input class="m-2 text-center form-control rounded" type="text" value="" id="sixth"
+                                    maxlength="1" required="" />
+                            </div>
+                            <p class="error-msg" style="display: none;"></p>
+
+                            <button type="submit" class="btn3 mt-30">Login</button>
+                            <a href="#" class="loginLink">Resend OTP</a>
+                            <a href="#" class="loginLink mt-48 login-with-password">Login with Password</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

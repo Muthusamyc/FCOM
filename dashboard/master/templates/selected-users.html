@@ -1,0 +1,89 @@
+{% extends "admin/base_template.html" %} {% block content %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="">{{ role | capfirst }} List</h3>
+        </div>              
+    </div>
+    <div class="col-8">
+        <div class="form-group">
+            
+            
+            {% if role == 'admin' %}
+            <a class="btn btn-secondary btn-min-width mr-1 mb-1" href="{% url 'selected_users' 'admin' %}" role="button">Fcom User</a>
+            {% else %}
+            <a class="btn btn-primary btn-min-width mr-1 mb-1" href="{% url 'selected_users' 'admin' %}" role="button">Fcom User</a>
+            {% endif %}
+            {% if role == 'designer' %}
+            <a class="btn btn-secondary btn-min-width mr-1 mb-1" href="{% url 'selected_users' 'designer' %}" role="button">Designer</a>
+            {% else %}
+            <a class="btn btn-primary btn-min-width mr-1 mb-1" href="{% url 'selected_users' 'designer' %}" role="button">Designer</a>
+            {% endif %}
+            {% if role == 'customer' %}
+            <a class="btn btn-secondary btn-min-width mr-1 mb-1" href="{% url 'selected_users' 'customer' %}" role="button">Customer</a>
+            {% else %}
+            <a class="btn btn-primary btn-min-width mr-1 mb-1" href="{% url 'selected_users' 'customer' %}" role="button">Customer</a>
+            {% endif %}
+            {% if role == 'partner' %}
+            <a class="btn btn-secondary btn-min-width mr-1 mb-1" href="{% url 'selected_users' 'partner' %}" role="button">Partner</a>
+            {% else %}
+            <a class="btn btn-primary btn-min-width mr-1 mb-1" href="{% url 'selected_users' 'partner' %}" role="button">Partner</a>
+            {% endif %}
+             
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered  table-hover" id="table">
+            <thead>
+                <tr>
+                    <th>
+                        SL.No
+                    </th>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Mobile Number
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in users %}
+                <tr>
+                    <td>
+                        {{ item.id }}
+                    </td>
+                    <td>
+                        {{ item.first_name }}
+                    </td>
+                    <td>
+                        {{ item.last_name }}
+                    </td>
+                    <td>
+                        {{ item.email }}
+                    </td>
+                    <td>
+                        {{ item.mobile_no }}
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_user' item.id  %}"><i class="fa fa-edit"></i>Edit</a>
+                       
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

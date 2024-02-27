@@ -1,0 +1,13 @@
+<div class="col-md-3 sideTabs">
+    {% for name, services in services.items %}
+    <h4>{{name}}</h4>
+    <ul class="nav" data-tab="{{name}}" id="{{name}}Tab" role="tablist">
+        {% for item in services %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link  btn-category filter-btn {% if item.id == 1 and name != 'finishing' %} active {% elif name == 'finishing' and item.id == 2 %} active {% endif %}" type="button"
+                id="{{ item.id }}" data-controls="{{name}}">{{item.name}}</button>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</div>

@@ -1,0 +1,7 @@
+CREATE USER 'fcom_admin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'fcom_admin@23_secure';
+
+GRANT ALL PRIVILEGES ON *.* TO 'fcom_admin'@'localhost' WITH GRANT OPTION;
+
+mysql -u fcom_admin -p
+
+sudo apt-get install python-mysqldb

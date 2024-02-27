@@ -1,0 +1,180 @@
+{% extends "admin/base_template.html" %}
+{% load ordertags %}
+{% load orderitemtags %}
+{% block content %}
+
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title" id="report-title">Sales report - SR</h3>
+                        <div class="card-tools">
+
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#exampleModal">
+                                <i class="fas fa-filter"></i>Filter
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                            </div>
+
+                        </div>
+                            <table class="table table-bordered  table-hover" id="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Inv Date</th>
+                                        <th>Invoice Amt</th>
+                                        <!-- <th>Sub Total</th> -->
+                                        <th>IGST</th>
+                                        <th>CGST</th>
+                                        <th>SGST</th>
+                                        <th>Amt received</th>
+    
+                                        <th>Paid date</th>
+                                        <th>Paid Details</th>
+                                        <th> Paid mode</th>
+                                        <th>Amt Balance</th>
+    
+                                    </tr>
+                                </thead>
+    
+                                <tbody>
+                                    {% for transactiondetail in transactiondetails %}
+    
+                                    <tr>
+                                        <th>{{forloop.counter}}</th>
+                                        <th><a href="{% url 'order_details' transactiondetail.order.id  %}">{{ transactiondetail.order.made_by.first_name }} {{transactiondetail.order.made_by.last_name }}</a></th>
+                                        <th>{{transactiondetail.order.created_on|date:"d M Y"}}</th>
+                                        <th>{{transactiondetail.net_amount|floatformat}}</th>
+                                        <!-- <th>{{transactiondetail.sub_total|floatformat}}</th> -->
+                                        <th>{{transactiondetail.igst_tax_charges|floatformat}}</th>
+                                        <th>{{transactiondetail.cgst_tax_charges|floatformat}}</th>
+                                        <th>{{transactiondetail.sgst_tax_charges|floatformat}}</th>
+                                        <th>
+                                            {% for detail in transactiondetail.transactionamount_set.all %}
+                                            <p>{{ detail.payment_amount|floatformat }}</p>
+                                            {% endfor %}
+                                        </th>
+    
+                                        <th>
+                                            {% for detail in transactiondetail.transactionamount_set.all %}
+                                            <p>{{ detail.created_on|date:"d M Y" }}</p>
+                                            {% endfor %}
+                                        </th>
+    
+                                        <th>
+                                            {% for detail in transactiondetail.transactionamount_set.all %}
+                                            <p>{{ detail.payment_type }}</p>
+                                            {% endfor %}
+                                        </th>
+    
+                                        <th>
+                                            {% for detail in transactiondetail.transactionamount_set.all %}
+                                            <p>UPI</p>
+                                            {% endfor %}
+                                        </th>
+                                        <th>{{transactiondetail.balance_amt_due|floatformat}}</th>
+                                        
+    
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>Total</th>
+                                        <th></th>
+                                        <th>{{net_amount_value|floatformat}}</th>
+                                        <!-- <th>{{sub_total_value|floatformat}}</th> -->
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>{{paid_amt_value|floatformat}}</th>
+    
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>{{balance_amt_due_value|floatformat}}</th>
+                                    </tr>
+                                  </tfoot>
+                                
+    
+    
+                            </table>
+                       
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+
+
+<div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Select Date</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{% url 'amount_collected' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>From Date</label>
+
+                        <input type="date" class="form-control" name="fromDate" value="" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>To Date</label>
+
+                        <input type="date" class="form-control" name="toDate" value="" required="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock%}

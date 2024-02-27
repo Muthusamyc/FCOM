@@ -1,0 +1,366 @@
+{% load ordertags %}
+<h3>Details <span id="trk_odr" class="badge badge-secondary float-end">Track Order</span></h3>
+<div class="row booking-status-details">
+  <div class="col-12 p-0 d-flex justify-content-between">
+    <div class="status-items">
+      <label for="" class="label-tag">ID</label>
+      <p id="booking_id">{{ order_detail.id }}</p>
+    </div>
+    <div class="status-items text-end">
+      <label for="" class="label-tag">Date</label>
+      <p id="booking_date">{{ order_detail.created_on }}</p>
+    </div>
+
+  </div>
+  <div class="col-12 p-0 d-flex justify-content-between">
+    <div class="status-items">
+      <label for="" class="label-tag">Booking Type</label>
+      <p id="booking_type" class="mb-0">{{ order_detail.booking_type.name }}</p>
+    </div>
+    <div class="status-items">
+      <label for="" class="label-tag">Services Type</label>
+      <p id="service_type">Consultation</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-12">
+  <div class="container-fluid track-order" id="track-orderid" style="height:100%;width:100%;display:none">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 card track-card">
+      <button type="button" class="btn-close  btn-close" aria-label="Close"><b id="trkclsbtn">&#10006</b></button>
+      <h1 class="headingTrack">Tracking</h1>
+      <div class="track2"></div>
+      <div class="track1" style="margin-top: 20px;">
+        {% tracking_date order_detail.id "Order Booked" as result %}
+        {% if result == "Yet-to-Assign" %}
+        <div class="step1 "> <span class="icon-trk"></span><span>
+            <p class="trktext"><b>Booked</b></p>
+            <p class="trktext1" style="color:white;">{{ result }}</p>
+          </span></div>
+        {% else %}
+        <div class="step1 active"> <span class="icon-trk"></span><span>
+            <p class="trktext"><b>Booked</b></p>
+            <p class="trktext1">{{ result|date }}</p>
+          </span></div>
+        {% endif %}
+
+        {% if order_detail.is_order_cancaled and order_detail.pickup_date %}
+
+                {% tracking_date order_detail.id "Order Assigned" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Assigned</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Assigned</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+
+
+                {% if order_detail.consultation_date %}
+                <div class="step1 active"> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Visit/Consultation</b></p>
+                    <p class="trktext1">{{ order_detail.consultation_date }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 "> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Visit/Consultation</b></p>
+                    <p class="trktext1" style="color:white;">Yet-To-Assign</p>
+                  </span></div>
+                {% endif %}
+
+
+                {% if order_detail.pickup_date %}
+                <div class="step1 active"> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Picked Up</b></p>
+                    <p class="trktext1">{{ order_detail.pickup_date }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 "> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Picked Up</b></p>
+                    <p class="trktext1" style="color:white;">Yet-To-Assign</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Approval Pending" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Waiting For Approval</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Waiting For Approval</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Order Canceled" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Order Canceled</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Order Canceled</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Canceled Order Ready for Dispatch" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Canceled Order Ready to Return</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Canceled Order Ready to Return</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Canceled Order Dispatched" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Canceled Order Despatched</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Canceled Order Despatched</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Canceled Order Delivered" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Canceled Order Delivered</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Canceled Order Delivered</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Refund Initiated" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Refund Initiated</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Refund Initiated</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Refund Completed" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Refund Completed</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Refund Completed</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+
+        {% elif order_detail.is_order_cancaled %}
+
+
+              {% tracking_date order_detail.id "Order Canceled" as result %}
+              {% if result == "Yet-to-Assign" %}
+              <div class="step1 "> <span class="icon-trk"></span><span>
+                  <p class="trktext"><b>Order Canceled</b></p>
+                  <p class="trktext1" style="color:white;">{{ result }}</p>
+                </span></div>
+              {% else %}
+              <div class="step1 active"> <span class="icon-trk"></span><span>
+                  <p class="trktext"><b>Order Canceled</b></p>
+                  <p class="trktext1">{{ result|date }}</p>
+                </span></div>
+              {% endif %}
+
+              {% tracking_date order_detail.id "Refund Initiated" as result %}
+              {% if result == "Yet-to-Assign" %}
+              <div class="step1 "> <span class="icon-trk"></span><span>
+                  <p class="trktext"><b>Refund Initiated</b></p>
+                  <p class="trktext1" style="color:white;">{{ result }}</p>
+                </span></div>
+              {% else %}
+              <div class="step1 active"> <span class="icon-trk"></span><span>
+                  <p class="trktext"><b>Refund Initiated</b></p>
+                  <p class="trktext1">{{ result|date }}</p>
+                </span></div>
+              {% endif %}
+
+              {% tracking_date order_detail.id "Refund Completed" as result %}
+              {% if result == "Yet-to-Assign" %}
+              <div class="step1 "> <span class="icon-trk"></span><span>
+                  <p class="trktext"><b>Refund Completed</b></p>
+                  <p class="trktext1" style="color:white;">{{ result }}</p>
+                </span></div>
+              {% else %}
+              <div class="step1 active"> <span class="icon-trk"></span><span>
+                  <p class="trktext"><b>Refund Completed</b></p>
+                  <p class="trktext1">{{ result|date }}</p>
+                </span></div>
+              {% endif %}
+
+        {% else %}
+
+                {% tracking_date order_detail.id "Order Assigned" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Assigned</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Assigned</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+
+
+                {% if order_detail.consultation_date %}
+                <div class="step1 active"> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Visit/Consultation</b></p>
+                    <p class="trktext1">{{ order_detail.consultation_date }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 "> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Visit/Consultation</b></p>
+                    <p class="trktext1" style="color:white;">Yet-To-Assign</p>
+                  </span></div>
+                {% endif %}
+
+
+                {% if order_detail.pickup_date %}
+                <div class="step1 active"> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Picked Up</b></p>
+                    <p class="trktext1">{{ order_detail.pickup_date }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 "> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Picked Up</b></p>
+                    <p class="trktext1" style="color:white;">Yet-To-Assign</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Approval Pending" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Waiting For Approval</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Waiting For Approval</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Estimation Approved" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Approved</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Approved</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+
+
+                {% if order_detail.inprogress_date %}
+                <div class="step1 active"> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Order In-Progess</b></p>
+                    <p class="trktext1">{{ order_detail.inprogress_date }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 "> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Order In-Progess</b></p>
+                    <p class="trktext1" style="color:white;">Yet-To-Assign</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Ready for Dispatch" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Ready for Dispatch</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Ready for Dispatch</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+
+                {% if order_detail.is_total_paid %}
+                <div class="step1 active"> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Total Amount Paid</b></p>
+                    <p class="trktext1">{{ order_detail.inprogress_date }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 "> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Total Amount Paid</b></p>
+                    <p class="trktext" style="color:white;">Yet-To-Assign</p>
+                  </span></div>
+                {% endif %}
+
+                {% tracking_date order_detail.id "Dispatched" as result %}
+                {% if result == "Yet-to-Assign" %}
+                <div class="step1 "> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Dispatched</b></p>
+                    <p class="trktext1" style="color:white;">{{ result }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 active"> <span class="icon-trk"></span><span>
+                    <p class="trktext"><b>Dispatched</b></p>
+                    <p class="trktext1">{{ result|date }}</p>
+                  </span></div>
+                {% endif %}
+
+
+
+                {% if order_detail.is_order_delivered %}
+                <div class="step1 active"> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Delivered</b></p>
+                    <p class="trktext1">{{ order_detail.delivery_date }}</p>
+                  </span></div>
+                {% else %}
+                <div class="step1 "> <span class="icon-trk"> </span><span>
+                    <p class="trktext"><b>Delivered</b></p>
+                    <p style="color:white;">Yet-To-Assign</p>
+                  </span></div>
+                {% endif %}
+
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>

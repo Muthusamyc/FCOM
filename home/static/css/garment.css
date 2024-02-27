@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@100&display=swap');
+* {
+    padding: 0%;
+    margin: 0%;
+}
+
+body {
+    line-height: 1.8;
+    color: #898fa1;
+    font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: #11245a;
+    font-family: 'Didot';
+    font-style: normal;
+    font-size: 52px;
+    line-height: 72px;
+    /* or 138% */
+    letter-spacing: -0.015em;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+}
+
+a {
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.45 ease;
+}
+
+img {
+    width: 100%;
+}
+
+small {
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+#Benifits {
+    background: rgba(242, 128, 119, 0.05);
+}
+
+#Home7 {
+    margin-top: 60px;
+    width: 100%;
+    background: linear-gradient(72.78deg, rgba(255, 118, 98, 0.5) 39.74%, rgba(196, 196, 196, 0) 87.61%, rgba(255, 119, 99, 0.5) 100%), url(../img/garmentcare.png);
+    background-size: cover;
+    align-items: center;
+    background-position: center;
+    display: flex;
+    height: 900px;
+}
+
+p {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    letter-spacing: -0.015em;
+}
+
+.para14 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height, or 125% */
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    /* black 60 */
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.cloths {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 16px;
+    /* identical to box height, or 67% */
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    /* Primary */
+    color: #F28077;
+}
+
+.para11 {
+    width: 517px;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 32px;
+    /* or 160% */
+    letter-spacing: -0.015em;
+    /* black 60 */
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.para10 {
+    width: 100%;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    /* or 133% */
+    letter-spacing: -0.015em;
+    /* Black */
+    align-items: center;
+    color: #000000;
+}
+
+.careh1 {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 72px;
+    /* identical to box height, or 200% */
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.015em;
+    /* Black */
+    color: #000000;
+}
+
+.call {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 48px 88px;
+    width: 553px;
+    height: 132px;
+    margin-top: -130px;
+    margin-left: 442px;
+    background: #FFF4F4;
+    border-radius: 16px;
+}
+
+@media only screen and (max-width: 992px) {
+    .call {
+        padding: 30px;
+        width: 334px;
+    }
+}

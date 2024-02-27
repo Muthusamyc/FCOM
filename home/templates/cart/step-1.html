@@ -1,0 +1,125 @@
+<div class="row setup-content" id="step-1">
+  <!-- Items in cart -->
+  <div id="customTabContent" class="p-0">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <h2 class="itemssearch-heading">Items <span id="itemCount">{{ items_in_cart.total_items }}</span>
+      </h2>
+      {% for item_row in items_in_cart %}
+      <div class="row-data active" data-tag="girls,restyling,regular,withLining">
+        <div class="row">
+          <div class="col-md-8">
+            <h3>{{ item_row.item.item.name }}</h3>
+            <p id="selectedTags">{{ item_row.item.item.tags }}</p>
+            <p id="priceTag">Starting Price: ₹
+              <span class="priceValue" id="{{ item_row.item.item.id }}">
+                {{item_row.item.item.starting_price }}
+              </span>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <div class="items-add">
+              <img src="/media/{{ item_row.item.item.image }}" alt="Items">
+              <button type="button" class="btn btn1 add" name="button" id="add1">Add</button>
+              <div class="quantity-wrapper active">
+                <button type="button" class="btn btn2 quantity-btn decrease" name="button">&#8722;</button>
+                <span class="quantity-txt" data-count="{{item_row.qty}}">{{item_row.qty}}</span>
+                <button type="button" class="btn btn2 quantity-btn increase" name="button">&#43;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="sticky-cart-footer show">
+        <div class="row">
+          <div class="col-md-7">
+            <div class="sticky-cart-total">
+              <div class="items-cart">
+                <h4>Items in Cart</h4>
+                <p id="total-item">{{ saved_cart.total_items }}</p>
+              </div>
+              <div class="items-cart">
+                <h4>Estimated Total</h4>
+                <p>&#x20B9; <span id="estimated-total-item">{{ saved_cart.estimated_price }}</span></p>
+              </div>
+              <div class="items-cart">
+                <h4>Advance Payable</h4>
+                <p>&#x20B9; <span id="advance-payable">{{ saved_cart.advance_payable }}</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 text-right btn-flex">
+            <button type="button" class="btn btn25" name="back_button">Back</button>
+            <button type="button" class="btn btn7 pay-btn nextBtn" name="button">Pay Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preferences -->
+  <div class="selection-details">
+    <div class="row form-group">
+      <div class="col-md-6">
+        <label for="">Service Mode</label>
+       
+        <select name="serviceMode" class="form-control" value="" required>          
+          <option value="">Select</option>
+          {% for preference in designer_preferences %}
+          <option value="{{ preference.id }}">{{ preference.name }}</option>
+          {% endfor %}
+        </select>
+        <p class="error-msg">Please Select Service Mode</p>
+      </div>
+      <div class="col-md-6">
+        <label for="">Designer Preference</label>
+        <select name="designersPreference" class="form-control" value="" required>
+          <option value="">Select</option>
+          {% for mode in service_modes %}
+          <option value="{{ mode.id }}" {% if mode.id == items_in_cart.service_mode %} selected {% endif%} >{{ mode.name }}</option>
+          {% endfor %}
+        </select>
+        <p class="error-msg">Please Select Designer Preference</p>
+      </div>
+     
+     
+    </div>
+  </div>
+
+  <!-- Address Details -->
+  <div class="address-details">
+    <!-- <h4><label for="">Address</label> <button type="button" class="btn btn7" data-bs-target="#addAddressModal"
+        data-bs-toggle="modal" name="button">&#43;</button></h4> -->
+    <div class="address-row row">
+      <div class="col-md-4 address-box">
+        <div class="btn-icons">
+          <!-- <button type="button" class="btn" name="button" data-bs-target="#addAddressModal" data-bs-toggle="modal"><img
+              src="static/img/edit.png" alt="edit" /></button>
+          <button type="button" class="btn" name="button"><img src="static/img/cancel.png" alt="close" /></button> -->
+        </div>
+        <h5>{{ user_details.fullName }}</h5>
+        <p>{{ user_details.address.address }} {{ user_details.address.location }} {{user_details.address.pincode}} +91
+          {{ user_details.mobileNo }}</p>
+        <span class="badge badge-light" id="typeOfAddress">{{ user_details.address.addressType }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Note Text -->
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-8">
+      <div class="note-txt">
+        <ul>
+          <li><b>Starting</b> price is for guidance only, final price / bill amount will be communicated during
+            Designer Consultation</li>
+          <li><b>Advance Payable</b> amount needs to be paid to book an appointment. If you cancel the booking
+            (only) before 24 Hrs of designer’s visit to your location, full advance amount would be refunded.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,125 @@
+<div class="dashed-line-breaker"></div>
+<div class="scrollable-item">
+  <h3 class="form-heading i-add" id="familyMembers">Family Members <button type="button"
+      class="btn btn7 add-edit-modal" data-bs-target="#addFamilyMemberModal" data-label="Add Family Member"
+      data-bs-toggle="modal" name="button">+</button></h3>
+  <div class="grid-box-row family-member-row row">
+    {% for member in family_members %}
+    <div class="col-md-4 grid-box grid1">
+      <div class="btn-icons">
+        <button type="button" class="btn add-edit-modal" name="button"
+          data-bs-target="#editFamilyMemberModal{{member.user_id}}" data-label="Edit Family Member" data-bs-toggle="modal"><img
+            src="/static/img/edit.png" alt="edit"></button>
+
+
+            
+      </div>
+      {% if member.image %}
+      <img src="{{ member.image.url }}"  class="img1" alt="Family member" />
+      {% else %}
+      <img src="/static/img/family-member/avator.jpg" class="img1" alt="Family member" />
+      {% endif %}
+      <h5>{{member.user.first_name}} {{member.user.last_name}}</h5>
+      <p>{{member.gender}}</p>
+    </div>
+
+
+
+    <div class="modal fade" id="editFamilyMemberModal{{member.user_id}}" tabindex="-1" aria-labelledby="editFamilyMemberModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Edit Family Member</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+      </div>
+      <form method="post" action="{% url 'edit_family_members' member.user_id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-body">
+   
+          
+    {% if member.image %}
+    <div class="row form-group">
+        <div class="col-md-12">
+          <div class="profile-pic">
+            <img id='oldpic' data-id="{{member.id}}"  src="{{ member.image.url }}" style="border-radius:50%;" alt="profile-pic"/>
+            <div id="imagePreview" data-id="{{member.id}}" class="imagePreview" style="display:none;" >
+               
+            </div>
+            
+            
+            
+            <div class="btn-icons">
+              <input type='file' id="imageUpload"  data-id="{{member.id}}" class=imageUpload  name="itemImage" accept=".png, .jpg, .jpeg" />
+              <a href="javascript:void(0)" class="btn" name="button"><img src="/static/img/edit.png" alt="edit"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="row form-group">
+        <div class="col-md-12">
+          <div class="profile-pic">
+            
+            <div id="imagePreview" data-id="{{member.id}}">
+              
+            </div>
+            <div class="btn-icons">
+              <input type='file' id="imageUpload" data-id="{{member.id}}" class='imageUpload' name="itemImage" accept=".png, .jpg, .jpeg" />
+              <a href="javascript:void(0)" class="btn" name="button"><img src="/static/img/edit.png" alt="edit"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif%}
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label for="firstName">First Name</label>
+              <input type="text" name="firstName" class="form-control" value="{{member.user.first_name}}" />
+            </div>
+            <div class="col-md-6">
+              <label for="lastName">Last Name</label>
+              <input type="text" name="lastName" class="form-control" value="{{member.user.last_name}}" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label for="email">Email Id</label>
+              <input type="text" name="email" class="form-control" value="{{member.user.email}}" />
+            </div>
+            <div class="col-md-6">
+              <label for="mobile">Mobile Number</label>
+              <input type="text" name="mobile" class="form-control" value="{{member.user.mobile_no}}" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label for="">Date of birth <span class="light-text">(Optional)</span></label>
+              <input type="date"  class="form-control" id="dob" name="dob" value="{{member.dob|date:'Y-m-d'}}" >
+            </div>
+          
+            <div class="col-md-6">
+              <label for="gender">Gender</label>
+              <select class="form-control" name="gender">
+                <option value="1"{% if member.gender == '1' %} selected="selected"{% endif %}>Male</option>
+                <option value="2"{% if member.gender == '2' %} selected="selected"{% endif %}>Female</option>
+                <option value="3"{% if member.gender == '3' %} selected="selected"{% endif %}>Others</option>                            
+            </select>
+            </div>
+          </div>
+          
+  
+          <div class="btn-footer btn-flex">
+            <button type="button" class="btn btn25" name="button">Cancel</button>
+            <button type="submit" class="btn btn25" name="button">Save</button>
+          </div>
+        </div>
+      </form>
+     
+    </div>
+  </div>
+</div>
+    {% endfor %}
+ 
+  </div>
+</div>

@@ -1,0 +1,531 @@
+{% extends "admin/base_template.html" %}
+
+{% block content %}
+
+<div class="content">
+  <div class="container-fluid">
+    {% if request.user.is_superuser %}
+    <h4>Callback Info</h4>
+
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>{{book_call_back_count}}</h3>
+
+            <p>Request Callbacks</p>
+          </div>
+          <a href="{% url 'callback_listings' %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>{{partner_form_count}}</h3>
+
+            <p>Parnter Forms</p>
+          </div>
+          <a href="{% url 'partner_form_listings' %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>{{follow_up_count}}</h3>
+
+            <p>Follow Up Calls</p>
+          </div>
+          <a href="{% url 'followup_listings' %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <br>
+    <h4>Order Status</h4>
+    <hr>
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_booked_count}}</h3>
+            <p>Booked</p>
+          </div>
+          <a href="{% url 'orders_listing' 1 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_assigned_count}}</h3>
+
+            <p>Assigned</p>
+          </div>
+          <a href="{% url 'orders_listing' 17 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_consulted_count}}</h3>
+            <p>Visit/Consultation</p>
+          </div>
+          <a href="{% url 'orders_listing' 20 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_picked_up_count}}</h3>
+            <p>Picked Up</p>
+          </div>
+          <a href="{% url 'orders_listing' 19 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_waiting_approval_count}}</h3>
+            <p>Waiting For Approval</p>
+          </div>
+          <a href="{% url 'orders_listing' 21 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3>{{order_rejected_count}}</h3>
+
+            <p>Approved Rejected</p>
+          </div>
+          <a href="{% url 'orders_listing' 4 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_approved_count}}</h3>
+
+            <p>Approved</p>
+          </div>
+          <a href="{% url 'orders_listing' 3 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_in_progress_count}}</h3>
+
+            <p>In progress</p>
+          </div>
+          <a href="{% url 'orders_listing' 7 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_ready_for_dispatch_count}}</h3>
+
+            <p>Ready for Dispatch</p>
+          </div>
+          <a href="{% url 'orders_listing' 22 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_balance_amount_paid_count}}</h3>
+
+            <p>Total Amount Paid</p>
+          </div>
+          <a href="{% url 'orders_listing' 18 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_dispatched_count}}</h3>
+
+            <p>Dispatched</p>
+          </div>
+          <a href="{% url 'orders_listing' 23 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_delivered_count}}</h3>
+
+            <p>Delivered</p>
+          </div>
+          <a href="{% url 'orders_listing' 9 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row">
+
+
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{order_canceled_count}}</h3>
+
+            <p>Order Canceled</p>
+          </div>
+          <a href="{% url 'orders_listing' 10 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+
+
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{canceled_order_dispatch_count}}</h3>
+
+            <p>Ready for Dispatch</p>
+          </div>
+          <a href="{% url 'orders_listing' 24 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{canceled_order_dispatched_count}}</h3>
+
+            <p>Dispatched</p>
+          </div>
+          <a href="{% url 'orders_listing' 25 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{canceled_order_delivered_count}}</h3>
+
+            <p>Delivered</p>
+          </div>
+          <a href="{% url 'orders_listing' 26 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+
+
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{refund_initiated_count}}</h3>
+
+            <p>Refund Initiated</p>
+          </div>
+          <a href="{% url 'orders_listing' 11 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{refund_completed_count}}</h3>
+
+            <p>Refund Completed</p>
+          </div>
+          <a href="{% url 'orders_listing' 13 %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+
+    </div>
+    {% endif %}
+
+
+
+    <!--Desginer Orders Count-->
+    {% if request.user.role == 2 %}
+    <h4>Order Status</h4>
+    <hr>
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_booked_count}}</h3>
+
+            <p>Order Booked</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.ORDER_ASSINGED %}" class="small-box-footer">More
+            info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_consulted_count}}</h3>
+
+            <p>Visit/Consultation</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.ORDER_CONSULTED %}" class="small-box-footer">More
+            info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_picked_up_count}}</h3>
+
+            <p>Order Picked Up</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.ORDER_PICKEDUP %}" class="small-box-footer">More
+            info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_waiting_approval_count}}</h3>
+
+            <p>Waiting For Approval</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.WAIT_FOR_APPROVAL %}"
+            class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3>{{order_rejected_count}}</h3>
+
+            <p>Approved Rejected</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.APPROVAL_REJECTED %}"
+          class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>   
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_approved_count}}</h3>
+
+            <p>Order Approved</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.APPROVAL_ACCEPTED %}"
+            class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_in_progress_count}}</h3>
+
+            <p>Order In-Progess</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.ORDER_IN_PROGRESS %}"
+            class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_ready_for_dispatch_count}}</h3>
+
+            <p>Ready for Dispatch</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.READY_FOR_DISPATCH %}"
+            class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_balance_amount_paid_count}}</h3>
+
+            <p>Total Amount Paid </p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.BALANCE_AMOUNT_PAID %}"
+            class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_dispatched_count}}</h3>
+
+            <p>Dispatched</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.ORDER_DISPATCHED %}"
+            class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{order_delivered_count}}</h3>
+
+            <p>Delivered</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.ORDER_DELIVERED %}" class="small-box-footer">More
+            info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <hr>
+    <div class="row">
+      <!-- <div class="col-lg-3 col-6">
+          
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3>{{order_rejected_count}}</h3>
+  
+              <p>Order DisApproved</p>
+            </div>
+            <a href="{% url 'orders_listing_for_designer' booking_stages.APPROVAL_REJECTED %}" class="small-box-footer">More info <i
+                class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>   -->
+
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{order_canceled_count}}</h3>
+
+            <p>Order Canceled</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.ORDER_CANCELED %}" class="small-box-footer">More
+            info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{canceled_order_dispatch_count}}</h3>
+
+            <p>Ready for Dispatch</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.ORDER_CANCELED_READY_FOR_DISPATCH %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{canceled_order_dispatched_count}}</h3>
+
+            <p>Dispatched</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.ORDER_CANCELED_DISPATCHED %}"  class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{canceled_order_delivered_count}}</h3>
+
+            <p>Delivered</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.ORDER_CANCELED_DELIVERED %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+
+
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{refund_initiated_count}}</h3>
+
+            <p>Refund Initiated</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.REFUND_INITIATED %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{refund_completed_count}}</h3>
+
+            <p>Refund Completed</p>
+          </div>
+          <a href="{% url 'orders_listing_for_designer' booking_stages.REFUND_COMPLETED %}" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+    {% endif %}
+    <!--/. Desginer Orders Count-->
+
+
+  </div><!-- /.container-fluid -->
+</div>
+
+{% endblock %}

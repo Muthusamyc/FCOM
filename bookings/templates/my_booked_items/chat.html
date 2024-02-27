@@ -1,0 +1,62 @@
+<!-- <div> -->
+<div id="chat_box" style=" background-image: url(/static/img/chat-bg1.png); box-shadow: 5px 5px 5px #7d7878;width: 800px;">
+    <input type="hidden" value="{{ order_detail.id }}" name="chatOrderID" id="chatOrderID" />
+    <input type="hidden" value="{{ order_detail.made_by.id }}" name="chatUserID" id="chatUserID" />
+    <input type="hidden" value="{{ assinged_designer.designer.id }}" name="chatWithDesigner" id="chatWithDesigner" />
+    <div class="chat-content">
+   
+       
+              <!-- <div class="note-text" style="position: fixed;right:5px;">Booked on {{ order_detail.created_on }}</div> -->
+       
+            <div id="chat-body">
+                <div class="note-text" style="">Thanks for Choosing Fcom India.Our Designer will be shortly reaching you..! </div>
+                {% for msg in chat_messages %}
+                    {% if msg.sender != user_details.id %}
+                        {% if msg.message_type == "text" %}
+                        <div class="sender-text">                            
+                            {{msg.message}}
+                        </div>
+                        {% elif msg.message_type == "file_upload" %}
+                        <div class="sender-text" style="width: 50%;">
+                            <div class="sender_img">
+                                <img src="/media/chat_uploads/{{ msg.uploaded_file }}" />
+                                <a download="" href="">
+                                    <img src="" class="download-icon" />
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% else %}
+                            
+
+                        {% if msg.message_type == "text" %}
+                            <div class="reciever-text">                            
+                                {{msg.message}}
+                            </div>
+                        {% elif msg.message_type == "file_upload" %}
+                            <div class="reciever-text" style="width: 50%;">
+                                <div class="sender_img">
+                                    <img src="/media/chat_uploads/{{ msg.uploaded_file }}" />
+                                    <a download="" href="">
+                                        <img src="" class="download-icon" />
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+    </div>
+    <div class="chat-footer flex-grid align-items-center">
+        <a onclick="uploadChatFile()" href="javascript:void(0)">
+            <img src="/static/img/image.png" alt="Image">
+            <input type="file" name="chatUploadedFile"  id="chatUploadedFile" style="display: none;" accept="image/*"/>
+        </a>
+        <input type="text" name="message-to-send" id="message-to-send" placeholder="Type Message" class="form-control">
+        <button id="chat-message-submit" style="background-color: #f06969; border:0.5px solid rgb(5, 5, 5);">
+            <!-- <img src="/static/img/Send-Img.png" alt="Send" style="width: 40px;height: 42px;"> -->
+            <box-icon type='solid' name='send' style="width: 40px;height:30px;margin-top: 5px;"></box-icon>
+        </button>
+    </div>
+</div>
+<div id="chat_icon"><i class='bx bx-chat'></i></div>

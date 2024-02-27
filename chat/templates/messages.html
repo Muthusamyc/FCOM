@@ -1,0 +1,128 @@
+{% extends "admin/base_template.html" %}
+{% load static %}
+
+{% block title %}{{request.user}}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<div class="container clearfix">
+  <div class="row">
+   <div class="col-md-3">
+    <div class="people-list" id="people-list">
+        <!-- <div class="search">
+          <input type="text" placeholder="search" id="myInput" onkeyup="myFunction()" title="Type in a name" />
+          <i class="fa fa-search"></i>
+        </div> -->
+      <!-- <ul class="list" style="list-style: none;" id="myUL">
+        {% for user in users %}
+        <li class="clearfix" id={{user.id}}>          
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name"><a href="{% url 'chat_messages' id=user.id %}" style="text-decoration: none; color:chartreuse;">{{user.first_name}} {{user.last_name}}</a></div>
+            <div class="status">
+              {% if user.is_user_online %}
+              <i class="fa fa-circle online"></i> online
+              {% else %}
+              <i class="fa fa-circle offline"></i> offline
+              {% endif %}
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul> -->
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="chat">
+      <div class="chat-header clearfix">
+        <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" /> -->
+  
+        <div class="chat-about">
+          <div class="chat-with">Chat with {{username}}</div>
+          <div class="chat-num-messages">already {{count}} messages</div>
+        </div>
+        <!-- <i class="fa fa-star"></i> -->
+      </div> <!-- end chat-header -->
+      
+      <div class="chat-history">
+        <ul id="chat-body" style="list-style: none;">
+        {% for msg in messages %}
+        {% if msg.sender == user %}
+          <li class="clearfix">
+            <div class="message-data align-right">
+              <span class="message-data-time">{{msg.timestamp|timesince}}</span> &nbsp; &nbsp;        
+  
+            </div>
+            <div class="message other-message float-right">
+              {% if msg.message_type == "text" %}
+                        <div class="sender-text">                            
+                            {{msg.message}}
+                        </div>
+                        {% elif msg.message_type == "file_upload" %}
+                        <div class="sender-text" style="width: 50%;">
+                            <div class="sender_img">
+                                <img src="/media/chat_uploads/{{ msg.uploaded_file }}" style="width: 100%;" />
+                                <a download="" href="">
+                                    <img src="" class="download-icon" />
+                                </a>
+                            </div>
+                        </div>
+                {% endif %}
+            </div>
+          </li>
+          {% else %}
+          <li>
+            <div class="message-data">               
+              <span class="message-data-time">{{msg.timestamp|timesince}}</span>
+            </div>
+            <div class="message my-message">
+                {% if msg.message_type == "text" %}
+                        <div class="sender-text">                            
+                            {{msg.message}}
+                        </div>
+                {% elif msg.message_type == "file_upload" %}
+                <div class="sender-text" style="width: 50%;">
+                    <div class="sender_img">
+                        <img src="/media/chat_uploads/{{ msg.uploaded_file }}" style="width: 100%;" />
+                        <a download="" href="">
+                            <img src="" class="download-icon" />
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div> <!-- end chat-history -->
+      
+  
+      <div class="chat-message clearfix">
+          
+       
+        <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3"></textarea>
+  
+        <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+        <i class="fa fa-file-image-o"></i>
+        <input type="file" id="chatUploadedFile" onclick="uploadChatFile" class="" />
+        <button id="chat-message-submit">Send</button>
+  
+      </div> <!-- end chat-message -->
+  
+    </div> <!-- end chat -->
+  </div>
+</div>
+  
+  </div> <!-- end container -->
+
+
+{{user|json_script:"json-username"}}
+{{request.user.id|json_script:"json-message-username"}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'chat.js' %}"></script>
+
+
+{% endblock %}
+
+

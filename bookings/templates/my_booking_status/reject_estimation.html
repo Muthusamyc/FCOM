@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="modal fade" id="rejectEstimationBookingModal" tabindex="-1" aria-labelledby="rejectEstimationBookingModal" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reject Estimation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+            </div>
+            <div class="modal-body">               
+                <div class="btn-footer btn-flex">
+                    <button type="button" class="btn btn7 yes-btn" data-bs-dismiss="modal" aria-label="Close"
+                        name="button">No</button>
+                    <button type="button" onclick="rejectOrderCustomer({{ order_detail.id }})" class="btn btn7 yes-btn" name="button">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

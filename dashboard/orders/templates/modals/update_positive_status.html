@@ -1,0 +1,97 @@
+<form method="post" action="{% url 'update_order_service_date_for_order' order.id %}">
+    {% csrf_token %} 
+
+    <tr>
+        <th style="width:50%">Visit/Consultation Date:</th>
+        <td>
+            <div class="row">
+                <div class="col-md-6">
+                    {% if order.status == booking_stage.ORDER_ASSINGED or order.status == booking_stage.ORDER_CONSULTED %}
+                 
+                    <input class="form-control"                                     
+                        type="text" name="consultation_date" id="consultation_date"
+                        min="{new Date().toISOString().split('T')[0]}" value="{{ order.consultation_date|date:"d-m-Y"  }}" autocomplete="off"/>
+                    {% elif  order.consultation_date %}
+                        <b id="consultation_date">{{ order.consultation_date }}</b>
+                    {% else %}
+                        Yet-to-update
+                    {% endif %}
+                </div>
+             
+            </div>
+         
+
+        </td>
+    </tr>
+
+    <tr>
+        <th style="width:50%">In-Progess Date:</th>
+        <td>
+            {% if order.inprogress_date %}
+            <b id="inprogress_date"> {{ order.inprogress_date }}</b>
+            {% else %}
+            Yet-to-update
+            {% endif %}
+            {% if order.status == booking_stage.APPROVAL_ACCEPTED %} 
+          
+            <input class="form-control" type="text" name="inprogress_date" id="inprogress_date"
+                min="{new Date().toISOString().split('T')[0]}" autocomplete="off" required />
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th style="width:50%">Delivery Date:</th>
+        <td>
+            {% if order.status == booking_stage.ORDER_IN_PROGRESS or order.status == booking_stage.BALANCE_AMOUNT_PAID%}
+            <input class="form-control" type="text" name="delivery_date" id="delivery_date"
+                min="{new Date().toISOString().split('T')[0]}" value="{{ order.delivery_date|date:"d-m-Y" }}" autocomplete="off"/>
+            {% elif order.delivery_date  %}
+            <b> {{ order.delivery_date }}</b>
+            {% else %}
+            Yet-to-update
+            {% endif %}
+            {% if order.status == booking_stage.APPROVAL_ACCEPTED %} 
+            <input class="form-control" type="text" name="delivery_date" id="delivery_date"
+                min="{new Date().toISOString().split('T')[0]}" autocomplete="off" required />
+            {% endif %}
+        </td>
+    </tr>
+    {% if order.status == booking_stage.BALANCE_AMOUNT_PAID %}
+    <tr>
+        <th style="width:50%">Send for Delivery:</th>
+        <td>
+            
+            <label class="btn btn-success">
+                <input type="checkbox" name="dispatched"  autocomplete="off" required>
+                <span class="glyphicon glyphicon-ok"></span>
+            </label>
+          
+        </td>
+    </tr> 
+    {% elif order.status == booking_stage.ORDER_IN_PROGRESS %}
+    <tr>
+        <th style="width:50%">Ready for Dispatch:</th>
+        <td>                               
+           
+            <label class="btn btn-success">
+                <input id="dispatch" type="checkbox" name="dispatch"  autocomplete="off">
+                <span class="glyphicon glyphicon-ok"></span>
+            </label>
+            
+        </td>
+    </tr> 
+
+    {% endif %}
+
+    {% if order.status == booking_stage.ORDER_ASSINGED or order.status == booking_stage.ORDER_CONSULTED or order.status == booking_stage.APPROVAL_ACCEPTED or order.status == booking_stage.ORDER_IN_PROGRESS or order.status == booking_stage.BALANCE_AMOUNT_PAID  %}
+   
+    <tr>
+        <th></th>
+        <td>
+            
+            <button type="submit" name="order" class="btn btn-success">Update</button>
+        </td>
+    </tr> 
+    {% endif %}
+   
+    </form>     

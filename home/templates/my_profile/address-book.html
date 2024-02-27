@@ -1,0 +1,122 @@
+<div class="dashed-line-breaker"></div>
+<div class="scrollable-item">
+  <h3 class="form-heading i-add" id="addressBook">Address Book <button type="button"
+      class="btn btn7 add-edit-modal" data-bs-target="#addAddressModal" data-label="Add Address"
+      data-bs-toggle="modal" name="button">+</button></h3>
+  <div class="address-row row">
+   
+        <div class="col-md-5 address-box">      
+        
+          <h5>{{user.first_name}} {{user.last_name}}</h5>
+          <p>{{ user_detail.address }}</p>
+          <span class="badge badge-light" id="typeOfAddress">{{user_detail.address_type}}</span>
+        </div>
+
+{% for addressbook in user.addressbook_set.all %}
+<div class="col-md-5 address-box">      
+  <div class="btn-icons">
+    <button type="button" class="btn add-edit-modal" name="button" data-bs-target="#editAddressModal{{addressbook.id}}"
+      data-label="Edit Address" data-bs-toggle="modal"><img src="static/img/edit.png"
+        alt="edit" /></button>
+  
+  </div>
+  <h5>{{addressbook.first_name}} {{addressbook.last_name}}</h5>
+  <p>{{ addressbook.address }}</p>
+  <span class="badge badge-light" id="typeOfAddress">{{addressbook.address_type}}</span>
+</div>
+
+
+<div class="modal fade" id="editAddressModal{{addressbook.id}}" tabindex="-1" aria-labelledby="editAddressModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Edit Address</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+      </div>
+      <form method="post" action="{% url 'edit_address_book' addressbook.id %}">
+        {% csrf_token %}
+      <div class="modal-body">
+        <div class="row form-group">
+          <div class="col-md-6">
+            <label for="">First Name</label>
+            <input type="text" name="firstName" class="form-control" value="{{addressbook.first_name}}" />
+          </div>
+          <div class="col-md-6">
+            <label for="">Last Name</label>
+            <input type="text" name="lastName" class="form-control" value="{{addressbook.last_name}}" />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">Address</label>
+            <input type="text" name="address" class="form-control" value="{{addressbook.address}}" />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-6">
+            <label for="">Pin Code</label>
+            <input type="text" name="pincode" class="form-control" value="{{addressbook.pincode}}" />
+          </div>
+          <div class="col-md-6">
+            <label for="">City/State</label>
+            <input type="text" name="city" class="form-control" value="{{addressbook.city}}" />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-6">
+            <label for="">Landmark</label>
+            <input type="text" name="landmark" class="form-control" value="{{addressbook.land_mark}}" />
+          </div>
+          <div class="col-md-6">
+            <label for="">Address Type</label>
+            <select name="addressType" class="form-control">
+              <option value="">Select</option>
+              <option value="home" {% if addressbook.address_type == "home" %} selected  {% endif %}>Home</option>
+              <option value="office"  {% if addressbook.address_type == "office" %} selected  {% endif %} >Office</option>
+              <option value="other"  {% if addressbook.address_type == "other" %} selected  {% endif %}>Others</option>
+          </select>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-6">
+            <label for="">Email Id</label>
+            <input type="text" name="email" class="form-control" value="{{addressbook.email}}" />
+          </div>
+          <div class="col-md-6">
+            <label for="">Mobile Number</label>
+            <input type="text" name="mobile" class="form-control" value="{{addressbook.mobile_no}}" />
+          </div>
+        </div>
+        <h3 class="form-heading">Update your address on map</h3>
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">Type your address</label>
+            <div class="search-input">
+              <input type="text" id="addAddress" name="addAddress" class="form-control" value=""
+                placeholder="#227, Ground Floor, 10th Main, Motappanapalya" />
+              <button type="button" id="submitAddress" data-source="addAddress" class="search-btn"><i
+                  class='bx bx-search'></i></button>
+            </div>
+            <p id="error-msg"></p>
+            <iframe id="map-canvas-add-address" src="" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="btn-footer btn-flex">
+          <button type="button" class="btn btn25" name="button">Cancel</button>
+          <button type="submit" class="btn btn25" style="background: #F28077; color:white" name="button">Update</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endfor %}
+
+
+
+
+
+  </div>
+</div>

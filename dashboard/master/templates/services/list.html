@@ -1,0 +1,45 @@
+{% extends "admin/base_template.html" %} {% block content %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="">Service List</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>SL No</th>
+                    <th>Service Name</th>
+                    <th>Service Description</th>
+                    <th>Gender</th>
+                    <th>created_by</th>
+                    <th>created_date</th>
+                    <th>modified_by</th>
+                    <th>modified_date</th>
+                    <th>Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in service_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ item.service_name }}</td>
+                    <td>{{ item.service_description }}</td>
+                    <td>{{ item.gender }} </td>
+                    <td>{{ item.created_by }}</td>
+                    <td>{{ item.created_date }}</td>
+                    <td>{{ item.modified_by }}</td>
+                    <td>{{ item.modified_date }}</td>
+                    <td>
+                        <a href="{% url 'edit_service' item.id%}" class="fa fa-edit"></a>
+                        <a href="{% url 'delete_service' item.id%}" class="fa fa-trash"></a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "admin/base_template.html" %} {% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">Add SEO</h3>
+                    </div>
+                    <form method="post" action="{% url 'create_seo' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Page</label>
+                                    <select class="form-control" name="page" id="page">
+                                        <option value="">Select Page</option>                               
+                                        <option value="home">Home</option>                                
+                                        <option value="services">Services</option>                                
+                                        <option value="our-story">Our story</option>    
+                                        <option value="my-profile">My Profile</option>  
+                                        <option value="my-bookings">My Bookings</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input class="form-control" type="text" name="title" id="title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Keywords</label>
+                                    <textarea class="form-control" type="text" rows="4" name="keywords" id="keywords"  required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-control" type="text" name="description" id="description" rows="6" required></textarea>
+                                </div>
+                            </div>
+
+                           
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary" style="background-color: #F28077">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header" style="background-color: #F28077">
+                <h3 class="card-title">List Recent SEO </h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Page</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Keywords</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for seo in seodata %}
+                        <tr>
+                            <th>{{seo.id}}</th>
+                            <th>{{seo.page}}</th>
+                            <th>{{seo.title}}</th>
+                            <th>{{seo.description}}</th>
+                            <th>{{seo.keywords}}</th>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

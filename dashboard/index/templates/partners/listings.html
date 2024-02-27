@@ -1,0 +1,93 @@
+{% extends "admin/base_template.html" %} {% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="">Partner Form Listing</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered  table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th>SL No</th>
+                                    <th>Full Name</th>
+                                    <th>Mobile Number</th>
+                                    <th>Email</th>
+                                    <th>Service Type</th>
+                                    <th>Service Name</th>
+                                    <th>Organization Name</th>
+                                    <!-- <th>Request On</th> -->
+                                    <!-- <th>Updated On</th> -->
+                                    <!-- <th>Status</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in parnters %}
+                                <tr>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.user.first_name }} {{ item.user.last_name }}</td>
+                                    <td>{{ item.user.mobile_no }}</td>
+                                    <td>{{ item.user.email }}</td>
+                                    <td>{{ item.service_type }} </td>
+                                    <td>{{ item.service_name }} </td>
+                                    <td>{{ item.organization_name }} </td>
+                                    <!-- <td>{{ item.created_at }} </td> -->
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <!-- <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing
+                                    1 to 10 of 30 entries</div>
+                            </div> -->
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                    {% if parnters.has_other_pages %}
+                                    <ul class="pagination">
+                                        {% if parnters.has_previous %}
+                                        <li class="paginate_button page-item previous disabled" id="example1_previous">
+                                            <a href="?page={{ parnters.previous_page_number }}" aria-controls="example1" data-dt-idx="0" tabindex="0"
+                                                class="page-link">Previous</a></li>
+                                        {% else %}
+                                        {% endif %}
+                                        {% for i in parnters.paginator.page_range %}
+                                            {% if parnters.number == i %}
+
+                                                <li class="paginate_button page-item active"><a href="#"
+                                                        aria-controls="example1" data-dt-idx="1" tabindex="0"
+                                                        class="page-link">{{ i }}</a></li>
+                                            {% else %}
+
+                                                <li class="paginate_button page-item "><a href="?page={{ i }}" aria-controls="example1"
+                                                    data-dt-idx="2" tabindex="0" class="page-link">{{ i }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if parnters.has_next %}
+                                            
+                                        <li class="paginate_button page-item next" id="example1_next"><a href="?page={{ parnters.next_page_number }}"
+                                                aria-controls="example1" data-dt-idx="4" tabindex="0"
+                                                class="page-link">Next</a></li>
+                                        {% endif %}
+                                    </ul>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

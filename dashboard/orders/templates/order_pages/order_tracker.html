@@ -1,0 +1,88 @@
+{% load ordertags %}
+  <div class="card col-md-12">
+        <div class="card-header">
+            <h3>Tracking TimeStamps</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Booked</th>
+                                <th>Assigned</th>
+                                <th>Approved</th>
+                                <th>In progress</th>
+                                <th>Dispatch</th>                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                
+                                {% for tracked_order in order.ordertracking_set.all %}
+
+                                    {% if tracked_order.status == booking_stage.ORDER_BOOKED %}
+                                        <td>{{ tracked_order.created_on|date:"d-m-y" }}</td>
+                                    {% endif %}
+                                    {% if tracked_order.status == booking_stage.ORDER_ASSINGED %}
+                                        <td>{{ tracked_order.created_on|date:"d-m-y" }}</td>
+                                    {% endif %}
+                                    {% if tracked_order.status == booking_stage.APPROVAL_ACCEPTED %}
+                                        <td>{{ tracked_order.created_on|date:"d-m-y" }}</td>
+                                    {% endif %}
+
+                                    {% if tracked_order.status == booking_stage.ORDER_IN_PROGRESS %}
+                                        <td>{{ tracked_order.created_on|date:"d-m-y" }}</td>                                    
+                                    {% endif %}
+
+                                    {% if tracked_order.status == booking_stage.READY_FOR_DISPATCH %}
+                                        <td>{{ tracked_order.created_on|date:"d-m-y" }}</td>
+                                    {% endif %}
+
+                                {% endfor %}
+                                
+                                <!-- <td id="order_booked">
+                                    {% for tracked_order in order.ordertracking_set.all %}
+                                        {% if tracked_order.status == booking_stage.ORDER_BOOKED %}
+                                            {{ tracked_order.created_on|date:"d-m-y" }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td id="order_assigned">
+                                    {% for tracked_order in order.ordertracking_set.all %}
+                                        {% if tracked_order.status == booking_stage.ORDER_ASSINGED %}
+                                            {{ tracked_order.created_on|date:"d-m-y" }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td id="approved">
+                                    {% for tracked_order in order.ordertracking_set.all %}
+                                        {% if tracked_order.status == booking_stage.APPROVAL_ACCEPTED %}
+                                            {{ tracked_order.created_on|date:"d-m-y" }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>                            
+                              
+                                <td id="in_progress">
+                                    {% for tracked_order in order.ordertracking_set.all %}
+                                        {% if tracked_order.status == booking_stage.ORDER_IN_PROGRESS %}
+                                            {{ tracked_order.created_on|date:"d-m-y" }}
+                                            
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for tracked_order in order.ordertracking_set.all %}
+                                    {% if tracked_order.status == booking_stage.ORDER_DELIVERED %}
+                                    {{ tracked_order.created_on|date:"d-m-y" }}
+                                    {% endif %}
+                                    {% endfor %}
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   

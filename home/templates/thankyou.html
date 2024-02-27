@@ -1,0 +1,35 @@
+{% extends 'public_template.html' %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/story.css">
+
+<!-- <section id="Story">
+    <div class="col text-center"> -->
+        <!-- <h1 class="mainh1">Our Story</h1>
+        <p class="text-white para2">Our passionate design journey</p> -->
+    <!-- </div>
+</section> -->
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="para3 d-block text-center thankyou-text">
+                    <span>Thankyou for reaching out!</span> <br /><br />
+                      We’re thrilled to hear from you. We will get back in touch with you soon!Have a great day!
+                    
+                    
+                </p>
+                <!-- <div class="hiring-action text-center">
+                    <h3 class="h11">We’re hiring!</h3>
+                    <p class="p8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                    <button type="button" class="btn btn2" name="button">Open positions</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $('.header .navbar-nav .nav-item .nav-link').removeClass('active')
+    $('#our_story_menu').addClass('active')
+</script>
+{% endblock %}

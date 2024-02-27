@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@100&display=swap');
+* {
+    padding: 0%;
+    margin: 0%;
+}
+
+body {
+    line-height: 1.8;
+    color: #898fa1;
+    font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: #11245a;
+    font-family: 'Didot';
+    font-style: normal;
+    font-size: 52px;
+    line-height: 72px;
+    /* or 138% */
+    letter-spacing: -0.015em;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+}
+
+a {
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.45 ease;
+}
+
+img {
+    width: 100%;
+}
+
+small {
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+#Home8 {
+    margin-top: 60px;
+    width: 100%;
+    background: linear-gradient(72.78deg, rgba(255, 118, 98, 0.5) 39.74%, rgba(196, 196, 196, 0) 87.61%, rgba(255, 119, 99, 0.5) 100%), url(../img/social.png);
+    background-size: cover;
+    align-items: center;
+    background-position: center;
+    display: flex;
+    height: 900px;
+}
+
+.para19 {
+    font-family: 'Futura';
+    font-size: 24px;
+    line-height: 32px;
+    /* or 133% */
+    letter-spacing: -0.015em;
+    /* Black */
+    color: #000000;
+}
+
+.para20 {
+    font-family: 'Futura';
+    font-size: 18px;
+    line-height: 20px;
+    /* identical to box height, or 111% */
+    text-align: center;
+    /* Primary */
+    color: #F28077;
+}
+
+.box5 {
+    position: relative;
+    width: 440px;
+    left: 500px;
+    height: 52px;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 16px;
+    border: 2px dashed #F28077;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+@media only screen and (max-width: 992px) {
+    .box5 {
+        left: 149px;
+        padding: 13px;
+        width: 377px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .box5 {
+        left: -9px;
+        padding: 15px;
+        width: 365px;
+    }
+}
+
+.blogh1 {
+    width: 100%;
+    font-family: 'Didot';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 130%;
+    /* identical to box height, or 42px */
+    /* Black */
+    color: #000000;
+}
+
+.para12 {
+    font-family: 'Futura';
+    font-size: 16px;
+    line-height: 150%;
+    /* or 24px */
+    /* black 60 */
+    color: rgba(0, 0, 0, 0.6);
+    /* Inside auto layout */
+}
+
+.category {
+    font-family: 'Futura';
+    font-size: 12px;
+    line-height: 150%;
+    /* identical to box height, or 18px */
+    /* Primary */
+    color: #F28077;
+}
+
+.blogh1 {
+    width: 100%;
+    font-family: 'Didot';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 130%;
+    /* identical to box height, or 42px */
+    /* Black */
+    color: #000000;
+}
+
+.blogh2 {
+    width: 100%;
+    font-family: 'Didot';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    /* identical to box height, or 34px */
+    /* Black */
+    color: #000000;
+}
+
+.ph1 {
+    font-family: 'Futura';
+    font-size: 40px;
+    line-height: 120%;
+    /* identical to box height, or 48px */
+    /* Black */
+    color: #000000;
+}
+
+.photo {
+    background: rgba(242, 128, 119, 0.05);
+}

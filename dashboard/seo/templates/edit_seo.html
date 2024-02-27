@@ -1,0 +1,55 @@
+{% extends "admin/base_template.html" %} {% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">Edit SEO</h3>
+                    </div>
+                    <form method="post" action="{% url 'edit_seo' seodata.id %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Page</label>
+                                    <select class="form-control" name="page" id="page">
+                                        <option value="">Select Page</option>                                
+                                        <option value="home"{% if seodata.page == 'home' %} selected="selected"{% endif %}>Home</option>
+                                        <option value="services"{% if seodata.page == 'services' %} selected="selected"{% endif %}>Services</option>
+                                        <option value="our-story"{% if seodata.page == 'our-story' %} selected="selected"{% endif %}>Our story</option>  
+                                        <option value="my-profile"{% if seodata.page == 'my-profile' %} selected="selected"{% endif %}>My Profile</option>
+                                        <option value="my-bookings"{% if seodata.page == 'my-bookings' %} selected="selected"{% endif %}>My Bookings</option>                      
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" value="{{ seodata.title }}" name="title" class="form-control" id="title" required="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Keywords</label>
+                                    <textarea class="form-control" type="text" rows="4" name="keywords" id="keywords"  required>{{ seodata.keywords }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-control" type="text" name="description" id="description" rows="6" required>{{ seodata.description }}</textarea>
+                                </div>
+                            </div>
+
+                           
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary" style="background-color: #F28077">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

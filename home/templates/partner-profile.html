@@ -1,0 +1,195 @@
+{% extends 'public_template.html' %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="static/css/my-account.css">
+<style>
+  form .error {
+    color: #ff0000;
+  }
+</style>
+
+<script type="text/javascript">
+  $('.header .navbar-nav .nav-item .nav-link').removeClass('active')
+  $('#partner_menu').addClass('active')
+</script>
+
+<section id="MyAccount">
+  <div class="col text-center">
+    <h1 class="mainh1">Partner registration</h1>
+    <p class="text-white para2">Add Your Information</p>
+  </div>
+</section>
+
+<section class="workTabs">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-7">
+        {% for message in messages %}
+        <div>{{ message }}</div>
+        {% endfor %}
+        <div class="tab-content" id="myProfileContent">
+          <div class="tab-pane fade show active title-plus" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <form name="registration" method="post" action="{% url 'partner_profile' %}">
+              {% csrf_token %}
+              <div class="row form-group">
+                <div class="col-md-6">
+                  <label for="">First Name</label>
+                  <input type="text" name="firstName" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label for="">Last Name</label>
+                  <input type="text" name="lastName" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-6">
+                  <label for="">Mobile No</label>
+                  <input type="text" name="mobileNumber" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label for="">Email Id</label>
+                  <input type="email" name="email" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-6">
+                  <label for="">Password</label>
+                  <input type="password" id="password" name="password" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label for="">Confirm Password</label>
+                  <input type="password" name="password2" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label for="">Address</label>
+                  <input type="text" name="address" class="form-control" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-6">
+                  <label for="">Address Type</label>
+                  <select name="addressType" class="form-control" value="" required>
+                    <option value="">Select</option>
+                    <option value="home">Home</option>
+                    <option value="office">Office</option>
+                    <option value="other">Others</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="">Pin Code</label>
+                  <input type="text" name="pincode" class="form-control" required />
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-6">
+                  <label for="">City/State</label>
+                  <input type="text" name="city" class="form-control" required />
+                </div>
+                <div class="col-md-6">
+                  <label for="">Gender</label>
+                  <select name="gender" class="form-control" value="" required>
+                    <option value="">Select Gender</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                    <option value="3">Others</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-6">
+                  <label for="">Service Type</label>
+                  <select name="servicesTypePartnerForm" class="form-control" required>
+                    <option value="">Select</option>
+                    {% for service in services %}
+                    <option value="{{ service }}">
+                      {{service}}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="">Service</label>
+                  <input type="text" name="servicesPartnerForm" class="form-control" required>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-6">
+                  <label for="">Organization Name</label>
+                  <input type="text" name="organization" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <button type="submit" class="btn3">Save</button>
+                </div>
+              </div>
+
+            </form>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<script src='https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js'></script>
+<script>
+  $(function () {
+
+    $("form[name='registration']").validate({
+      rules: {
+        // The key name on the left side is the name attribute
+        // of an input field. Validation rules are defined
+        // on the right side
+        firstName: "required",
+        lastName: "required",
+        mobileNumber: {
+          required: true,
+          number: true,
+          minlength: 10,
+          maxlength: 10
+        },
+        pincode: {
+          required: true,
+          number: true
+        },
+        email: {
+          required: true,
+          email: true
+        },
+        password: {
+          required: true,
+          minlength: 7
+        },
+        password2: {
+          required: true,
+          minlength: 7,
+          equalTo: "#password"
+        }
+      },
+      messages: {
+        firstName: "Please enter your firstname",
+        lastName: "Please enter your lastname",
+        mobilNumber: {
+          required: "Please provide a Mobile Number",
+          minlength: "Please enter a valid mobile number"
+        },
+        password: {
+          required: "Please provide a password",
+          minlength: "Your password must be at least 7 characters long"
+        },
+        password2: {
+          required: "Please provide a confirm password",
+          minlength: "Your password must be at least 7 characters long",
+          equalTo: "Password does not match"
+        },
+        email: "Please enter a valid email address"
+      },
+      submitHandler: function (form) {
+        form.submit();
+      }
+    });
+  });
+</script>
+{% endblock %}

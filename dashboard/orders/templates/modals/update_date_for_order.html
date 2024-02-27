@@ -1,0 +1,49 @@
+<div class="modal fade" id="update-date">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Date</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="" id="">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        {% csrf_token %}
+                        <input type="hidden" name="orderId" value="{{ order.id }}" />
+                        <input type="hidden" name="cartId" value="{{ order.cart.id }}" />
+                        <input type="hidden" name="itemId" id="itemId" value="" />
+                        <div class="form-group">
+                            <label>Date For</label>
+                            <select class="form-control" name="dateType" id="dateType" required >
+                                <option value="" >Select</option>
+                                <option value="Visit/Consultation" >Visit/Consultation</option>
+                                <option value="Pick Up" >Pick Up</option>
+                                <option value="Delivery" >Delivery</option>                               
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input class="form-control" type="date" name="date" min="{new Date().toISOString().split('T')[0]}"  required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<!-- <script>
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("date")[0].setAttribute('min', today);
+</script> -->

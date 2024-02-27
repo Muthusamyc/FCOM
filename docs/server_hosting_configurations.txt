@@ -1,0 +1,51 @@
+[Unit]
+Description=fcom project
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/opt/FCOM
+ExecStart=gunicorn --access-logfile - --workers 3 --bind unix:/opt/FCOM/fcom.sock myproject.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+server {
+    listen 80;
+    server_name fcomindia.com, www.fcomindia.com;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static {
+        add_header Cache-Control public;
+        add_header Pragma public;
+        add_header Vary Accept-Encoding;
+        expires 1h;
+
+        root /opt/FCOM;
+    }
+    location /media {
+        add_header Cache-Control public;
+        add_header Pragma public;
+        add_header Vary Accept-Encoding;
+        expires 1h;
+        root /opt/FCOM;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/opt/FCOM/fcom.sock;
+        proxy_intercept_errors on;
+    }
+
+     #   location /robots.txt {
+      #      alias /opt/cashygo_production/robots.txt;
+      #  }
+
+
+       # location /sitemap.xml {
+       #    alias /opt/cashygo_production/sitemap.xml;
+        # }
+}  

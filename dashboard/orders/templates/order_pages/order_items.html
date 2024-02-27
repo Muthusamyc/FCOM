@@ -1,0 +1,166 @@
+{% load ordertags %}
+<div class="card col-md-12">
+    <div class="card-header">
+
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Order Items</h3>
+                <label>Assigned To: {% if order.designer_assigned %} {{order.designer_assigned}} {% else %} Not Yet
+                    Assigned {% endif %}
+
+                </label>
+            </div>
+            <div class="col-md-9">
+                {% if order.status == booking_stage.ORDER_PICKEDUP or order.status == booking_stage.WAIT_FOR_APPROVAL %}
+                <button type="button" id=master_screen_btn style="margin: 5px;" class="btn btn-success float-right">Add Master</button>
+                {% endif %}
+                {% if request.user.is_superuser %}
+                {% include 'order_pages/order_items/admin_workflow.html' %}
+                {% endif %}
+                {% if booking_stage.ORDER_DELIVERED != order.status %}
+                    {% include 'order_pages/order_items/workflow_tags.html' %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item Id</th>
+                            <th>Item</th>
+                            <th>Image</th>
+                            <th>Category</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <!-- <th>Desin.Price</th> -->
+                            <th>Subtotal</th>  
+                            
+                                                     
+
+                            {% if order.status == booking_stage.ORDER_PICKEDUP or order.status == booking_stage.WAIT_FOR_APPROVAL %}
+                            <th>Pickup Img</th>   
+                            <th>Measurements</th>  
+                            <th>Update</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        {% for item in items %}
+                        {% if item.status %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>
+                                {{ item.product_item.item.name }}
+                            </td>
+                            <td>
+                                <img src="/media/{{item.product_item.item.image}}" style="width: 50px;" />
+                            </td>
+                            <td>
+                                {{item.product_item.category.name }} | {{item.product_item.service.name }} |
+                                {{item.product_item.finishing.name }} | {{item.product_item.pattern.name }}
+                            </td>
+                            <td>
+                                {{item.qty}}
+                            </td>
+                            <td>
+                                {% if item.is_cart_item_updated %}
+                                <s>{{ item.product_item.item.starting_price|floatformat }}</s>
+                                {% else %}
+                                {{ item.product_item.item.starting_price|floatformat }}
+                                {% endif %}
+                            </td>
+                            <!-- <td>{{ item.designer_updated_price}}</td> -->
+                            <td>
+                                {{ item.sub_total}}
+                            </td>
+
+                           
+                            
+                            {% if order.status == booking_stage.ORDER_PICKEDUP or order.status == booking_stage.WAIT_FOR_APPROVAL %}
+                            <td>
+                                {% if item.image %}
+                                <div class="img-wraps">
+                                    <span class="closes" title="Delete"  data-toggle="modal" data-target="#remove_pickedup_image{{ order.id }}{{item.id}}" >×</span>
+                    
+                                    <img class="img-responsive" src="/media/{{item.image}}" style="width: 50px;" />
+                                    {% include 'modals/remove_picked_image.html' %}
+                                    </div>
+                            
+                                {% else %}
+                                <div>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#pickedup_image{{ order.id }}{{item.id}}" style="background-color: #F28077">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                {% include 'modals/upload_picked_image.html' %}
+                                </div> 
+                                {% endif %}
+                               
+                            </td>
+                            
+                            <td>
+                              
+                                
+                              
+                                <div>
+                                    <button type="button" class="btn btn-primary" data-sid="{{item.id}}"><i class="fa fa-plus"></i></button>
+                                </div> 
+                                
+                               
+                            </td>
+                            <td>
+                                <div class="btn-group w-100">
+                                    
+                                    <button type="button" data-toggle="modal" data-target="#update-item" id="editItem"
+                                        data-sid="{{item.id}}" class="btn btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </button>                                    
+                                </div>
+                            </td>
+                            {% endif %}
+                            
+                            
+                        </tr>
+                        {% else %}
+                        <tr style="background-color:#f28077">
+                            <td>{{ item.id }}</td>
+                            <td>
+                                {{ item.product_item.item.name }}
+                            </td>
+                            <td>
+                                <img src="/media/{{item.product_item.item.image}}" style="width: 50px;" />
+                            </td>
+                            <td>
+                                {{item.product_item.category.name }} | {{item.product_item.service.name }} |
+                                {{item.product_item.finishing.name }} | {{item.product_item.pattern.name }}
+                            </td>
+                            <td>
+                                {{item.qty}}
+                            </td>
+                            <td>
+                                {% if item.is_cart_item_updated %}
+                                <s>{{ item.product_item.item.starting_price|floatformat }}</s>
+                                {% else %}
+                                {{ item.product_item.item.starting_price|floatformat }}
+                                {% endif %}
+                            </td>
+                            <!-- <td>{{ item.designer_updated_price}}</td> -->
+                            <td>
+                                {{ item.sub_total}}
+                            </td>
+                            
+                           
+                            <td>
+                               
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

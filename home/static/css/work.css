@@ -1,0 +1,151 @@
+/* Common Css */
+.h11 {
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+    /* identical to box height, or 42px */
+    text-align: center;
+    align-items: center;
+    /* Primary */
+    color: #F28077;
+}
+/* Story Css */
+.mainh1{
+  width:auto;
+  display:block;
+}
+#Work {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:0;
+  background-image: url('../img/work-bg.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.para2{
+  width:auto;
+}
+.workTabs .nav-tabs {
+  flex-direction: column;
+  border:0;
+}
+.workTabs .nav-tabs .nav-link {
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 20px;
+  border:0;
+  padding: 14px 25px;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+.workTabs .nav-tabs .nav-link.active {
+  border: 0;
+  color:#000;
+  border-left: 1px solid #FF6F6F;
+}
+.callback-action {
+  background: rgba(242, 128, 119, 0.05);
+  border-radius: 16px;
+  text-align: center;
+  padding: 32px 21px;
+  margin-top:64px;
+}
+.callback-action a {
+  display: block;
+  margin-top:11px;
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+.callback-action button {
+  margin-top: 28px;
+}
+#myTabContent .tab-pane {
+  display: flex;
+}
+.gallery-grid img {
+  width: calc(100% - 22px);
+}
+.gallery-grid:nth-child(1) img,.gallery-grid:nth-child(3) img {
+  width: calc(100% - 11px);
+}
+.gallery-grid {
+  flex: 1 1 33%;
+}
+.gallery-grid img {
+  margin: 11px;
+}
+.gallery-grid:nth-child(1) img {
+  margin-left:0;
+}
+.gallery-grid img:first-child {
+  margin-top:0;
+}
+#workImageSlider .btn-close{
+  position: absolute;
+  z-index: 12;
+  right: 10px;
+  color:#fff;
+  background:none;
+  top: 10px;
+}
+#workImageSlider .modal-body {
+  padding: 0;
+}
+#workImageSlider .modal-content{
+  background: none;
+  border:0;
+}
+#workImageSlider .carousel-inner {
+  border:16px;
+  overflow:hidden;
+}
+.control-wrapper {
+  position: relative;
+  background: #F28077;
+  width: 189px;
+  margin: 21px auto;
+  padding: 4px;
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  border-radius: 32px;
+  text-align: center;
+  color: #fff;
+}
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  @media screen and (max-width: 767px) {
+  .workTabs .nav-tabs {
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom:40px;
+  }
+  .workTabs .nav-tabs .nav-link.active {
+    border-bottom: 1px solid #FF6F6F;
+    border-left:0;
+  }
+  .workTabs .nav-tabs .nav-link {
+    border-left:0;
+    border-bottom:1px solid rgba(0, 0, 0, 0.2);
+  }
+}

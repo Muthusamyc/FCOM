@@ -1,0 +1,100 @@
+{% extends "admin/base_template.html" %} {% block content %}
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">Add Estimation Date</h3>
+                    </div>
+                    <form action="{% url 'estimated_consultation_date' %}" method="POST">
+                        <div class="card-body">
+                            {% csrf_token %}
+                         
+
+                            <div class="form-group">
+                                <label for="">Service Mode</label>
+                                <select class="form-control" name="service_mode">
+                                    <option value="">Select</option>
+                                    {% for mode in service_modes %}
+                                    <option value="{{ mode.id }}">{{ mode.name }}</option>
+                                    {% endfor %}
+                                </select>                               
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Designer Preference</label>
+                                <select class="form-control" name="designer_preference_mode">
+                                    <option value="">Select</option>
+                                    {% for mode in designer_preferences %}
+                                    <option value="{{ mode.id }}">{{ mode.name }}</option>
+                                    {% endfor %}
+                                </select>                               
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Estimation Date</label>
+                                <select class="form-control" name="est_dates">
+                                    <option value="">Select</option>
+                                    
+                                    <option value="1">1 Day</option>
+                                    <option value="2">2 Day</option>
+                                    <option value="3">3 Day</option>
+                                    <option value="4">4 Day</option>
+                                    <option value="5">5 Day</option>
+                                    <option value="6">6 Day</option>
+                                    <option value="7">1 Week</option>
+                                    <option value="14">2 Weeks</option>
+                                    <option value="21">3 Weeks</option>
+                                    <option value="30">1 Month</option>
+                                  
+                                </select>               
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color: #F28077">Submit</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #F28077">
+                        <h3 class="card-title">Stitching {{ page_name }} List</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SL No</th>
+                                    <th>{{page_name}}</th>
+                                    <th>Service</th>
+                                    <th>Design</th>
+                                    <th>Date</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for est in estimation_dates %}
+                                <tr>
+                                    <th>{{est.id}}</th>
+                                    <th>{{est.service_mode.name}}</th>
+                                    <th>{{est.designer_preference_mode.name}}</th>
+                                    <th>{{est.date}}</th>                                 
+                                    <th>
+                                        <a href="{% url 'edit_estimated_consultation_date' est.id %}" class="fa fa-edit"></a>
+                                        <!-- <a href="{% url 'delete_estimated_consultation_date' est.id %}" class="fa fa-trash"></a> -->
+                                    </th>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

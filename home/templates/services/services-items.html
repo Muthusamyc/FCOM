@@ -1,0 +1,84 @@
+<div class="col-md-9">
+  <div class="tab-content" id="customTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <h2 class="itemssearch-heading">Items <span id="itemCount">{{item_counts}}</span>
+        <div class="search-input" style="display: flex;left: 8px;">
+          <input type="text" id="text_search" name="itemsText" class="form-control" value='' placeholder="Search" autocomplete="off" size="45"/>
+          <button type="button" id="itemsSearch" class="btn btn-danger"><i class='bx bx-search'></i></button>
+        </div>
+      </h2>
+      <div id="itemDataPlaceholder" onload="populateItemsData()">
+      </div>
+      <div id="page">
+        <ul class="pagination"></ul>
+      </div>
+      <div class="sticky-cart-footer">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="sticky-cart-total flex-xs-column">
+              <div class="items-cart">
+                <h4>Items in Cart</h4>
+                <p id="total-item">0</p>
+              </div>
+              <div class="items-cart">
+                <h4>Estimated Sub Total 
+                  <!-- <i class='bx bx-info-circle cr1' id="tooltip1"><span class="tooltiptext1">
+                  <table class="toltab">
+                    <tr>         
+                      <th id="toltd" style="text-align: end;"><u>Estimated Total</u></th>  
+                    </tr>
+                  <tr>         
+                    <td id="toltd">Sub Total</td>  
+                    <td id="box3"></td></tr>       
+                  </tr>
+                  <tr>
+                    <td id="toltd">PickUp & Drop<BR><small>(min Upto 3km)</small></td> 
+                    <td id="box1">99</td>
+                  </tr>
+                  <tr>
+                    <td id="toltd">Disigner Charges</td> 
+                    <td id="box2">50</td> 
+                  </tr> 
+                  <tr>
+                    <td id="toltd">GST 5%</td> 
+                    <td id="box4"></td>
+                  </tr>
+                  <tr>
+                    <tr id="estAmt"></tr>
+                    <td><b>Total Amount</b></td> 
+                    <td id="box5"></td>
+                  </tr>
+                  </table>
+                </span></i> -->
+              </h4>
+                <p>&#x20B9; <span id="estimated-total-item">0</span></p>
+              </div>
+              <div class="items-cart">
+                <h4>Advance Payable</h4>
+                <p id="">&#x20B9;<span id="advance-payable">350</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 text-right btn-flex">
+            <button type="button" class="btn btn25" name="button">Cancel</button>
+            <button type="button" class="btn btn7" id="continue_to_cart" name="continue_to_cart">Continue</button>
+          </div>
+        </div>
+        <div class='row text-left pt-3 disclaimerTxt' >
+          <div>
+            <i class='bx bxs-star disclaimerWord'Style="font-size:11px;line-height:1.5;" >&ensp;Pick & Drop charges - ₹99 upto 3km. anything above is charged at ₹11/km</i><br>
+            <i class='bx bxs-star disclaimerWord'Style="font-size:11px;line-height:1.5;" >&ensp;Co-ordination charges - ₹50 for alteration order, ₹150 for striching orders Note - this for Complete Order</i>
+          </div>
+      </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  <!-- <div class='row text-left'>
+    <div>
+      <i class='bx bxs-star'Style="font-size:11px;">&ensp;Pick & Drop charges are applicable for 3km. anything above would be charged ₹11/km</i><br>
+      <i class='bx bxs-star'Style="font-size:11px;">&ensp;Designer charges applicable based on customer discussions</i>
+    </div>
+</div> -->
+

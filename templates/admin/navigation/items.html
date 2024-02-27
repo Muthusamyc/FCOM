@@ -1,0 +1,29 @@
+<li class="nav-item">
+    <a href="#" class="nav-link">
+        <p>
+            Items
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{% url 'add_stiching_items' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Add Item</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'view_stiching_items' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>All Items</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'view_selected_stiching_items' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Filter Items</p>
+            </a>
+        </li>
+
+    </ul>
+</li>

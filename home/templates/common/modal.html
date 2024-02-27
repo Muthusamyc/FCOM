@@ -1,0 +1,318 @@
+<!-- Add address modal -->
+<div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Add Address</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+      </div>
+      <form method="post" action="{% url 'add_address_book' %}">
+        {% csrf_token %}
+      <div class="modal-body">
+        <div class="row form-group">
+          <div class="col-md-6">
+            <label for="">First Name</label>
+            <input type="text" name="firstName" class="form-control" value="" />
+          </div>
+          <div class="col-md-6">
+            <label for="">Last Name</label>
+            <input type="text" name="lastName" class="form-control" value="" />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">Address</label>
+            <input type="text" name="address" class="form-control" value="" />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-6">
+            <label for="">Pin Code</label>
+            <input type="text" name="pincode" class="form-control" value="" />
+          </div>
+          <div class="col-md-6">
+            <label for="">City/State</label>
+            <input type="text" name="city" class="form-control" value="" />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-6">
+            <label for="">Landmark</label>
+            <input type="text" name="landmark" class="form-control" value="" />
+          </div>
+          <div class="col-md-6">
+            <label for="">Address Type</label>
+            <select name="addressType" class="form-control" value="" >
+              <option value="">Select</option>
+              <option value="home" {% if user_detail.address_type == "home" %} selected  {% endif %}>Home</option>
+              <option value="office"  {% if user_detail.address_type == "office" %} selected  {% endif %} >Office</option>
+              <option value="other"  {% if user_detail.address_type == "other" %} selected  {% endif %}>Others</option>
+          </select>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-6">
+            <label for="">Email Id</label>
+            <input type="email" name="email" class="form-control" value="" />
+          </div>
+          <div class="col-md-6">
+            <label for="">Mobile Number</label>
+            <input type="text" name="mobile" class="form-control" value="" />
+          </div>
+        </div>
+        <h3 class="form-heading">Update your address on map</h3>
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">Type your address</label>
+            <div class="search-input">
+              <input type="text" id="addAddress" name="addAddress" class="form-control" value=""
+                placeholder="#227, Ground Floor, 10th Main, Motappanapalya" />
+              <button type="button" id="submitAddress" data-source="addAddress" class="search-btn"><i
+                  class='bx bx-search'></i></button>
+            </div>
+            <p id="error-msg"></p>
+            <iframe id="map-canvas-add-address" src="" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="btn-footer btn-flex">
+          <button type="button" class="btn btn25" name="button">Cancel</button>
+          <button type="submit" class="btn btn7 save-btn" name="button">Save</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Family modal -->
+<div class="modal fade" id="addFamilyMemberModal" tabindex="-1" aria-labelledby="addFamilyMemberModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Add Family Member</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+      </div>
+      <form method="post" action="{% url 'add_family_members' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-body">
+        
+          <div class="row form-group">
+            <div class="col-md-12">
+              <div class="profile-pic">
+                
+                <div id="imagePreview" data-id="add-image" ></div>
+                <div class="btn-icons">
+                  <input type='file' id="imageUpload" data-id="add-image" class='imageUpload' name="itemImage" accept=".png, .jpg, .jpeg" />
+                  <a href="javascript:void(0)" class="btn" name="button"><img src="/static/img/edit.png" alt="edit"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label for="firstName">First Name</label>
+              <input type="text" name="firstName" class="form-control" value="" />
+            </div>
+            <div class="col-md-6">
+              <label for="lastName">Last Name</label>
+              <input type="text" name="lastName" class="form-control" value="" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label for="email">Email Id</label>
+              <input type="email" name="email" class="form-control" value="" />
+            </div>
+            <div class="col-md-6">
+              <label for="mobile">Mobile Number</label>
+              <input type="text" name="mobile" class="form-control" value="" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label for="">Date of birth <span class="light-text">(Optional)</span></label>
+              <input type="date" name="dob" class="form-control" value="" placeholder="DD/MM/YYYY">
+            </div>
+          
+            <div class="col-md-6">
+              <label for="gender">Gender</label>
+              <select class="form-control" name="gender">
+                <option value="">Select Gender</option>                                
+                <option value="1">Male</option>                                
+                <option value="2">Female</option>                                
+                <option value="3">Others</option>                                
+            </select>
+            </div>
+          </div>
+          
+  
+          <div class="btn-footer btn-flex">
+            <button type="button" class="btn btn25" name="button">Cancel</button>
+            <button type="submit" class="btn btn7 save-btn" name="button">Save</button>
+          </div>
+        </div>
+      </form>
+     
+    </div>
+  </div>
+</div>
+<!-- Edit Family modal -->
+
+<!-- Change Email -->
+<div class="modal fade" id="changeEmailModal" tabindex="-1" aria-labelledby="changeEmailModal" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Change Email</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">Email</label>
+            <input type="email" name="email" class="form-control" value="" />
+          </div>
+        </div>
+        <!-- <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">OTP</label>
+            <input type="text" name="address" class="form-control" value="" />
+          </div>
+        </div> -->
+        
+        <div class="btn-footer btn-flex">
+          <button type="button" class="btn btn25" name="button">Cancel</button>
+          <button type="button" class="btn btn7 save-btn" name="button">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Change Mobile No Modal -->
+<div class="modal fade" id="changeMobileNoModal" tabindex="-1" aria-labelledby="changeMobileNoModal" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Change Mobile Number</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">Mobile No.</label>
+            <input type="number" name="pno" class="form-control" value="" />
+          </div>
+        </div>
+        <!-- <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">OTP</label>
+            <input type="text" name="address" class="form-control" value="" />
+          </div>
+        </div> -->
+        
+        <div class="btn-footer btn-flex">
+          <button type="button" class="btn btn25" name="button">Cancel</button>
+          <button type="button" class="btn btn7 save-btn" name="button">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Change Password -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModal" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">Old Password</label>
+            <input type="password" name="oldpwd" class="form-control" value="" />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">New Password</label>
+            <input type="password" name="newpwd" class="form-control" value="" />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">Confirm Password</label>
+            <input type="password" name="confirmpwd" class="form-control" value="" />
+          </div>
+        </div>
+        <!-- <div class="row form-group">
+          <div class="col-md-12">
+            <label for="">OTP</label>
+            <input type="text" name="address" class="form-control" value="" />
+          </div>
+        </div> -->
+        
+        <div class="btn-footer btn-flex">
+          <button type="button" class="btn btn25" name="button">Cancel</button>
+          <button type="button" class="btn btn7 save-btn" name="button">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reshcedule booking -->
+<div class="modal fade" id="rescheduleModal" tabindex="-1" aria-labelledby="rescheduleModal" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Reschedule Consultation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+      </div>
+      <form>
+      <div class="modal-body">
+        <div class="row form-group">
+          <div class="col-md-6">
+            <label for="">Reschedule Date</label>
+            <input type="date" name="fromDate" id="fromDate" class="form-control" value="" />
+          </div>
+          <!-- <div class="col-md-6">
+            <label for="">To Date</label>
+            <input type="date" name="toDate" id="toDate" class="form-control" value="" />
+          </div> -->
+        </div>
+        <div class="row form-group">
+          <p>Suggest us a date range in which you would want your appointment to be rescheduled. We will try to accomodate as best as we can. You would receive an alert for your next appointment.</p>
+        </div>
+        <div class="btn-footer btn-flex">
+          <button type="button" class="btn btn25" name="button">Cancel</button>
+          <button type="button" onclick="resheduleVistingDdate({{ order_detail.id }})" class="btn btn7 yes-btn" >Submit</button>  
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!-- Cancel booking -->
+<div class="modal fade" id="cancelBookingModal" tabindex="-1" aria-labelledby="cancelBookingModal" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cancel Booking</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row form-group">
+          <p>Are you sure you want to cancel your booking? Or you want to <a href="javascript:void(0)" data-bs-target="#rescheduleModal" data-bs-toggle="modal">Reshcedule booking</a></p>
+        </div>
+        <div class="btn-footer btn-flex">
+          <button type="button" class="btn btn25 btn-close" data-bs-dismiss="modal" aria-label="Close" name="button">No</button>
+          <button type="button" class="btn btn7 yes-btn" name="button">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

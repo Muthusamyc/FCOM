@@ -1,0 +1,24 @@
+{% load static %}
+
+<div class="modal fade" id="cancelBookingModal" tabindex="-1" aria-labelledby="cancelBookingModal" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cancel Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&#9587;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row form-group">
+                    <p>Are you sure you want to cancel your booking? 
+                        <!-- Or you want to  <a href="javascript:void(0)" data-bs-target="#rescheduleModal" data-bs-toggle="modal">Reshcedule booking</a> -->
+                    </p>
+                </div>
+                <div class="btn-footer btn-flex">
+                    <button type="button" class="btn btn7 yes-btn" data-bs-dismiss="modal" aria-label="Close"
+                        name="button">No</button>
+                    <button type="button" onclick="cancelOrderCustomer({{ order.id }})" class="btn btn7 yes-btn" name="button">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+{% extends 'public_template.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/custom-stitching.css">
+
+<script type="text/javascript">
+  $('.header .navbar-nav .nav-item .nav-link').removeClass('active')
+  $('#services_menu').addClass('active')
+</script>
+
+
+
+<section id="custom-stitching">
+
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators" >
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slider 1" onclick="currentDiv(1)"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slider 2" onclick="currentDiv(2)"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slider 3" onclick="currentDiv(3)"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" id="slider1" style="transition: none;">
+        <div class="container-fluid container-width">
+          <div class="row">
+            <div class="col-md-6 text-left" id="TxtContent">
+              <h1 class="mainh1">Custom Stitching</h1>
+              <p class="text-white para2">We provide the most exceptional and beautiful bespoke stitching services. Our team
+                of highly skilled designers, fitters, tailors and pattern cutters advise on a style that suites
+                you.<br /><br /> We can sketch a design to help you visualize your garment. You can choose the fabric, lining
+                and trims you want and we can source them for you. You get to decide exactly how you’d like your garment to
+                look, fit and feel with a little help from us.</p>
+              <p class="text-highlight">Starting @ ₹299</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" id="slider2" style="transition: none;">
+        <div class="container-fluid container-width" >
+          <div class="row">
+            <div class="col-md-6 text-left" id="TxtContent">
+              <h1 class="mainh1">Darning and Dyeing</h1>
+              <p class="text-white para2">We provide the most exceptional and beautiful bespoke stitching services. Our team
+                of highly skilled designers, fitters, tailors and pattern cutters advise on a style that suites
+                you.<br /><br /> We can sketch a design to help you visualize your garment. You can choose the fabric, lining
+                and trims you want and we can source them for you. You get to decide exactly how you’d like your garment to
+                look, fit and feel with a little help from us.</p>
+              <p class="text-highlight">Starting @ ₹299</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" id="slider3" style="transition: none;">
+         <div class="container-fluid container-width">
+          <div class="row">
+            <div class="col-md-6 text-left" id="TxtContent">
+              <h1 class="mainh1">Alterations</h1>
+              <p class="text-white para2">We provide the most exceptional and beautiful bespoke stitching services. Our team
+                of highly skilled designers, fitters, tailors and pattern cutters advise on a style that suites
+                you.<br /><br /> We can sketch a design to help you visualize your garment. You can choose the fabric, lining
+                and trims you want and we can source them for you. You get to decide exactly how you’d like your garment to
+                look, fit and feel with a little help from us.</p>
+              <p class="text-highlight">Starting @ ₹299</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+
+<section class="customTabs">
+  <div class="container-fluid container-width">
+    <div class="row" id="custom-stiches">
+      {% include 'services/services-side-nav.html' %}
+       {% include 'services/services-items.html' %}    
+    </div>
+  </div>
+
+   <!-- Zoom PopUp Image -->
+   <div class="col-md-12">
+    <div class="row-container zooncon" style="width: 100%; height:100%; display:none ">
+    <div class="card popcard">
+      <img id="zoomid" src="" class="card-img-top popupimg" alt="Product Image">
+      <button type="button" class="btn-close  btn-close" aria-label="Close" ><b id="clsbttn">&#10006</b></button>
+      </div>
+    </div>
+  </div>
+  
+
+</section>
+<div class="loader"><img src="../../static/img/ajax-loader.gif"></div>
+
+<script type="text/javascript" src="{% static 'services/itemcard.js' %}"></script>
+<script type="text/javascript" src="/static/services/itemsincart.js"></script>
+<script type="text/javascript" src="/static/services/carousel.js"></script>
+<script>
+  $("#tooltip1").hover(function(){
+    var num1 = $("#box1").text();
+    var num2 = $("#box2").text();
+    var num3 = $("#estimated-total-item").text();
+    $("#box3").text(num3);
+    var total = parseInt(num1) + parseInt(num2) + parseInt(num3);
+    var answermu1 =( (0.05) * parseInt(total)) ;
+    var tax = $("#box4").text( answermu1.toFixed(2));
+    var total_wtax = total + answermu1;
+     $("#box5").text(total_wtax).css("font-weight", "bold").text( total_wtax.toFixed(2));
+});
+  </script>
+{% endblock %}

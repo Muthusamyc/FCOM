@@ -43,14 +43,14 @@
                             <tbody>
                                 {% for item in items %}
                                 <tr>
-                                    <th>{{item.id}}</th>
+                                    <th>{{forloop.counter}}</th>
                                     <th>{{item.name}}</th>
                                     <th>{{item.created_by}}</th>
                                     <th>{{item.created_on}}</th>
                                     <th>{{item.updated_on}}</th>
                                     <th>
                                         <a href="{% url 'edit_stiching_categories' page_name item.id %}" class="fa fa-edit"></a>
-                                        <!-- <a href="{% url 'delete_stiching_categories' page_name item.id %}" class="fa fa-trash"></a> -->
+                                        &nbsp  &nbsp<a href="{% url 'delete_stiching_categories' page_name item.id %}" class="fa fa-trash"></a>
                                     </th>
                                 </tr>
                                 {% endfor %}
